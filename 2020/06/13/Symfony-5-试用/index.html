@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://yoursite.com').hostname,
+    root: '/',
+    scheme: 'Mist',
+    version: '7.7.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="本人在公司的PHP项目中，一直都在使用Symfony框架做开发。之所以会选择Symfony这个框架，是因为它作为一个企业级框架，有很多的优点：功能强大而全面，以至于众多PHP项目都在使用Symfony提供的组件；长期而稳定的技术支持，整个项目从2005年到今天已经走过了十几个年头，最终演化到了当前的5.1版本；此外还有丰富全面的文档、开源社区与商业公司的共同支持等等。而它最大缺点恐怕就是因为过于强">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Symfony 5 试用">
+<meta property="og:url" content="http://yoursite.com/2020/06/13/Symfony-5-%E8%AF%95%E7%94%A8/index.html">
+<meta property="og:site_name" content="盐 碱 地">
+<meta property="og:description" content="本人在公司的PHP项目中，一直都在使用Symfony框架做开发。之所以会选择Symfony这个框架，是因为它作为一个企业级框架，有很多的优点：功能强大而全面，以至于众多PHP项目都在使用Symfony提供的组件；长期而稳定的技术支持，整个项目从2005年到今天已经走过了十几个年头，最终演化到了当前的5.1版本；此外还有丰富全面的文档、开源社区与商业公司的共同支持等等。而它最大缺点恐怕就是因为过于强">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://yoursite.com/2020/06/13/Symfony-5-%E8%AF%95%E7%94%A8/01.composer_version.png">
+<meta property="og:image" content="http://yoursite.com/2020/06/13/Symfony-5-%E8%AF%95%E7%94%A8/02.symfony_welcome.png">
+<meta property="og:image" content="http://yoursite.com/2020/06/13/Symfony-5-%E8%AF%95%E7%94%A8/03.hello.png">
+<meta property="article:published_time" content="2020-06-13T09:54:14.000Z">
+<meta property="article:modified_time" content="2020-07-25T02:24:08.483Z">
+<meta property="article:author" content="Andy Zhang">
+<meta property="article:tag" content="PHP">
+<meta property="article:tag" content="Symfony">
+<meta property="article:tag" content="Nginx">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2020/06/13/Symfony-5-%E8%AF%95%E7%94%A8/01.composer_version.png">
+
+<link rel="canonical" href="http://yoursite.com/2020/06/13/Symfony-5-%E8%AF%95%E7%94%A8/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>Symfony 5 试用 | 盐 碱 地</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?0827f66baef0e8fc8bd5d7647e82136b";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">盐 碱 地</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/13/Symfony-5-%E8%AF%95%E7%94%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Andy Zhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="盐 碱 地">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Symfony 5 试用
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-06-13 17:54:14" itemprop="dateCreated datePublished" datetime="2020-06-13T17:54:14+08:00">2020-06-13</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-07-25 10:24:08" itemprop="dateModified" datetime="2020-07-25T10:24:08+08:00">2020-07-25</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>本人在公司的PHP项目中，一直都在使用Symfony框架做开发。之所以会选择Symfony这个框架，是因为它作为一个企业级框架，有很多的优点：功能强大而全面，以至于众多PHP项目都在使用Symfony提供的组件；长期而稳定的技术支持，整个项目从2005年到今天已经走过了十几个年头，最终演化到了当前的5.1版本；此外还有丰富全面的文档、开源社区与商业公司的共同支持等等。而它最大缺点恐怕就是因为过于强大而全面的功能设计，导致学习的曲线有些陡峭，新手上手困难。</p>
+<p>正好前几天Symfony更新了5.1的release版本<a href="#refer-anchor-1"><sup>1</sup></a>，修复了大量的bug，感觉已经这个新版本的状态已经比较稳定了。所以今天我就带大家一块来试用一下这个新的版本。</p>
+<a id="more"></a>
+
+<p>安装之前需要确认部署的环境是否符合Symfony的要求，比如Symfony5就要求PHP的版本要大于7.2.5，并且开启了Ctype, iconv, JSON, PCRE, Session, SimpleXML, Tokenizer这些扩展。</p>
+<p>Symfony的安装方式主要有两种，一种是使用官方提供的CLI工具<a href="#refer-anchor-2"><sup>1</sup></a>，另一种是大家熟悉的Composer。现在几乎所有的现代PHP项目都在使用Composer，来进行第三方的依赖管理，所以这次试用我们就使用Composer来完成。</p>
+<ol>
+<li><p>安装Composer</p>
+<p>Composer是PHP用来管理依赖（dependency）关系的工具。换句话说，就是我们可以利用这个工具，直接在我们的项目中引入并使用别人写好的功能模块。</p>
+<p>首先我们要下载composer.phar文件（windows可以去官网下载安装包）：</p>
+<p> <code># curl -sS https://getcomposer.org/installer | php</code></p>
+<p>为了全局调用Composer 我们把下载好的文件移动一下位置：</p>
+<p> <code># mv composer.phar /usr/local/bin/composer</code></p>
+<p>最后查看一下Composer的版本，判断是否安装成功：</p>
+<p> <code># composer -v</code></p>
+ <img src="/2020/06/13/Symfony-5-%E8%AF%95%E7%94%A8/01.composer_version.png" class="" title="composer_version">
+
+<p>默认安装依赖会使用国外的链接，所以很多时候安装过程会很慢，以至于安装失败。我们可以配置成使用国内的镜像，比如淘宝：</p>
+<p> <code># composer config -g repo.packagist composer https://mirrors.aliyun.com/composer/</code></p>
+</li>
+<li><p>安装Symfony</p>
+<p>首先我们建一个项目所在的文件夹：</p>
+<p><code># mkdir /var/www &amp;&amp; cd /var/www</code></p>
+<p>然后需要我们选择安装的类别，一种是安装一个传统的web项目，另一种是现在流行的微服务。两者在安装的组件上有一些小的差异，比如web项目会安装twig模板组件，用来做web页面的渲染。这次我们选择传统的web项目：</p>
+<p><code># composer create-project symfony/website-skeleton my_project_name</code></p>
+<p>或者你也可以选择做一个微服务：</p>
+<p><code># composer create-project symfony/skeleton my_project_name</code></p>
+</li>
+<li><p>配置服务器</p>
+<p>配置就以Nginx为例，创建一个新的Nginx配置文件：</p>
+<p><code># vim /etc/nginx/conf.d/symfony_dev.conf</code></p>
+<p>写入如下配置内容：</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    server_name symfony_dev.vm;</span><br><span class="line">    root /var/www/symfony_dev/public;</span><br><span class="line"></span><br><span class="line">    location / &#123;</span><br><span class="line">        <span class="comment"># try to serve file directly, fallback to index.php</span></span><br><span class="line">        try_files <span class="variable">$uri</span> /index.php<span class="variable">$is_args</span><span class="variable">$args</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment"># optionally disable falling back to PHP script for the asset directories;</span></span><br><span class="line">    <span class="comment"># nginx will return a 404 error when files are not found instead of passing the</span></span><br><span class="line">    <span class="comment"># request to Symfony (improves performance but Symfony's 404 page is not displayed)</span></span><br><span class="line">    <span class="comment"># location /bundles &#123;</span></span><br><span class="line">    <span class="comment">#     try_files $uri =404;</span></span><br><span class="line">    <span class="comment"># &#125;</span></span><br><span class="line"></span><br><span class="line">    location ~ ^/index\.php(/|$) &#123;</span><br><span class="line">        fastcgi_pass 127.0.0.1:9000;</span><br><span class="line">        fastcgi_split_path_info ^(.+\.php)(/.*)$;</span><br><span class="line">        include fastcgi_params;</span><br><span class="line"></span><br><span class="line">        <span class="comment"># optionally set the value of the environment variables used in the application</span></span><br><span class="line">        <span class="comment"># fastcgi_param APP_ENV prod;</span></span><br><span class="line">        <span class="comment"># fastcgi_param APP_SECRET &lt;app-secret-id&gt;;</span></span><br><span class="line">        <span class="comment"># fastcgi_param DATABASE_URL "mysql://db_user:db_pass@host:3306/db_name";</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># When you are using symlinks to link the document root to the</span></span><br><span class="line">        <span class="comment"># current version of your application, you should pass the real</span></span><br><span class="line">        <span class="comment"># application path instead of the path to the symlink to PHP</span></span><br><span class="line">        <span class="comment"># FPM.</span></span><br><span class="line">        <span class="comment"># Otherwise, PHP's OPcache may not properly detect changes to</span></span><br><span class="line">        <span class="comment"># your PHP files (see https://github.com/zendtech/ZendOptimizerPlus/issues/126</span></span><br><span class="line">        <span class="comment"># for more information).</span></span><br><span class="line">        fastcgi_param SCRIPT_FILENAME <span class="variable">$realpath_root</span><span class="variable">$fastcgi_script_name</span>;</span><br><span class="line">        fastcgi_param DOCUMENT_ROOT <span class="variable">$realpath_root</span>;</span><br><span class="line">        <span class="comment"># Prevents URIs that include the front controller. This will 404:</span></span><br><span class="line">        <span class="comment"># http://domain.tld/index.php/some-path</span></span><br><span class="line">        <span class="comment"># Remove the internal directive to allow URIs like this</span></span><br><span class="line">        internal;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment"># return 404 for all other php files not matching the front controller</span></span><br><span class="line">    <span class="comment"># this prevents access to other php files you don't want to be accessible.</span></span><br><span class="line">    location ~ \.php$ &#123;</span><br><span class="line">        <span class="built_in">return</span> 404;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    error_log /var/<span class="built_in">log</span>/nginx/symfony_dev_error.log;</span><br><span class="line">    access_log /var/<span class="built_in">log</span>/nginx/symfony_dev_access.log;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>访问Symfony</p>
+<p>最后打开浏览器，输入我们配置好的域名访问，就可以看到Symfony的欢迎页面：</p>
+<img src="/2020/06/13/Symfony-5-%E8%AF%95%E7%94%A8/02.symfony_welcome.png" class="" title="symfony_welcome">
+
+<p>在src/Controller目录中，我们新建一个控制器文件：</p>
+ <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">// src/Controller/LuckyController.php</span></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">App</span>\<span class="title">Controller</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">use</span> <span class="title">Symfony</span>\<span class="title">Component</span>\<span class="title">HttpFoundation</span>\<span class="title">Response</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">DefaultController</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">hello</span><span class="params">()</span>: <span class="title">Response</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Response(</span><br><span class="line">            <span class="string">'&lt;html&gt;&lt;body&gt;Hello World!&lt;/body&gt;&lt;/html&gt;'</span></span><br><span class="line">        );</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在config目录中的路由配置文件中增加一个路由：</p>
+ <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># config/routes.yaml</span></span><br><span class="line"></span><br><span class="line"><span class="attr">app_hello:</span></span><br><span class="line">    <span class="attr">path:</span> <span class="string">/default/hello</span></span><br><span class="line">    <span class="attr">controller:</span> <span class="string">App\Controller\DafualtController::hello</span></span><br></pre></td></tr></table></figure>
+<p>最后在浏览器中访问配置好的地址，就可以看到我们写的“Hello World!”：</p>
+<img src="/2020/06/13/Symfony-5-%E8%AF%95%E7%94%A8/03.hello.png" class="" title="hello">
+
+</li>
+</ol>
+<div id="refer-anchor-1"></div>
+
+<ul>
+<li>[1] <a href="https://symfony.com/blog/symfony-5-1-1-released" target="_blank" rel="noopener">Symfony Blog</a></li>
+</ul>
+<div id="refer-anchor-2"></div>
+
+<ul>
+<li>[2] <a href="https://symfony.com/download" target="_blank" rel="noopener">Symfony CLI</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/PHP/" rel="tag"># PHP</a>
+              <a href="/tags/Symfony/" rel="tag"># Symfony</a>
+              <a href="/tags/Nginx/" rel="tag"># Nginx</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/02/13/Centos-7-LNMP%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" rel="prev" title="Centos 7 LNMP环境搭建">
+      <i class="fa fa-chevron-left"></i> Centos 7 LNMP环境搭建
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/07/25/Symfony-5-%E5%9F%BA%E7%A1%80%E4%B9%8B%E8%B7%AF%E7%94%B1/" rel="next" title="Symfony 5 基础之路由">
+      Symfony 5 基础之路由 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Andy Zhang"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Andy Zhang</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">5</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Andy Zhang</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> v7.7.0
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
