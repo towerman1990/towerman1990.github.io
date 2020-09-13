@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://yoursite.com').hostname,
+    root: '/',
+    scheme: 'Mist',
+    version: '7.7.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="配置文件Symfony 应用程序的配置文件存储在 conifg&#x2F; 目录，这个目录有默认的结构： 1234567your-project&#x2F;├─ config&#x2F;│  ├─ packages&#x2F;│  ├─ bundles.php│  ├─ routes.yaml│  └─ services.yaml├─ ...  routes.yaml 文件定义了 路由配置；services.yaml 文件配置了 服务容">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Symfony 5 基础之配置">
+<meta property="og:url" content="http://yoursite.com/2020/09/13/Symfony-5-%E5%9F%BA%E7%A1%80%E4%B9%8B%E9%85%8D%E7%BD%AE/index.html">
+<meta property="og:site_name" content="盐 碱 地">
+<meta property="og:description" content="配置文件Symfony 应用程序的配置文件存储在 conifg&#x2F; 目录，这个目录有默认的结构： 1234567your-project&#x2F;├─ config&#x2F;│  ├─ packages&#x2F;│  ├─ bundles.php│  ├─ routes.yaml│  └─ services.yaml├─ ...  routes.yaml 文件定义了 路由配置；services.yaml 文件配置了 服务容">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-09-13T07:57:09.000Z">
+<meta property="article:modified_time" content="2020-09-13T11:49:13.281Z">
+<meta property="article:author" content="Andy Zhang">
+<meta property="article:tag" content="PHP">
+<meta property="article:tag" content="Symfony">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2020/09/13/Symfony-5-%E5%9F%BA%E7%A1%80%E4%B9%8B%E9%85%8D%E7%BD%AE/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>Symfony 5 基础之配置 | 盐 碱 地</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?0827f66baef0e8fc8bd5d7647e82136b";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">盐 碱 地</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/13/Symfony-5-%E5%9F%BA%E7%A1%80%E4%B9%8B%E9%85%8D%E7%BD%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Andy Zhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="盐 碱 地">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Symfony 5 基础之配置
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-09-13 15:57:09 / 修改时间：19:49:13" itemprop="dateCreated datePublished" datetime="2020-09-13T15:57:09+08:00">2020-09-13</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a><span id="configuration-files">配置文件</span></h3><p>Symfony 应用程序的配置文件存储在 <code>conifg/</code> 目录，这个目录有默认的结构：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">your-project/</span><br><span class="line">├─ config/</span><br><span class="line">│  ├─ packages/</span><br><span class="line">│  ├─ bundles.php</span><br><span class="line">│  ├─ routes.yaml</span><br><span class="line">│  └─ services.yaml</span><br><span class="line">├─ ...</span><br></pre></td></tr></table></figure>
+
+<p><code>routes.yaml</code> 文件定义了 <a href="/2020/07/25/Symfony-5-%E5%9F%BA%E7%A1%80%E4%B9%8B%E8%B7%AF%E7%94%B1/">路由配置</a>；<code>services.yaml</code> 文件配置了 <a href="https://symfony.com/doc/current/service_container.html" target="_blank" rel="noopener">服务容器</a> 中的服务；<code>bundles.php</code> 文件使你的应用程序中的软件包可用/不可用。</p>
+<p>你将主要在 <code>config/packages/</code> 目录中工作。这个目录存储了应用程序中安装的每个软件包的配置。软件包（在Symfony中也称为“捆绑包”，在其他项目中也称为“插件/模块”）为你的项目添加了现成的功能。</p>
+<a id="more"></a>
+
+<p>使用 <a href="https://symfony.com/doc/current/setup.html#symfony-flex" target="_blank" rel="noopener">Symfony Flex</a>（默认在Symfony应用程序中启用）时，软件包会在安装过程中自动更新 <code>bundles.php</code> 文件并在 <code>config/ packages/</code> 中自动创建新文件。例如，这是 “API平台” 包创建的默认文件：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># config/packages/api_platform.yaml</span></span><br><span class="line"><span class="attr">api_platform:</span></span><br><span class="line">    <span class="attr">mapping:</span></span><br><span class="line">        <span class="attr">paths:</span> <span class="string">['%kernel.project_dir%/src/Entity']</span></span><br></pre></td></tr></table></figure>
+
+<p>将配置拆分成许多小文件对于某些Symfony新手来说是令人生畏的。但是你会很快习惯它们，并且在安装软件包后几乎不需要更改这些文件。</p>
+<blockquote>
+<p>要了解所有可用的配置选项，请查看 <a href="https://symfony.com/doc/current/reference/index.html" target="_blank" rel="noopener">Symfony配置参考</a> 或运行 <code>config：dump-reference</code> 命令。</p>
+</blockquote>
+<h4 id="配置格式"><a href="#配置格式" class="headerlink" title="配置格式"></a><span id="configuration-formates">配置格式</span></h4><p>不像其他的框架，Symfony不会让你使用特定格式来配置应用程序。 Symfony 允许你在 YAML，XML 和 PHP 之间进行选择，在整个 Symfony 文档中，所有配置示例都将以这三种格式显示。</p>
+<p>格式之间没有任何实际区别。实际上，Symfony 在运行应用程序之前将它们全部转换并缓存到 PHP 中，因此它们之间甚至没有任何性能差异。</p>
+<p>安装软件包时，默认情况下会使用 YAML，因为它简洁易读。这些是每种格式的主要优点和缺点：</p>
+<ul>
+<li><strong>YAML</strong>，简单，干净，可读，但并非所有IDE都支持自动完成和验证。<a href="https://symfony.com/doc/current/components/yaml/yaml_format.html" target="_blank" rel="noopener">了解YAML语法</a>；</li>
+<li><strong>XML</strong>，在大多数的 IDE 中都能自动完成/验证，并由 PHP 进行本机解析，但有时它会生成过于冗长的配置。<a href="https://en.wikipedia.org/wiki/XML" target="_blank" rel="noopener">学习XML语法</a>；</li>
+<li><strong>PHP</strong>，强大的功能，它允许你创建动态配置，但是生成的配置比其他格式的配置可读性差。</li>
+</ul>
+<h4 id="引入配置文件"><a href="#引入配置文件" class="headerlink" title="引入配置文件"></a><span id="importing-configuration-files">引入配置文件</span></h4><p>Symfony 使用 <a href="https://symfony.com/doc/current/components/config.html" target="_blank" rel="noopener">Config组件</a> 加载配置文件，该组件提供高级功能，例如导入其他配置文件，即使它们使用不同的格式也是如此：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># config/services.yaml</span></span><br><span class="line"><span class="attr">imports:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">&#123;</span> <span class="attr">resource:</span> <span class="string">'legacy_config.php'</span> <span class="string">&#125;</span></span><br><span class="line">    <span class="comment"># 如果所加载的文件不存在，ignore_errors 会静默丢弃错误</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">&#123;</span> <span class="attr">resource:</span> <span class="string">'my_config_file.xml'</span><span class="string">,</span> <span class="attr">ignore_errors:</span> <span class="literal">true</span> <span class="string">&#125;</span></span><br><span class="line">    <span class="comment"># 还支持glob表达式来加载多个文件</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">&#123;</span> <span class="attr">resource:</span> <span class="string">'/etc/myapp/*.yaml'</span> <span class="string">&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># ...</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- config/services.xml --&gt;</span></span><br><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">container</span> <span class="attr">xmlns</span>=<span class="string">"http://symfony.com/schema/dic/services"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://symfony.com/schema/dic/services</span></span></span><br><span class="line"><span class="tag"><span class="string">        https://symfony.com/schema/dic/services/services-1.0.xsd</span></span></span><br><span class="line"><span class="tag"><span class="string">        http://symfony.com/schema/dic/symfony</span></span></span><br><span class="line"><span class="tag"><span class="string">        https://symfony.com/schema/dic/symfony/symfony-1.0.xsd"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">imports</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">import</span> <span class="attr">resource</span>=<span class="string">"legacy_config.php"</span>/&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 如果所加载的文件不存在，ignore_errors 会静默丢弃错误 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">import</span> <span class="attr">resource</span>=<span class="string">"my_config_file.yaml"</span> <span class="attr">ignore-errors</span>=<span class="string">"true"</span>/&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 还支持glob表达式来加载多个文件 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">import</span> <span class="attr">resource</span>=<span class="string">"/etc/myapp/*.yaml"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">imports</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- ... --&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">container</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// config/services.php</span></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">Symfony</span>\<span class="title">Component</span>\<span class="title">DependencyInjection</span>\<span class="title">Loader</span>\<span class="title">Configurator</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> <span class="keyword">static</span> <span class="function"><span class="keyword">function</span> <span class="params">(ContainerConfigurator $container)</span> </span>&#123;</span><br><span class="line">    $container-&gt;import(<span class="string">'legacy_config.php'</span>);</span><br><span class="line">    <span class="comment">// 如果所加载的文件不存在，ignore_errors (第三个参数) 会静默丢弃错误</span></span><br><span class="line">    $container-&gt;import(<span class="string">'my_config_file.xml'</span>, <span class="keyword">null</span>, <span class="keyword">true</span>);</span><br><span class="line">    <span class="comment">// 还支持 glob 表达式来加载多个文件</span></span><br><span class="line">    $container-&gt;import(<span class="string">'/etc/myapp/*.yaml'</span>);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// ...</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="配置参数"><a href="#配置参数" class="headerlink" title="配置参数"></a><span id="configuration-parameters">配置参数</span></h3><p>有时在几个配置文件中使用相同的配置值。无需重复配置，你可以将其定义为“参数”，就像可重用的配置值一样。按照惯例，参数是在 <code>config/services.yaml</code> 文件中的 <code>parameter</code> 键下定义的：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># config/services.yaml</span></span><br><span class="line"><span class="attr">parameters:</span></span><br><span class="line">    <span class="comment"># 参数名称是任意字符串（建议使用“app.”前缀，</span></span><br><span class="line">    <span class="comment"># 以更好地将您的参数与 Symfony 参数区分开）。</span></span><br><span class="line">    <span class="attr">app.admin_email:</span> <span class="string">'something@example.com'</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 布尔值参数</span></span><br><span class="line">    <span class="attr">app.enable_v2_protocol:</span> <span class="literal">true</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 数组/集合参数</span></span><br><span class="line">    <span class="attr">app.supported_locales:</span> <span class="string">['en',</span> <span class="string">'es'</span><span class="string">,</span> <span class="string">'fr'</span><span class="string">]</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 二进制内容参数（使用 base64_encode() 编码内容）</span></span><br><span class="line">    <span class="attr">app.some_parameter:</span> <span class="type">!!binary</span> <span class="string">VGhpcyBpcyBhIEJlbGwgY2hhciAH</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># PHP 常量作为参数</span></span><br><span class="line">    <span class="attr">app.some_constant:</span> <span class="type">!php</span><span class="string">/const</span> <span class="string">GLOBAL_CONSTANT</span></span><br><span class="line">    <span class="attr">app.another_constant:</span> <span class="type">!php</span><span class="string">/const</span> <span class="string">App\Entity\BlogPost::MAX_ITEMS</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># ...</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- config/services.xml --&gt;</span></span><br><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">container</span> <span class="attr">xmlns</span>=<span class="string">"http://symfony.com/schema/dic/services"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:framework</span>=<span class="string">"http://symfony.com/schema/dic/symfony"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://symfony.com/schema/dic/services</span></span></span><br><span class="line"><span class="tag"><span class="string">        https://symfony.com/schema/dic/services/services-1.0.xsd</span></span></span><br><span class="line"><span class="tag"><span class="string">        http://symfony.com/schema/dic/symfony</span></span></span><br><span class="line"><span class="tag"><span class="string">        https://symfony.com/schema/dic/symfony/symfony-1.0.xsd"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">parameters</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 参数名称是任意字符串（建议使用“app.”前缀，</span></span><br><span class="line"><span class="comment">             以更好地将您的参数与 Symfony 参数区分开）。 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">parameter</span> <span class="attr">key</span>=<span class="string">"app.admin_email"</span>&gt;</span>something@example.com<span class="tag">&lt;/<span class="name">parameter</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">&lt;!-- 布尔值参数 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">parameter</span> <span class="attr">key</span>=<span class="string">"app.enable_v2_protocol"</span>&gt;</span>true<span class="tag">&lt;/<span class="name">parameter</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- if you prefer to store the boolean value as a string in the parameter --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">parameter</span> <span class="attr">key</span>=<span class="string">"app.enable_v2_protocol"</span> <span class="attr">type</span>=<span class="string">"string"</span>&gt;</span>true<span class="tag">&lt;/<span class="name">parameter</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">&lt;!-- 数组/集合参数 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">parameter</span> <span class="attr">key</span>=<span class="string">"app.supported_locales"</span> <span class="attr">type</span>=<span class="string">"collection"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">parameter</span>&gt;</span>en<span class="tag">&lt;/<span class="name">parameter</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">parameter</span>&gt;</span>es<span class="tag">&lt;/<span class="name">parameter</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">parameter</span>&gt;</span>fr<span class="tag">&lt;/<span class="name">parameter</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">parameter</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">&lt;!-- 二进制内容参数（使用 base64_encode() 编码内容） --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">parameter</span> <span class="attr">key</span>=<span class="string">"app.some_parameter"</span> <span class="attr">type</span>=<span class="string">"binary"</span>&gt;</span>VGhpcyBpcyBhIEJlbGwgY2hhciAH<span class="tag">&lt;/<span class="name">parameter</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">&lt;!-- PHP 常量作为参数 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">parameter</span> <span class="attr">key</span>=<span class="string">"app.some_constant"</span> <span class="attr">type</span>=<span class="string">"constant"</span>&gt;</span>GLOBAL_CONSTANT<span class="tag">&lt;/<span class="name">parameter</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">parameter</span> <span class="attr">key</span>=<span class="string">"app.another_constant"</span> <span class="attr">type</span>=<span class="string">"constant"</span>&gt;</span>App\Entity\BlogPost::MAX_ITEMS<span class="tag">&lt;/<span class="name">parameter</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">parameters</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- ... --&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">container</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// config/services.php</span></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">Symfony</span>\<span class="title">Component</span>\<span class="title">DependencyInjection</span>\<span class="title">Loader</span>\<span class="title">Configurator</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">use</span> <span class="title">App</span>\<span class="title">Entity</span>\<span class="title">BlogPost</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> <span class="keyword">static</span> <span class="function"><span class="keyword">function</span> <span class="params">(ContainerConfigurator $container)</span> </span>&#123;</span><br><span class="line">    $container-&gt;parameters()</span><br><span class="line">        <span class="comment">// 参数名称是任意字符串（建议使用“app.”前缀，</span></span><br><span class="line">        <span class="comment">// 以更好地将您的参数与 Symfony 参数区分开）。</span></span><br><span class="line">        -&gt;set(<span class="string">'app.admin_email'</span>, <span class="string">'something@example.com'</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 布尔值参数</span></span><br><span class="line">        -&gt;set(<span class="string">'app.enable_v2_protocol'</span>, <span class="keyword">true</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 数组/集合参数</span></span><br><span class="line">        -&gt;set(<span class="string">'app.supported_locales'</span>, [<span class="string">'en'</span>, <span class="string">'es'</span>, <span class="string">'fr'</span>])</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 二进制内容参数（使用 PHP 转义串行）</span></span><br><span class="line">        -&gt;set(<span class="string">'app.some_parameter'</span>, <span class="string">'This is a Bell char: \x07'</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment">// PHP 常量作为参数</span></span><br><span class="line">        -&gt;set(<span class="string">'app.some_constant'</span>, GLOBAL_CONSTANT)</span><br><span class="line">        -&gt;set(<span class="string">'app.another_constant'</span>, BlogPost::MAX_ITEMS);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// ...</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>使用XML配置时，不会修剪标记之间的值。这意味着以下参数的值将为 ‘\n    <a href="mailto:&#x73;&#x6f;&#x6d;&#x65;&#x74;&#x68;&#x69;&#x6e;&#103;&#64;&#x65;&#120;&#97;&#x6d;&#x70;&#108;&#x65;&#46;&#99;&#x6f;&#109;">&#x73;&#x6f;&#x6d;&#x65;&#x74;&#x68;&#x69;&#x6e;&#103;&#64;&#x65;&#120;&#97;&#x6d;&#x70;&#108;&#x65;&#46;&#99;&#x6f;&#109;</a>\n’：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">parameter</span> <span class="attr">key</span>=<span class="string">"app.admin_email"</span>&gt;</span></span><br><span class="line">   something@example.com</span><br><span class="line"><span class="tag">&lt;/<span class="name">parameter</span>&gt;</span> </span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>一旦定义完成，您可以使用特殊语法从任何其他配置文件中引用此参数值：将参数名称包装在两个 <code>%</code> 中（例如，<code>%app.admin_email%</code>）：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># config/packages/some_package.yaml</span></span><br><span class="line"><span class="attr">some_package:</span></span><br><span class="line">    <span class="comment"># 任何被两个 % 包围的字符串都将替换为该参数值</span></span><br><span class="line">    <span class="attr">email_address:</span> <span class="string">'%app.admin_email%'</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># ...</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- config/packages/some_package.xml --&gt;</span></span><br><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">container</span> <span class="attr">xmlns</span>=<span class="string">"http://symfony.com/schema/dic/services"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:framework</span>=<span class="string">"http://symfony.com/schema/dic/symfony"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://symfony.com/schema/dic/services</span></span></span><br><span class="line"><span class="tag"><span class="string">        https://symfony.com/schema/dic/services/services-1.0.xsd</span></span></span><br><span class="line"><span class="tag"><span class="string">        http://symfony.com/schema/dic/symfony</span></span></span><br><span class="line"><span class="tag"><span class="string">        https://symfony.com/schema/dic/symfony/symfony-1.0.xsd"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- 任何被两个 % 包围的字符串都将替换为该参数值 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">some-package:config</span> <span class="attr">email-address</span>=<span class="string">"%app.admin_email%"</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- ... --&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">some-package:config</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">container</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// config/packages/some_package.php</span></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">Symfony</span>\<span class="title">Component</span>\<span class="title">DependencyInjection</span>\<span class="title">Loader</span>\<span class="title">Configurator</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> <span class="keyword">static</span> <span class="function"><span class="keyword">function</span> <span class="params">(ContainerConfigurator $container)</span> </span>&#123;</span><br><span class="line">    $container-&gt;extension(<span class="string">'some_package'</span>, [</span><br><span class="line">        <span class="comment">// 任何被两个 % 包围的字符串都将替换为该参数值</span></span><br><span class="line">        <span class="string">'email_address'</span> =&gt; <span class="string">'%app.admin_email%'</span>,</span><br><span class="line"></span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line">    ]);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>如果某些参数值包含％字符，则需要通过添加另一个 <code>%</code> 来对其进行转义，因此 Symfony 不会将其视为对参数名称的引用：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># config/services.yaml</span></span><br><span class="line"><span class="attr">parameters:</span></span><br><span class="line">   <span class="comment"># 解析为 'https://symfony.com/?foo=%s&amp;amp;bar=%d'</span></span><br><span class="line">   <span class="attr">url_pattern:</span> <span class="string">'https://symfony.com/?foo=%%s&amp;amp;bar=%%d'</span> </span><br></pre></td></tr></table></figure>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- config/services.xml --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">parameters</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">parameter</span> <span class="attr">key</span>=<span class="string">"url_pattern"</span>&gt;</span>http://symfony.com/?foo=%%s<span class="symbol">&amp;amp;</span>bar=%%d<span class="tag">&lt;/<span class="name">parameter</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">parameters</span>&gt;</span> </span><br></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// config/services.php</span></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">Symfony</span>\<span class="title">Component</span>\<span class="title">DependencyInjection</span>\<span class="title">Loader</span>\<span class="title">Configurator</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> <span class="keyword">static</span> <span class="function"><span class="keyword">function</span> <span class="params">(ContainerConfigurator $container)</span> </span>&#123;</span><br><span class="line">   $container-&gt;parameters()</span><br><span class="line">       -&gt;set(<span class="string">'url_pattern'</span>, <span class="string">'http://symfony.com/?foo=%%s&amp;amp;bar=%%d'</span>);</span><br><span class="line">&#125;; </span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p>由于解析参数的方式，您不能使用它们动态地在导入中构建路径。<br>这表示以下内容无法正常运作：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># config/services.yaml</span></span><br><span class="line"><span class="attr">imports:</span></span><br><span class="line">   <span class="bullet">-</span> <span class="string">&#123;</span> <span class="attr">resource:</span> <span class="string">'%kernel.project_dir%/somefile.yaml'</span> <span class="string">&#125;</span> </span><br></pre></td></tr></table></figure>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- config/services.xml --&gt;</span></span><br><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">container</span> <span class="attr">xmlns</span>=<span class="string">"http://symfony.com/schema/dic/services"</span></span></span><br><span class="line"><span class="tag">   <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="tag">   <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://symfony.com/schema/dic/services</span></span></span><br><span class="line"><span class="tag"><span class="string">       https://symfony.com/schema/dic/services/services-1.0.xsd"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">   <span class="tag">&lt;<span class="name">imports</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">import</span> <span class="attr">resource</span>=<span class="string">"%kernel.project_dir%/somefile.yaml"</span>/&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">imports</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">container</span>&gt;</span> </span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; config&#x2F;services.php</span><br><span class="line">$loader-&gt;import(&#39;%kernel.project_dir%&#x2F;somefile.yaml&#39;); </span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>配置参数在 Symfony 应用程序中非常常见。有些包甚至定义了自己的参数（例如，在安装翻译包时，会将新的语言环境参数添加到 <code>config/services.yaml</code>文件中）。</p>
+<blockquote>
+<p>在本文的后面，您可以阅读如何 <a href="#accessing-configuration-parameters">在控制器和服务中获取配置参数</a>。</p>
+</blockquote>
+<h3 id="配置环境"><a href="#配置环境" class="headerlink" title="配置环境"></a><span id="configuration-environments">配置环境</span></h3><p>你只有一个应用程序，但是无论你是否意识到它，都需要它在不同时间表现不同：</p>
+<ul>
+<li>在 <strong>开发环境</strong> 过程中，您想记录所有内容并公开漂亮的调试工具；</li>
+<li>部署到 <strong>生产环境</strong> 后，您希望对同一应用程序进行优化以提高速度，并且仅记录日志错误。</li>
+</ul>
+<p>Symfony使用 <code>config/packages/</code> 中存储的文件来配置 <a href="https://symfony.com/doc/current/service_container.html" target="_blank" rel="noopener">应用程序服务</a>。换句话说，你可以通过更改加载的配置文件来更改应用程序的行为。这就是 Symfony 的 <strong>配置环境</strong> 的想法。</p>
+<p>典型的 Symfony 应用程序始于三种环境：<code>dev</code>（用于本地开发），<code>prod</code>（用于生产服务器）和 <code>test</code>（用于自动测试）。在运行应用程序时，Symfony 会按以下顺序加载配置文件（最后一个文件可以覆盖先前文件中设置的值）：</p>
+<ol>
+<li><code>config/packages/*.yaml</code> （<code>*.xml</code> 和 <code>*.php</code> 文件也一样）；</li>
+<li><code>config/packages/&lt;environment-name&gt;/*.yaml</code> （<code>*.xml</code> 和 <code>*.php</code> 文件也一样）；</li>
+<li><code>config/packages/services.yaml</code> （<code>services.xml</code> 和 <code>services.php</code> 文件也一样）；</li>
+</ol>
+<p>以默认情况下安装的框架包为例：</p>
+<ul>
+<li>首先，<code>config/packages/framework.yaml</code> 会在所有环境中加载，并使用一些选项配置框架。</li>
+<li>在 <strong>生产</strong> 环境中，将没有任何其他设置，因为没有 <code>config/packages/prod/framework.yaml</code> 文件。</li>
+<li>在 <strong>开发</strong> 环境中，也没有文件（<code>config/packages/dev/framework.yaml</code> 不存在）。</li>
+<li>在 <strong>测试</strong> 环境中，将加载 <code>config/packages/test/framework.yaml</code> 文件，以覆盖先前在 <code>config/packages/framework.yaml</code> 中配置的某些设置。</li>
+</ul>
+<p>实际上，每种环境仅与其他环境有所不同。这意味着所有环境都共享大量的通用配置，这些通用配置直接放在 <code>config/packages/</code> 目录中的文件中。</p>
+<blockquote>
+<p>请参阅 <a href="https://symfony.com/doc/current/configuration/front_controllers_and_kernel.html" target="_blank" rel="noopener">Kernel类</a> 的 <code>configureContainer()</code> 方法以了解有关配置文件的加载顺序的所有信息。</p>
+</blockquote>
+<h4 id="选择活动环境"><a href="#选择活动环境" class="headerlink" title="选择活动环境"></a><span id="selecting-the-active-environment">选择活动环境</span></h4><p>Symfony 应用程序具有一个名为 <code>.env</code> 的文件，该文件位于项目根目录中。此文件用于定义环境变量的值，本文稍后将对此进行详细解释。</p>
+<p>打开 <code>.env</code> 文件（或者更好的是，创建文件为 <code>.env.local</code> 文件），并编辑 <code>APP_ENV</code> 变量的值以更改应用程序运行的环境。例如，若要在生产环境中运行应用程序：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># .env (或 .env.local)</span></span><br><span class="line">APP_ENV=prod</span><br></pre></td></tr></table></figure>
+
+<p>此值用于 Web 和控制台命令。但是，您可以通过在运行命令之前设置”APP_ENV来重写命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用定义在 .env 文件中的环境变量</span></span><br><span class="line">&gt; php bin/console command_name</span><br><span class="line"></span><br><span class="line"><span class="comment"># 忽略 .env 文件并在生成环境中执行此命令</span></span><br><span class="line">&gt; APP_ENV=prod php bin/console command_name</span><br></pre></td></tr></table></figure>
+
+<h4 id="创建一个新的环境"><a href="#创建一个新的环境" class="headerlink" title="创建一个新的环境"></a><span id="creating-a-new-environment">创建一个新的环境</span></h4><p>Symfony 提供的默认三个环境对于大多数项目来说已经足够了，但您也可以定义自己的环境。例如，这是如何定义一个暂存环境，客户端可以在该环境中测试项目，然后再进入生产环境：</p>
+<ol>
+<li>创建与环境同名的配置目录（本例中为 <code>config/packages/staging/</code>）;</li>
+<li>在 <code>config/packages/staging/</code> 中添加所需的配置文件/以定义新环境的行为。Symfony 首先加载 <code>config/packages/*.yaml</code> 文件，因此你只需将差异配置为这些文件;</li>
+<li>使用 <code>APP_ENV</code> 环境变量选择 <code>staging</code> 环境，如上一节所述。</li>
+</ol>
+<blockquote>
+<p>环境彼此相似是很常见的，因此可以在 <code>config/packages/&lt;environment-name&gt;/</code> 目录之间使用 <a href="https://en.wikipedia.org/wiki/Symbolic_link" target="_blank" rel="noopener">符号链接</a> 来重用相同的配置。</p>
+</blockquote>
+<h3 id="基于环境变量的配置"><a href="#基于环境变量的配置" class="headerlink" title="基于环境变量的配置"></a><span id="configuration-based-on-environment-variables">基于环境变量的配置</span></h3><p>使用 <a href="https://en.wikipedia.org/wiki/Environment_variable" target="_blank" rel="noopener">环境变量</a> 是配置取决于应用程序运行地点的选项的常见做法（例如，数据库凭据在生产中通常与本地计算机不同）。如果值是敏感的，您甚至可以 <a href="https://symfony.com/doc/current/configuration/secrets.html" target="_blank" rel="noopener">将它们加密为加密串</a>。</p>
+<p>你可以使用特殊语法 <code>%env(ENV_VAR_NAME)%</code> 引用环境变量。这些选项的值在运行时解析（每个请求只解析一次，不会影响性能）。</p>
+<p>此示例演示如何使用环境变量配置数据库连接：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># config/packages/doctrine.yaml</span></span><br><span class="line"><span class="attr">doctrine:</span></span><br><span class="line">    <span class="attr">dbal:</span></span><br><span class="line">        <span class="comment"># 根据惯例， 环境变量名称总是大写</span></span><br><span class="line">        <span class="attr">url:</span> <span class="string">'%env(resolve:DATABASE_URL)%'</span></span><br><span class="line">    <span class="comment"># ...</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- config/packages/doctrine.xml --&gt;</span></span><br><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">container</span> <span class="attr">xmlns</span>=<span class="string">"http://symfony.com/schema/dic/services"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:doctrine</span>=<span class="string">"http://symfony.com/schema/dic/doctrine"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://symfony.com/schema/dic/services</span></span></span><br><span class="line"><span class="tag"><span class="string">        https://symfony.com/schema/dic/services/services-1.0.xsd</span></span></span><br><span class="line"><span class="tag"><span class="string">        http://symfony.com/schema/dic/doctrine</span></span></span><br><span class="line"><span class="tag"><span class="string">        https://symfony.com/schema/dic/doctrine/doctrine-1.0.xsd"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">doctrine:config</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 根据惯例， 环境变量名称总是大写 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">doctrine:dbal</span> <span class="attr">url</span>=<span class="string">"%env(resolve:DATABASE_URL)%"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">doctrine:config</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">container</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// config/packages/doctrine.php</span></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">Symfony</span>\<span class="title">Component</span>\<span class="title">DependencyInjection</span>\<span class="title">Loader</span>\<span class="title">Configurator</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> <span class="keyword">static</span> <span class="function"><span class="keyword">function</span> <span class="params">(ContainerConfigurator $container)</span> </span>&#123;</span><br><span class="line">    $container-&gt;extension(<span class="string">'doctrine'</span>, [</span><br><span class="line">        <span class="string">'dbal'</span> =&gt; [</span><br><span class="line">            <span class="comment">// 根据惯例， 环境变量名称总是大写</span></span><br><span class="line">            <span class="string">'url'</span> =&gt; <span class="string">'%env(resolve:DATABASE_URL)%'</span>,</span><br><span class="line">        ]</span><br><span class="line">    ]);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>环境变量的值只能是字符串，但 Symfony 包括一些 <a href="https://symfony.com/doc/current/configuration/env_var_processors.html" target="_blank" rel="noopener">环境变量处理器</a> 来转换其内容（例如，将字符串值转换为整数）。</p>
+</blockquote>
+<p>要定义环境变量的值，有几个选项：</p>
+<ul>
+<li><a href="#configuring-environment-variables-in-env-files">将值加到 .env 文件</a>;</li>
+<li><a href="">将值加密为加密串</a>;</li>
+<li>将值设置为 shell 或 Web 服务器中的实际环境变量。</li>
+</ul>
+<blockquote>
+<p>一些主机 - 如 SymfonyCloud - 提供简单的 <a href="https://symfony.com/doc/master/cloud/cookbooks/env.html" target="_blank" rel="noopener">实用程序</a> 来管理生产中的环境变量。</p>
+</blockquote>
+<blockquote>
+<p>请注意，转储 <code>_SERVER</code> 和 <code>$_ENV</code> 变量的内容或输出 <code>phpinfo()</code> 内容将显示环境变量的值，公开敏感信息，如数据库凭据。</p>
+<p>环境变量的值也会在 <a href="https://symfony.com/doc/current/profiler.html" target="_blank" rel="noopener">Symfony 探查器</a> 的 Web 界面中公开。实际上，这应该不是什么问题，因为绝不能在生产环境中启用 Web 探查器。</p>
+</blockquote>
+<h4 id="在-env-文件中配置环境变量"><a href="#在-env-文件中配置环境变量" class="headerlink" title="在 .env 文件中配置环境变量"></a><span id="configuring-environment-variables-in-env-files">在 .env 文件中配置环境变量</span></h4><p>Symfony 没有在 shell 或 Web 服务器中定义环境变量，而是提供了一种在位于项目根目录的 <code>.env</code>（带前导点）文件中定义它们的便捷方法。</p>
+<p><code>.env</code> 文件在每个请求上读取并解析，其环境变量将添加到 <code>$_ENV</code> 和 <code>_ENV _SERVER</code> PHP 变量中。任何现有的环境变量永远不会被 <code>.env</code> 中定义的值覆盖，因此你可以同时使用这两个值。</p>
+<p>例如，若要定义前文所说的 <code>DATABASE_URL</code> 环境变量，可以添加：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># .env</span></span><br><span class="line">DATABASE_URL=<span class="string">"mysql://db_user:db_password@127.0.0.1:3306/db_name"</span></span><br></pre></td></tr></table></figure>
+
+<p>此文件应提交到存储库，并且（由于这一事实）应仅包含适合本地发展的“默认”值。此文件不应包含生产值.</p>
+<p>除了你自己的环境变量之外，此 <code>.env</code> 文件还包含由应用程序中安装的第三方包定义的环境变量（在安装包时，<a href="https://symfony.com/doc/current/setup.html#symfony-flex" target="_blank" rel="noopener">Symfony Flex</a> 会自动添加它们）。</p>
+<h4 id="env-文件语法"><a href="#env-文件语法" class="headerlink" title=".env 文件语法"></a><span id="env-file-syntax">.env 文件语法</span></h4><p>添加注释，用 <code>#</code>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 数据库凭证</span></span><br><span class="line">DB_USER=root</span><br><span class="line">DB_PASS=pass <span class="comment"># 这里是密码</span></span><br></pre></td></tr></table></figure>
+
+<p>通过将变量前缀为 <code>$</code>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">DB_USER=root</span><br><span class="line">DB_PASS=<span class="variable">$&#123;DB_USER&#125;</span>pass <span class="comment"># include the user as a password prefix</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>当某些环境变量依赖于其他环境变量的值时，顺序很重要。在上面的示例中，DB_PASS 在操作后 DB_USER。此外，如果定义多个 .env 文件并 DB_PASS，则其值将取决于 DB_USER 文件中定义的 DB_USER 值，而不是在此文件中定义的值。</p>
+</blockquote>
+<p>定义一个默认值，以防未设置环境变量：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">DB_USER=</span><br><span class="line">DB_PASS=<span class="variable">$&#123;DB_USER:-root&#125;</span>pass <span class="comment"># 在 DB_PASS=rootpass 中的结果</span></span><br></pre></td></tr></table></figure>
+
+<p>通过 <code>$()</code> 嵌入命令（Windows 上不支持）：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">START_TIME=$(date)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>使用 $() 可能不会生效，这依赖于你使用的 shell。</p>
+</blockquote>
+<blockquote>
+<p>由于 .env 文件是常规 shell 脚本，你可以在你自己的 shell 脚本中生成该文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">source</span> .env </span><br></pre></td></tr></table></figure>
+</blockquote>
+<h4 id="通过-env-local-覆盖环境值"><a href="#通过-env-local-覆盖环境值" class="headerlink" title="通过 .env.local 覆盖环境值"></a><span id="overriding-environment-values-via-envlocal">通过 .env.local 覆盖环境值</span></h4><p>如果需要重写环境值（例如，本地计算机上的不同值），可以在 .env.local 文件中这样做：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># .env.local</span></span><br><span class="line">DATABASE_URL=<span class="string">"mysql://root:@127.0.0.1:3306/my_database_name"</span></span><br></pre></td></tr></table></figure>
+
+<p>这个文件应被 git 忽略，不应提交到存储库。其他几个 .env 文件可用于在正确的情况下设置环境变量：</p>
+<ul>
+<li><code>.env</code>：定义应用程序所需的环境变量的默认值;</li>
+<li><code>.env.local</code>：覆盖所有环境的默认值，但仅在包含该文件的计算机上。此文件不应提交到存储库，并且在测试环境中被忽略（因为测试应该为每个人产生相同的结果）;</li>
+<li><code>.env.&lt;environment&gt;</code> （例如 .env.test）：仅覆盖一个环境，但所有计算机（提交这些文件）;</li>
+<li><code>.env.&lt;environment&gt;.local</code> （例如 .env.test.local）：定义特定于计算机的环境变量仅针对一个环境进行覆盖。它类似于 <code>.env.local</code>，但重写仅适用于一个环境。</li>
+</ul>
+<p><em>真正</em>的环境变量总是赢得由任何 .env 文件创建的环境变量。</p>
+<p><code>.env</code> 和 <code>.env.&lt;environment&gt;</code> 文件应提交到存储库，因为它们对于所有开发人员和计算机都是一样的。但是，以 <code>.local</code> （<code>.env.local</code> 和 <code>.env.&lt;environment&gt;.local</code>）结尾的 env 文件，<strong>不应提交</strong>，因为只有你使用它们。事实上，Symfony 附带的 <code>.gitignore</code> 文件会阻止它们被提交。</p>
+<blockquote>
+<p>2018 年 11 月之前创建的应用程序的系统略有不同，涉及 <code>.env.dist</code> 文件。有关升级的信息，请参阅：<a href="https://symfony.com/doc/current/configuration/dot-env-changes.html" target="_blank" rel="noopener">2018 年 11 月对 .env 的更改和如何更新</a>。</p>
+</blockquote>
+<h4 id="在生产环境中配置环境变量"><a href="#在生产环境中配置环境变量" class="headerlink" title="在生产环境中配置环境变量"></a><span id="configuring-environment-variables-in-production">在生产环境中配置环境变量</span></h4><p>在生产中，也会在每个请求上解析和加载 <code>.env</code> 文件。因此，定义环境变量的最简单方法是将 <code>.env.local</code> 文件部署到具有生产值的生产服务器。</p>
+<p>为了提高性能，您可以选择运行转储 env 命令（在 <a href="https://symfony.com/doc/current/setup.html#symfony-flex" target="_blank" rel="noopener">Symfony Flex</a> 1.2 或更晚一些中提供）：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 解析所有的 .env 文件并导出他们的最终值到 .env.local.php</span></span><br><span class="line">&gt;  composer dump-env prod</span><br></pre></td></tr></table></figure>
+
+<p>运行此命令后，Symfony 将加载 <code>.env.local.php</code> 文件来获取环境变量，并且不会花时间分析 <code>.env</code> 文件。</p>
+<blockquote>
+<p>更新部署工具/工作流以在每次部署后运行 <code>dump-env</code> 命令以提高应用程序性能。</p>
+</blockquote>
+<h4 id="加密环境变量（机密）"><a href="#加密环境变量（机密）" class="headerlink" title="加密环境变量（机密）"></a><span id="encrypting-environment-variables">加密环境变量（机密）</span></h4><p>如果变量的值是敏感的（例如 API 密钥或数据库密码），则可以使用 <a href="https://symfony.com/doc/current/configuration/secrets.html" target="_blank" rel="noopener">机密管理系统</a> 对值进行加密，而不是定义真实环境变量或将变量添加到 <code>.env</code> 文件中。</p>
+<h4 id="列出环境变量"><a href="#列出环境变量" class="headerlink" title="列出环境变量"></a><span id="listing-environment-variables">列出环境变量</span></h4><p>无论你如何设置环境变量，都可以通过运行下面命令来查看包含其值的完整列表：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"> php bin/console debug:container --env-vars</span><br><span class="line"></span><br><span class="line">---------------- ----------------- ---------------------------------------------</span><br><span class="line"> Name             Default value     Real value</span><br><span class="line">---------------- ----------------- ---------------------------------------------</span><br><span class="line"> APP_SECRET       n/a               <span class="string">"471a62e2d601a8952deb186e44186cb3"</span></span><br><span class="line"> FOO              <span class="string">"[1, "</span>2.5<span class="string">", 3]"</span>   n/a</span><br><span class="line"> BAR              null              n/a</span><br><span class="line">---------------- ----------------- ---------------------------------------------</span><br><span class="line"></span><br><span class="line"><span class="comment"># 你也可以通过名称过滤环境变量列表：</span></span><br><span class="line">&gt; php bin/console debug:container --env-vars foo</span><br><span class="line"></span><br><span class="line"><span class="comment"># 运行这个命令来运行一个特殊环境变量所有的细节：</span></span><br><span class="line">&gt; php bin/console debug:container --env-var=FOO</span><br></pre></td></tr></table></figure>
+
+<h3 id="访问配置参数"><a href="#访问配置参数" class="headerlink" title="访问配置参数"></a><span id="accessing-configuration-parameters">访问配置参数</span></h3><p>控制器和服务可以访问所有配置参数。这包括 <a href="#configuration-parameters">你自己定义的参数</a> 和包/捆绑包创建的参数。运行以下命令以查看应用程序中存在的所有参数：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">php bin/console debug:container --parameters</span><br></pre></td></tr></table></figure>
+
+<p>在从 <a href="https://symfony.com/doc/current/controller.html#the-base-controller-class-services" target="_blank" rel="noopener">AbstractController</a> 扩展的控制器中，使用 <code>getParameter()</code> 辅助函数：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">// src/Controller/UserController.php</span><br><span class="line">namespace App\Controller;</span><br><span class="line"></span><br><span class="line">use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;</span><br><span class="line"></span><br><span class="line">class UserController extends AbstractController</span><br><span class="line">&#123;</span><br><span class="line">    // ...</span><br><span class="line"></span><br><span class="line">    public <span class="keyword">function</span> index()</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="variable">$projectDir</span> = <span class="variable">$this</span>-&gt;getParameter(<span class="string">'kernel.project_dir'</span>);</span><br><span class="line">        <span class="variable">$adminEmail</span> = <span class="variable">$this</span>-&gt;getParameter(<span class="string">'app.admin_email'</span>);</span><br><span class="line"></span><br><span class="line">        // ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在服务和控制器中，不是从抽象控制器扩展，将参数注入为其构造函数的参数。你必须显式注入它们，因为服务 <a href="https://symfony.com/doc/current/service_container/autowiring.html" target="_blank" rel="noopener">自动写入</a> 对参数不起作用：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># config/services.yaml</span></span><br><span class="line"><span class="attr">parameters:</span></span><br><span class="line">    <span class="attr">app.contents_dir:</span> <span class="string">'...'</span></span><br><span class="line"></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">    <span class="string">App\Service\MessageGenerator:</span></span><br><span class="line">        <span class="attr">arguments:</span></span><br><span class="line">            <span class="string">$contentsDir:</span> <span class="string">'%app.contents_dir%'</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- config/services.xml --&gt;</span></span><br><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">container</span> <span class="attr">xmlns</span>=<span class="string">"http://symfony.com/schema/dic/services"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://symfony.com/schema/dic/services</span></span></span><br><span class="line"><span class="tag"><span class="string">        https://symfony.com/schema/dic/services/services-1.0.xsd"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">parameters</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">parameter</span> <span class="attr">key</span>=<span class="string">"app.contents_dir"</span>&gt;</span>...<span class="tag">&lt;/<span class="name">parameter</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">parameters</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">services</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">service</span> <span class="attr">id</span>=<span class="string">"App\Service\MessageGenerator"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">argument</span> <span class="attr">key</span>=<span class="string">"$contentsDir"</span>&gt;</span>%app.contents_dir%<span class="tag">&lt;/<span class="name">argument</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">service</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">services</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">container</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// config/services.php</span></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">Symfony</span>\<span class="title">Component</span>\<span class="title">DependencyInjection</span>\<span class="title">Loader</span>\<span class="title">Configurator</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">use</span> <span class="title">App</span>\<span class="title">Service</span>\<span class="title">MessageGenerator</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> <span class="keyword">static</span> <span class="function"><span class="keyword">function</span> <span class="params">(ContainerConfigurator $container)</span> </span>&#123;</span><br><span class="line">    $container-&gt;parameters()</span><br><span class="line">        -&gt;set(<span class="string">'app.contents_dir'</span>, <span class="string">'...'</span>);</span><br><span class="line"></span><br><span class="line">    $container-&gt;services()</span><br><span class="line">        -&gt;get(MessageGenerator::class)</span><br><span class="line">            -&gt;arg(<span class="string">'$contentsDir'</span>, <span class="string">'%app.contents_dir%'</span>);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>如果一遍又一遍地注入相同的参数，请 <code>services._defaults.bind</code> 选项。每当服务构造函数或控制器操作定义具有该确切名称的参数时，都会自动注入该选项中定义的参数。例如，每当服务/控制器定义 <a href="https://symfony.com/doc/current/reference/configuration/kernel.html#configuration-kernel-project-directory" target="_blank" rel="noopener">kernel.project_dir 参数</a> 时，请注入 <code>$projectDir</code> 参数的值，请使用以下方法：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># config/services.yaml</span></span><br><span class="line">services:</span><br><span class="line">    _defaults:</span><br><span class="line">        <span class="built_in">bind</span>:</span><br><span class="line">            <span class="comment"># 将此值传递给$projectDir文件（包括控制器参数）</span></span><br><span class="line">            <span class="comment"># 创建的任何服务的任何参数</span></span><br><span class="line">            <span class="variable">$projectDir</span>: <span class="string">'%kernel.project_dir%'</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># ...</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>阅读有关 <a href="https://symfony.com/doc/current/service_container.html#services-binding" target="_blank" rel="noopener">按名称和/或类型绑定参数</a> 的文章，了解有关此强大功能的详细信息。</p>
+</blockquote>
+<p>最后，如果某些服务需要访问大量参数，而不是单独注入每个参数，你可以通过使用 <code>Symfony\Component\DependencyInjection\ParameterBag\ContainerBagInterfac</code> 参数约定其任何构造函数参数，一次注入所有应用程序参数：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// src/Service/MessageGenerator.php</span></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">App</span>\<span class="title">Service</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// ...</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">use</span> <span class="title">Symfony</span>\<span class="title">Component</span>\<span class="title">DependencyInjection</span>\<span class="title">ParameterBag</span>\<span class="title">ContainerBagInterface</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MessageGenerator</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> $params;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">(ContainerBagInterface $params)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;params = $params;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">someMethod</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="comment">// 从存储所有参数的 $this 参数获取任何容器参数，这些参数存储所有参数</span></span><br><span class="line">        $sender = <span class="keyword">$this</span>-&gt;params-&gt;get(<span class="string">'mailer_sender'</span>);</span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="继续前进！"><a href="#继续前进！" class="headerlink" title="继续前进！"></a><span id="keep-going">继续前进！</span></h3><p>祝贺！你已经解决了 Symfony 的基础知识。接下来，通过按照指南单独了解 Symfony 的每个部分。通过考核：</p>
+<ul>
+<li><a href="https://symfony.com/doc/current/forms.html" target="_blank" rel="noopener">表单</a></li>
+<li><a href="https://symfony.com/doc/current/doctrine.html" target="_blank" rel="noopener">数据库和 Doctrine ORM</a></li>
+<li><a href="https://symfony.com/doc/current/service_container.html" target="_blank" rel="noopener">服务容器</a></li>
+<li><a href="https://symfony.com/doc/current/security.html" target="_blank" rel="noopener">安全</a></li>
+<li><a href="https://symfony.com/doc/current/mailer.html" target="_blank" rel="noopener">使用 Mailer 发送邮件</a></li>
+<li><a href="https://symfony.com/doc/current/logging.html" target="_blank" rel="noopener">日志</a></li>
+</ul>
+<p>以及与配置相关的所有其他主题：</p>
+<ul>
+<li><a href="https://symfony.com/doc/current/configuration/dot-env-changes.html" target="_blank" rel="noopener">2018 年 11 月 更改至.env 及如何更新</a></li>
+<li><a href="https://symfony.com/doc/current/configuration/env_var_processors.html" target="_blank" rel="noopener">环境变量处理器</a></li>
+<li><a href="https://symfony.com/doc/current/configuration/front_controllers_and_kernel.html" target="_blank" rel="noopener">了解前控制器、内核和环境如何协同工作</a></li>
+<li><a href="https://symfony.com/doc/current/configuration/micro_kernel_trait.html" target="_blank" rel="noopener">使用 MicroKernelTrait 构建您自己的框架</a></li>
+<li><a href="https://symfony.com/doc/current/configuration/multiple_kernels.html" target="_blank" rel="noopener">如何创建具有多个内核的符号应用程序</a></li>
+<li><a href="https://symfony.com/doc/current/configuration/override_dir_structure.html" target="_blank" rel="noopener">如何覆盖 Symfony 的默认目录结构</a></li>
+<li><a href="https://symfony.com/doc/current/configuration/secrets.html" target="_blank" rel="noopener">如何保持敏感信息的秘密</a></li>
+<li><a href="https://symfony.com/doc/current/configuration/using_parameters_in_dic.html" target="_blank" rel="noopener">在依赖注入类中使用参数</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/PHP/" rel="tag"># PHP</a>
+              <a href="/tags/Symfony/" rel="tag"># Symfony</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/09/05/Symfony-5-%E5%9F%BA%E7%A1%80%E4%B9%8B%E5%88%9B%E5%BB%BA%E5%92%8C%E4%BD%BF%E7%94%A8%E6%A8%A1%E6%9D%BF/" rel="prev" title="Symfony 5 基础之创建和使用模板">
+      <i class="fa fa-chevron-left"></i> Symfony 5 基础之创建和使用模板
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#配置文件"><span class="nav-number">1.</span> <span class="nav-text">配置文件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#配置格式"><span class="nav-number">1.1.</span> <span class="nav-text">配置格式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#引入配置文件"><span class="nav-number">1.2.</span> <span class="nav-text">引入配置文件</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置参数"><span class="nav-number">2.</span> <span class="nav-text">配置参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置环境"><span class="nav-number">3.</span> <span class="nav-text">配置环境</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#选择活动环境"><span class="nav-number">3.1.</span> <span class="nav-text">选择活动环境</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#创建一个新的环境"><span class="nav-number">3.2.</span> <span class="nav-text">创建一个新的环境</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基于环境变量的配置"><span class="nav-number">4.</span> <span class="nav-text">基于环境变量的配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#在-env-文件中配置环境变量"><span class="nav-number">4.1.</span> <span class="nav-text">在 .env 文件中配置环境变量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#env-文件语法"><span class="nav-number">4.2.</span> <span class="nav-text">.env 文件语法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#通过-env-local-覆盖环境值"><span class="nav-number">4.3.</span> <span class="nav-text">通过 .env.local 覆盖环境值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#在生产环境中配置环境变量"><span class="nav-number">4.4.</span> <span class="nav-text">在生产环境中配置环境变量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#加密环境变量（机密）"><span class="nav-number">4.5.</span> <span class="nav-text">加密环境变量（机密）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#列出环境变量"><span class="nav-number">4.6.</span> <span class="nav-text">列出环境变量</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#访问配置参数"><span class="nav-number">5.</span> <span class="nav-text">访问配置参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#继续前进！"><span class="nav-number">6.</span> <span class="nav-text">继续前进！</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Andy Zhang"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Andy Zhang</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Andy Zhang</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> v7.7.0
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
