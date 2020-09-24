@@ -189,6 +189,76 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/24/Golang-%E4%B8%AD%E7%9A%84%E9%98%9F%E5%88%97/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Andy Zhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="盐 碱 地">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/09/24/Golang-%E4%B8%AD%E7%9A%84%E9%98%9F%E5%88%97/" class="post-title-link" itemprop="url">Golang 中的队列</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-09-24 22:27:08 / 修改时间：22:31:13" itemprop="dateCreated datePublished" datetime="2020-09-24T22:27:08+08:00">2020-09-24</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="什么是队列"><a href="#什么是队列" class="headerlink" title="什么是队列"></a><span id="what-is-queue">什么是队列</span></h3><p>队列，又称为伫列（queue），计算机科学中的一种抽象资料型别，是先进先出（FIFO, First-In-First-Out）的线性表。在具体应用中通常用链表或者数组来实现。队列只允许在后端（称为rear）进行插入操作，在前端（称为front）进行删除操作。</p>
+<p>队列的操作方式和堆栈类似，唯一的区别在于队列只允许新数据在后端进行添加。</p>
+<h3 id="Golang-实现单链队列（数组）"><a href="#Golang-实现单链队列（数组）" class="headerlink" title="Golang 实现单链队列（数组）"></a><span id="single-queue-in-golang">Golang 实现单链队列（数组）</span></h3><p>在 Golang 中使用数组实现一个单链队列，除了需要创建一个数组存储数据外，还要定义最大值（maxSize）、头指针（front）和尾指针（rear），其中头指针和尾指针的初始值为-1。</p>
+<p>当向队列中插入数据时，头指针不变，尾指针+1，最后在数组的尾指针位置赋值。</p>
+<p>当从队列中取出数据时，尾指针不变，头指针+1，最后在数组的头指针位置取值。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/09/24/Golang-%E4%B8%AD%E7%9A%84%E9%98%9F%E5%88%97/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/19/Golang-%E4%B8%AD%E7%9A%84%E7%A8%80%E7%96%8F%E7%9F%A9%E9%98%B5/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -830,7 +900,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-count">9</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
