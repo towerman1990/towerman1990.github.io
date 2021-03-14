@@ -46,15 +46,15 @@
   };
 </script>
 
-  <meta name="description" content="什么是队列队列，又称为伫列（queue），计算机科学中的一种抽象资料型别，是先进先出（FIFO, First-In-First-Out）的线性表。在具体应用中通常用链表或者数组来实现。队列只允许在后端（称为rear）进行插入操作，在前端（称为front）进行删除操作。 队列的操作方式和堆栈类似，唯一的区别在于队列只允许新数据在后端进行添加。 Golang 实现单链队列（数组）在 Golang 中使">
+  <meta name="description" content="什么是队列队列，又称为伫列（queue），计算机科学中的一种抽象资料型别，是先进先出（FIFO, First-In-First-Out）的线性表。在具体应用中通常用链表或者数组来实现。队列只允许在后端（称为rear）进行插入操作，在前端（称为front）进行删除操作。 队列的操作方式和堆栈类似，唯一的区别在于队列只允许新数据在后端进行添加1。 Golang 实现单链队列（数组）在 Golang 中">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Golang 中的队列">
 <meta property="og:url" content="http://yoursite.com/2020/09/24/Golang-%E4%B8%AD%E7%9A%84%E9%98%9F%E5%88%97/index.html">
 <meta property="og:site_name" content="盐 碱 地">
-<meta property="og:description" content="什么是队列队列，又称为伫列（queue），计算机科学中的一种抽象资料型别，是先进先出（FIFO, First-In-First-Out）的线性表。在具体应用中通常用链表或者数组来实现。队列只允许在后端（称为rear）进行插入操作，在前端（称为front）进行删除操作。 队列的操作方式和堆栈类似，唯一的区别在于队列只允许新数据在后端进行添加。 Golang 实现单链队列（数组）在 Golang 中使">
+<meta property="og:description" content="什么是队列队列，又称为伫列（queue），计算机科学中的一种抽象资料型别，是先进先出（FIFO, First-In-First-Out）的线性表。在具体应用中通常用链表或者数组来实现。队列只允许在后端（称为rear）进行插入操作，在前端（称为front）进行删除操作。 队列的操作方式和堆栈类似，唯一的区别在于队列只允许新数据在后端进行添加1。 Golang 实现单链队列（数组）在 Golang 中">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-09-24T14:27:08.000Z">
-<meta property="article:modified_time" content="2020-09-24T14:31:13.955Z">
+<meta property="article:modified_time" content="2020-09-24T14:38:17.049Z">
 <meta property="article:author" content="Andy Zhang">
 <meta property="article:tag" content="Golang">
 <meta name="twitter:card" content="summary">
@@ -218,7 +218,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2020-09-24 22:27:08 / 修改时间：22:31:13" itemprop="dateCreated datePublished" datetime="2020-09-24T22:27:08+08:00">2020-09-24</time>
+              <time title="创建时间：2020-09-24 22:27:08 / 修改时间：22:38:17" itemprop="dateCreated datePublished" datetime="2020-09-24T22:27:08+08:00">2020-09-24</time>
             </span>
 
           
@@ -233,7 +233,7 @@
 
       
         <h3 id="什么是队列"><a href="#什么是队列" class="headerlink" title="什么是队列"></a><span id="what-is-queue">什么是队列</span></h3><p>队列，又称为伫列（queue），计算机科学中的一种抽象资料型别，是先进先出（FIFO, First-In-First-Out）的线性表。在具体应用中通常用链表或者数组来实现。队列只允许在后端（称为rear）进行插入操作，在前端（称为front）进行删除操作。</p>
-<p>队列的操作方式和堆栈类似，唯一的区别在于队列只允许新数据在后端进行添加。</p>
+<p>队列的操作方式和堆栈类似，唯一的区别在于队列只允许新数据在后端进行添加<a href="#refer-anchor-1"><sup>1</sup></a>。</p>
 <h3 id="Golang-实现单链队列（数组）"><a href="#Golang-实现单链队列（数组）" class="headerlink" title="Golang 实现单链队列（数组）"></a><span id="single-queue-in-golang">Golang 实现单链队列（数组）</span></h3><p>在 Golang 中使用数组实现一个单链队列，除了需要创建一个数组存储数据外，还要定义最大值（maxSize）、头指针（front）和尾指针（rear），其中头指针和尾指针的初始值为-1。</p>
 <p>当向队列中插入数据时，头指针不变，尾指针+1，最后在数组的尾指针位置赋值。</p>
 <p>当从队列中取出数据时，尾指针不变，头指针+1，最后在数组的头指针位置取值。</p>
@@ -250,6 +250,11 @@
 <p>当从队列中取出数据时，尾指针不变，在数组的头指针位置取值，最后头指针 +1 并取余。</p>
 <p>实现代码如下：</p>
 <figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">"errors"</span></span><br><span class="line">    <span class="string">"fmt"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 队列结构</span></span><br><span class="line"><span class="keyword">type</span> Queue <span class="keyword">struct</span> &#123;</span><br><span class="line">    front   <span class="keyword">int</span></span><br><span class="line">    rear    <span class="keyword">int</span></span><br><span class="line">    maxSize <span class="keyword">int</span></span><br><span class="line">    data    [<span class="number">5</span>]<span class="keyword">int</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    queue := &amp;Queue&#123;</span><br><span class="line">        front:   <span class="number">0</span>,</span><br><span class="line">        rear:    <span class="number">0</span>,</span><br><span class="line">        maxSize: <span class="number">5</span>,</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">var</span> selectOption <span class="keyword">int</span></span><br><span class="line">    <span class="keyword">var</span> inputValue <span class="keyword">int</span></span><br><span class="line"></span><br><span class="line">exit:</span><br><span class="line">    <span class="keyword">for</span> &#123;</span><br><span class="line">        fmt.Print(<span class="string">"请选择一种操作：\n"</span>)</span><br><span class="line">        fmt.Print(<span class="string">"1. 将数据加入队列。\n"</span>)</span><br><span class="line">        fmt.Print(<span class="string">"2. 从队列中取出数据。\n"</span>)</span><br><span class="line">        fmt.Print(<span class="string">"3. 显示队列中所有数据。\n"</span>)</span><br><span class="line">        fmt.Print(<span class="string">"4. 退出。\n"</span>)</span><br><span class="line">        fmt.Scanln(&amp;selectOption)</span><br><span class="line">        <span class="keyword">switch</span> selectOption &#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">            fmt.Print(<span class="string">"输入数据：\n"</span>)</span><br><span class="line">            fmt.Scanln(&amp;inputValue)</span><br><span class="line">            err := queue.EnQueue(inputValue)</span><br><span class="line">            <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">                fmt.Println(err.Error())</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                fmt.Println((<span class="string">"加入数据成功！"</span>))</span><br><span class="line">            &#125;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">            val, err := queue.DeQueue()</span><br><span class="line">            <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">                fmt.Println(err.Error())</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                fmt.Printf(<span class="string">"取出队列值为：%d\n"</span>, val)</span><br><span class="line">            &#125;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">3</span>:</span><br><span class="line">            err := queue.LtQueue()</span><br><span class="line">            <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">                fmt.Println(err.Error())</span><br><span class="line">            &#125;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">4</span>:</span><br><span class="line">            <span class="keyword">break</span> exit</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    fmt.Println(<span class="string">"退出成功！"</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 将数据加入队列</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(this *Queue)</span> <span class="title">EnQueue</span><span class="params">(val <span class="keyword">int</span>)</span> <span class="title">error</span></span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (this.rear+<span class="number">1</span>)%this.maxSize == this.front &#123;</span><br><span class="line">        <span class="keyword">return</span> errors.New(<span class="string">"队列已满"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    this.data[this.rear] = val</span><br><span class="line">    this.rear = (this.rear + <span class="number">1</span>) % this.maxSize</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">nil</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 从队列中取出数据</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(this *Queue)</span> <span class="title">DeQueue</span><span class="params">()</span> <span class="params">(val <span class="keyword">int</span>, error)</span></span> &#123;</span><br><span class="line">    <span class="keyword">if</span> this.front == this.rear &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>, errors.New(<span class="string">"队列为空"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    val = this.data[this.front]</span><br><span class="line">    this.front = (this.front + <span class="number">1</span>) % this.maxSize</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 显示队列中的所有数据</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(this *Queue)</span> <span class="title">LtQueue</span><span class="params">()</span> <span class="title">error</span></span> &#123;</span><br><span class="line">    <span class="keyword">if</span> this.front == this.rear &#123;</span><br><span class="line">        <span class="keyword">return</span> errors.New(<span class="string">"队列为空"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> i := <span class="number">0</span>; i &lt; this.Length(); i++ &#123;</span><br><span class="line">        fmt.Printf(<span class="string">"Queue [%d] = %d\n"</span>, i, this.data[(this.front+i)%this.maxSize])</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">nil</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 队列长度</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(this *Queue)</span> <span class="title">Length</span><span class="params">()</span> <span class="title">int</span></span> &#123;</span><br><span class="line">    <span class="keyword">return</span> (this.maxSize - this.front + this.rear) % this.maxSize</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<div id="refer-anchor-1"></div>
+
+<ul>
+<li>[1] <a href="https://zh.wikipedia.org/wiki/%E9%98%9F%E5%88%97" target="_blank" rel="noopener">wiki-队列</a></li>
+</ul>
 
     </div>
 
@@ -271,7 +276,10 @@
     <a href="/2020/09/19/Golang-%E4%B8%AD%E7%9A%84%E7%A8%80%E7%96%8F%E7%9F%A9%E9%98%B5/" rel="prev" title="Golang 中的稀疏矩阵">
       <i class="fa fa-chevron-left"></i> Golang 中的稀疏矩阵
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2020/10/18/Golang-%E4%B8%ADdefer%E4%BF%AE%E6%94%B9%E8%BF%94%E5%9B%9E%E5%80%BC%E9%97%AE%E9%A2%98/" rel="next" title="Golang 中defer修改返回值问题">
+      Golang 中defer修改返回值问题 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -347,7 +355,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">9</span>
+          <span class="site-state-item-count">12</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -379,7 +387,7 @@
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2020</span>
+  <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
