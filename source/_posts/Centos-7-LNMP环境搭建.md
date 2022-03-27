@@ -59,21 +59,19 @@ tags:
 
 二. MySQL安装
 
-  1. 下载yum资源包（[地址](https://dev.mysql.com/downloads/repo/yum/)）：
+  1. 下载yum资源包：
 
-    {% asset_img 03.myql_yum.png myql_yum %}
+    `wget https://dev.mysql.com/get/mysql57-community-release-el6-11.noarch.rpm`
 
-    *注意：现在下载mysql的yum安装包必须先登录，然后手动下载，所以以前像安装nginx一样，直接通过localinstall参数安装mysql源的方式都失效了*
+    *如果出现提示：`-bash: wget: command not found`  首先执行：`# yum install wget` 进行wget的安装*
 
   2. mysql源：
 
-    `# rpm -ivh mysql57-community-release-el7-7.noarch.rpm`
+    `# rpm -ivh mysql57-community-release-el6-11.noarch.rpm`
 
   3. 安装mysql:
 
     `# yum install mysql-community-server`
-
-    *如果出现提示：`-bash: wget: command not found`  首先执行：`# yum install wget` 进行wget的安装*
 
   4. mysql的开发包:
 

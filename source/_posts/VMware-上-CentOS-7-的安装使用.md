@@ -78,26 +78,30 @@ VMware Workstation是一款功能强大的桌面虚拟计算机软件，现在�
 
   2. 可以看到网卡的文件名为”ifcfg-ens33“，然后使用vi编辑器打开网卡文件：
 
-    `vi /etc/sysconfig/network-scripts/ifcfg-ens-33`
+    `vi /etc/sysconfig/network-scripts/ifcfg-ens33`
 
     {% asset_img 12.open_network.png open_network %}
 
-  3. 普通版的workstation缺少虚拟网络管理功能，我们可以参照本机的网络设置，对虚拟机的网络进行配置。进入win10的设置→网络和Internet→查看网络属性，找到结尾为VMnet8的网络属性（此网络为NAT模式时使用）：
+  3. 普通版的workstation缺少虚拟网络管理功能，我们通过本机的网络设置，对虚拟机的网络进行配置。首先进入win10的设置→网络和Internet→查看网络属性，找到结尾为VMnet8的网络属性（此网络为NAT模式时使用），查看主机的ip、子网掩码、网关等配置信息：
 
     {% asset_img 13.win_network.png win_network %}
 
-  4. 修改虚拟机的网卡配置：
+  4. 然后再从网络和Internet中选择更改适配器设选项，找到“VMware Network Adapter VMnet8”，双击打开查看状态，然后点击“属性”，双击修改“Internet 版本协议 4（TCP/IPv4）”：
+
+    {% asset_img 14.network_protocol.png network_protocol %}
+
+  5. 修改虚拟机的网卡配置：
 
     将BOOTPROTO改为static（静态ip）
 
     将ONBOOT改为yes（开机启动）
 
-    增加ip地址、网络掩码、网关、DNS等参数（虚拟机与主机ip要同网段）
+    根据之前获取的主机网络信息，增加ip地址、网络掩码、网关、DNS等参数（虚拟机与主机ip要同网段）
 
-    {% asset_img 14.net_config.png net_config %}
+    {% asset_img 15.net_config.png net_config %}
 
-  5. wq保存后，重启网络服务，然后即可ping通百度了：
+  6. wq保存后，重启网络服务，然后即可ping通百度了：
 
     `systemctl restart network`
 
-    {% asset_img 15.success.png success %}
+    {% asset_img 16.success.png success %}
