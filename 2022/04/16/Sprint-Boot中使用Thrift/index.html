@@ -46,27 +46,31 @@
   };
 </script>
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="盐 碱 地">
-<meta property="og:url" content="http://yoursite.com/index.html">
+  <meta name="description" content="Thrift简介Thrift是一种接口描述语言和二进制通讯协议，它被用来定义和创建跨语言的服务。它被当作一个远程过程调用（RPC）框架来使用，是由Facebook为“大规模跨语言服务开发”而开发的。它通过一个代码生成引擎联合了一个软件栈，来创建不同程度的、无缝的跨平台高效服务，可以使用C#、C++（基于POSIX兼容系统）、Cappuccino、Cocoa、Delphi、Erlang、Go、Has">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Sprint Boot中使用Thrift">
+<meta property="og:url" content="http://yoursite.com/2022/04/16/Sprint-Boot%E4%B8%AD%E4%BD%BF%E7%94%A8Thrift/index.html">
 <meta property="og:site_name" content="盐 碱 地">
+<meta property="og:description" content="Thrift简介Thrift是一种接口描述语言和二进制通讯协议，它被用来定义和创建跨语言的服务。它被当作一个远程过程调用（RPC）框架来使用，是由Facebook为“大规模跨语言服务开发”而开发的。它通过一个代码生成引擎联合了一个软件栈，来创建不同程度的、无缝的跨平台高效服务，可以使用C#、C++（基于POSIX兼容系统）、Cappuccino、Cocoa、Delphi、Erlang、Go、Has">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-04-16T03:38:55.000Z">
+<meta property="article:modified_time" content="2022-04-16T05:19:53.626Z">
 <meta property="article:author" content="Andy Zhang">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://yoursite.com/">
+<link rel="canonical" href="http://yoursite.com/2022/04/16/Sprint-Boot%E4%B8%AD%E4%BD%BF%E7%94%A8Thrift/">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome: true,
-    isPost: false
+    isHome: false,
+    isPost: true
   };
 </script>
 
-  <title>盐 碱 地</title>
+  <title>Sprint Boot中使用Thrift | 盐 碱 地</title>
   
 
 
@@ -185,10 +189,10 @@
             
 
   <div class="posts-expand">
-        
+      
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/04/16/Sprint-Boot%E4%B8%AD%E4%BD%BF%E7%94%A8Thrift/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -202,8 +206,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/04/16/Sprint-Boot%E4%B8%AD%E4%BD%BF%E7%94%A8Thrift/" class="post-title-link" itemprop="url">Sprint Boot中使用Thrift</a>
+          Sprint Boot中使用Thrift
         </h1>
 
         <div class="post-meta">
@@ -228,7 +231,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h3 id="Thrift简介"><a href="#Thrift简介" class="headerlink" title="Thrift简介"></a><span id="thrift-brief">Thrift简介</span></h3><p>Thrift是一种接口描述语言和二进制通讯协议，它被用来定义和创建跨语言的服务。它被当作一个远程过程调用（RPC）框架来使用，是由<code>Facebook</code>为“大规模跨语言服务开发”而开发的。它通过一个代码生成引擎联合了一个软件栈，来创建不同程度的、无缝的跨平台高效服务，可以使用<code>C#</code>、<code>C++</code>（基于<code>POSIX</code>兼容系统）、<code>Cappuccino</code>、<code>Cocoa</code>、<code>Delphi</code>、<code>Erlang</code>、<code>Go</code>、<code>Haskell</code>、<code>Java</code>、<code>Node.js</code>、<code>OCaml</code>、<code>Perl</code>、<code>PHP</code>、<code>Python</code>、<code>Ruby</code>和<code>Smalltalk</code>。虽然它以前是由<code>Facebook</code>开发的，但它现在是<code>Apache</code>软件基金会的开源项目了。该实现被描述在2007年4月的一篇由<code>Facebook</code>发表的技术论文中，该论文现由<code>Apache</code>掌管。<a href="#refer-anchor-1"><sup>[1]</sup></a></p>
+        <h3 id="Thrift简介"><a href="#Thrift简介" class="headerlink" title="Thrift简介"></a><span id="thrift-brief">Thrift简介</span></h3><p>Thrift是一种接口描述语言和二进制通讯协议，它被用来定义和创建跨语言的服务。它被当作一个远程过程调用（RPC）框架来使用，是由<code>Facebook</code>为“大规模跨语言服务开发”而开发的。它通过一个代码生成引擎联合了一个软件栈，来创建不同程度的、无缝的跨平台高效服务，可以使用<code>C#</code>、<code>C++</code>（基于<code>POSIX</code>兼容系统）、<code>Cappuccino</code>、<code>Cocoa</code>、<code>Delphi</code>、<code>Erlang</code>、<code>Go</code>、<code>Haskell</code>、<code>Java</code>、<code>Node.js</code>、<code>OCaml</code>、<code>Perl</code>、<code>PHP</code>、<code>Python</code>、<code>Ruby</code>和<code>Smalltalk</code>。虽然它以前是由<code>Facebook</code>开发的，但它现在是<code>Apache</code>软件基金会的开源项目了。该实现被描述在2007年4月的一篇由<code>Facebook</code>发表的技术论文中，该论文现由<code>Apache</code>掌管。<a href="#refer-anchor-1"><sup>[1]</sup></a></p>
 <h3 id="具体使用步骤"><a href="#具体使用步骤" class="headerlink" title="具体使用步骤"></a><span id="steps">具体使用步骤</span></h3><h4 id="1-安装Thrift"><a href="#1-安装Thrift" class="headerlink" title="1. 安装Thrift"></a><span id="thrift-install">1. 安装Thrift</span></h4><p>由于我用的是<code>Windows</code>系统，直接去<a href="https://thrift.apache.org/" target="_blank" rel="noopener"><code>Thrift</code>官网</a>下载<code>EXE</code>文件就可以，其他系统的安装可以参见官网的安装说明。</p>
 <h4 id="2-定义接口文件"><a href="#2-定义接口文件" class="headerlink" title="2. 定义接口文件"></a><span id="define-interface-file">2. 定义接口文件</span></h4><p>我定义两个文件，一个是数据结构文件（<code>BookModel.thrift</code>），另一个是需要实现的方法接口文件（<code>BookService.thrift</code>）：</p>
 <figure class="highlight thrift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">namespace</span> java cn.towerman1990.server.model</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">enum</span> <span class="title">Status</span> </span>&#123;</span><br><span class="line">    No = <span class="number">0</span>;</span><br><span class="line">    YES = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Book</span> </span>&#123;</span><br><span class="line">    <span class="number">1</span>: <span class="keyword">required</span> <span class="built_in">i32</span> id;</span><br><span class="line">    <span class="number">2</span>: <span class="keyword">required</span> <span class="built_in">string</span> type;</span><br><span class="line">    <span class="number">3</span>: <span class="keyword">required</span> <span class="built_in">string</span> name;</span><br><span class="line">    <span class="number">4</span>: <span class="keyword">optional</span> <span class="built_in">string</span> description;</span><br><span class="line">    <span class="number">5</span>: <span class="keyword">required</span> Status status;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -261,693 +264,33 @@
 <li>[1] <a href="https://zh.wikipedia.org/wiki/Thrift" target="_blank" rel="noopener">Thrift</a></li>
 </ul>
 
-      
     </div>
 
     
     
     
+
       <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
 
         
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/03/27/%E7%A4%BE%E5%8C%BA%E7%89%88IDEA%E4%B8%AD%E5%90%AF%E5%8A%A8Tomcat/">
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Andy Zhang">
-      <meta itemprop="description" content="">
-    </span>
 
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="盐 碱 地">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/03/27/%E7%A4%BE%E5%8C%BA%E7%89%88IDEA%E4%B8%AD%E5%90%AF%E5%8A%A8Tomcat/" class="post-title-link" itemprop="url">社区版IDEA中启动Tomcat</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2022-03-27 11:34:36 / 修改时间：12:30:23" itemprop="dateCreated datePublished" datetime="2022-03-27T11:34:36+08:00">2022-03-27</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>因为工作需要，最近在学习Java。在学习的过程中，由于什么软件都喜欢用新版（┑(￣Д ￣)┍）踩了不少的坑，分享一下社区版IDEA中启动Tomcat的相关配置与代码Demo。<br>本人使用的软件环境为Java17 + Tomcat10 + IDEA2021.3.3，代码参考了廖雪峰老师的博客<a href="#refer-anchor-1"><sup>[1]</sup></a>。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2022/03/27/%E7%A4%BE%E5%8C%BA%E7%89%88IDEA%E4%B8%AD%E5%90%AF%E5%8A%A8Tomcat/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
         
-      
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/03/27/%E7%A4%BE%E5%8C%BA%E7%89%88IDEA%E4%B8%AD%E5%90%AF%E5%8A%A8Tomcat/" rel="prev" title="社区版IDEA中启动Tomcat">
+      <i class="fa fa-chevron-left"></i> 社区版IDEA中启动Tomcat
+    </a></div>
+      <div class="post-nav-item"></div>
     </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
       </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/07/31/Golang-%E4%B8%AD%E7%9A%84%E5%A0%86%E6%A0%88/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Andy Zhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="盐 碱 地">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/07/31/Golang-%E4%B8%AD%E7%9A%84%E5%A0%86%E6%A0%88/" class="post-title-link" itemprop="url">Golang 中的堆栈</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-07-31 14:50:02" itemprop="dateCreated datePublished" datetime="2021-07-31T14:50:02+08:00">2021-07-31</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-03-27 12:14:13" itemprop="dateModified" datetime="2022-03-27T12:14:13+08:00">2022-03-27</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
     
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="什么是堆栈"><a href="#什么是堆栈" class="headerlink" title="什么是堆栈"></a><span id="what-is-queue">什么是堆栈</span></h3><p><strong>堆栈</strong>（英语：stack）又称为<strong>栈</strong>或<strong>堆叠</strong>，是计算机科学中的一种抽象资料类型，只允许在有序的线性资料集合的一端（称为堆栈顶端，英语：top）进行加入数据（英语：push）和移除数据（英语：pop）的运算。因而按照后进先出（LIFO, Last In First Out）的原理运作<a href="#refer-anchor-1"><sup>[1]</sup></a>。</p>
-<h3 id="操作"><a href="#操作" class="headerlink" title="操作"></a><span id="operate">操作</span></h3><p>堆栈使用两种基本操作：推入（压栈，push）和弹出（弹栈，pop）：</p>
-<ul>
-<li>推入：将资料放入堆栈顶端，堆栈顶端移到新放入的资料。</li>
-<li>弹出：将堆栈顶端资料移除，堆栈顶端移到移除后的下一笔资料。</li>
-</ul>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/07/31/Golang-%E4%B8%AD%E7%9A%84%E5%A0%86%E6%A0%88/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/06/19/Golang-%E4%B8%AD%E7%9A%84%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Andy Zhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="盐 碱 地">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/06/19/Golang-%E4%B8%AD%E7%9A%84%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/" class="post-title-link" itemprop="url">Golang 中的排序算法</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-06-19 15:10:20" itemprop="dateCreated datePublished" datetime="2021-06-19T15:10:20+08:00">2021-06-19</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-06-20 17:26:36" itemprop="dateModified" datetime="2021-06-20T17:26:36+08:00">2021-06-20</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="什么是排序"><a href="#什么是排序" class="headerlink" title="什么是排序"></a><span id="what-is-sorting-algorithm">什么是排序</span></h3><p>在计算机科学与数学中，一个<strong>排序算法</strong>（英语：Sorting algorithm）是一种能将一串资料依照特定排序方式进行排列的一种算法<a href="#refer-anchor-1"><sup>[1]</sup></a>。本文中将使用Golang实现几种常见的排序算法。</p>
-<h3 id="Golang-实现冒泡排序"><a href="#Golang-实现冒泡排序" class="headerlink" title="Golang 实现冒泡排序"></a><span id="bubble_sort">Golang 实现冒泡排序</span></h3><p><strong>冒泡排序</strong>（英语：Bubble Sort）又称为泡式排序，是一种简单的排序算法。它重复地走访过要排序的数列，一次比较两个元素，如果他们的顺序错误就把他们交换过来。走访数列的工作是重复地进行直到没有再需要交换，也就是说该数列已经排序完成。这个算法的名字由来是因为越小的元素会经由交换慢慢“浮”到数列的顶端<a href="#refer-anchor-2"><sup>[2]</sup></a>。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/06/19/Golang-%E4%B8%AD%E7%9A%84%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/05/23/Golang-%E4%B8%AD%E7%9A%84%E9%93%BE%E8%A1%A8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Andy Zhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="盐 碱 地">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/05/23/Golang-%E4%B8%AD%E7%9A%84%E9%93%BE%E8%A1%A8/" class="post-title-link" itemprop="url">Golang 中的链表</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-05-23 17:47:42" itemprop="dateCreated datePublished" datetime="2021-05-23T17:47:42+08:00">2021-05-23</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-06-19 16:35:58" itemprop="dateModified" datetime="2021-06-19T16:35:58+08:00">2021-06-19</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="什么是链表"><a href="#什么是链表" class="headerlink" title="什么是链表"></a><span id="what-is-queue">什么是链表</span></h3><p>在计算机科学中，<strong>链表</strong>（Linked list）是一种常见的基础数据结构，是一种线性表，但是并不会按线性的顺序存储数据，而是在每一个节点里存到下一个节点的指针(Pointer)<a href="#refer-anchor-1"><sup>[1]</sup></a>。</p>
-<h3 id="Golang-实现单向链表"><a href="#Golang-实现单向链表" class="headerlink" title="Golang 实现单向链表"></a><span id="single-queue-in-golang">Golang 实现单向链表</span></h3>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/05/23/Golang-%E4%B8%AD%E7%9A%84%E9%93%BE%E8%A1%A8/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/02/19/PHP-8-%E5%AE%89%E8%A3%85amqp%E6%89%A9%E5%B1%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Andy Zhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="盐 碱 地">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/02/19/PHP-8-%E5%AE%89%E8%A3%85amqp%E6%89%A9%E5%B1%95/" class="post-title-link" itemprop="url">PHP 8 安装amqp扩展</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-02-19 13:52:12" itemprop="dateCreated datePublished" datetime="2021-02-19T13:52:12+08:00">2021-02-19</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-03-14 09:56:15" itemprop="dateModified" datetime="2021-03-14T09:56:15+08:00">2021-03-14</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>最近公司新项目开始使用PHP8，之前使用的扩展也需要升级，更换成支持PHP8的版本。在使用RabbitMQ时需要使用到php-amqp扩展，我安装的时候发现网上的一些安装教程都比较旧了，顶多支持到php7对应的版本。下面记录一下php8相关扩展的安装过程。</p>
-<h3 id="安装rabbitmq-c"><a href="#安装rabbitmq-c" class="headerlink" title="安装rabbitmq-c"></a>安装rabbitmq-c</h3><p>安装PHP-AMQP扩展前首先要安装 rabbitmq-c，rabbitmq-c 是一个支持 RabbitMQ v2.0+ 版本的由C语言开发的 AMQP 客户端库。</p>
-<p>按照官方说法安装rabbitmq-c需要使用 v2.6及以上版本的<code>CMake</code>进行构建，我们先安装一下它：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo dnf install cmake</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/02/19/PHP-8-%E5%AE%89%E8%A3%85amqp%E6%89%A9%E5%B1%95/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/12/09/MySQL-%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB%E5%92%8C%E9%94%81/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Andy Zhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="盐 碱 地">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/12/09/MySQL-%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB%E5%92%8C%E9%94%81/" class="post-title-link" itemprop="url">MySQL 事务隔离级别和锁</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-12-09 09:43:39" itemprop="dateCreated datePublished" datetime="2020-12-09T09:43:39+08:00">2020-12-09</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-03-17 20:46:32" itemprop="dateModified" datetime="2021-03-17T20:46:32+08:00">2021-03-17</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="事务概念"><a href="#事务概念" class="headerlink" title="事务概念"></a>事务概念</h3><p>数据库事务（简称:事务）是数据库管理系统执行过程中的一个逻辑单位，由一个有限的数据库操作序列构成。事务主要用于处理操作量大，复杂度高而的数据。比如在支付过程中，涉及到账户金额的变更、用户商品关系的建立和订单状态修改等操作，此时我们需要保证整个支付过程中所有数据的变更操作全部执行成功，或者完全恢复到支付前的状态，此时，我们就需要使用事务。</p>
-<blockquote>
-<p>注：<br>在 MySQL 中只有使用了 Innodb 数据库引擎的数据库或表才支持事务。<br>事务处理可以用来维护数据库的完整性，保证成批的 SQL 语句要么全部执行，要么全部不执行。<br>事务用来管理 insert,update,delete 语句。</p>
-</blockquote>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/12/09/MySQL-%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB%E5%92%8C%E9%94%81/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/10/18/Golang-%E4%B8%ADdefer%E4%BF%AE%E6%94%B9%E8%BF%94%E5%9B%9E%E5%80%BC%E9%97%AE%E9%A2%98/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Andy Zhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="盐 碱 地">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/10/18/Golang-%E4%B8%ADdefer%E4%BF%AE%E6%94%B9%E8%BF%94%E5%9B%9E%E5%80%BC%E9%97%AE%E9%A2%98/" class="post-title-link" itemprop="url">Golang 中defer修改返回值问题</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-10-18 20:56:14" itemprop="dateCreated datePublished" datetime="2020-10-18T20:56:14+08:00">2020-10-18</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-06-19 15:50:05" itemprop="dateModified" datetime="2021-06-19T15:50:05+08:00">2021-06-19</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="什么是defer"><a href="#什么是defer" class="headerlink" title="什么是defer"></a><span id="what-is-defer">什么是defer</span></h3><p>在 Golang 中 <code>defer</code> 是一个关键字，它用来实现 <code>延迟调用函数</code>：当 <code>defer</code> 语句被执行时，跟在 <code>defer</code> 后面的函数会被延迟执行。直到包含该 <code>defer</code> 语句的函数执行完毕时，<code>defer</code> 后的函数才会被执行，不论包含defer语句的函数是通过 <code>return</code> 正常结束，还是由于 <code>panic</code> 导致的异常结束。你可以在一个函数中执行多条defer语句，它们的执行顺序与声明顺序相反<a href="#refer-anchor-1"><sup>[1]</sup></a>。</p>
-<p>既然 <code>defer</code> 之后的函数是在“主函数”（这个主函数是先对于 <code>defer</code> 定义的延迟调用函数而言的）执行完毕后执行，那就可能出现这样一种情况：“主函数”在执行完成之后生成了返回值，延迟调用函数继续执行，假如此时延迟调用函数修改了返回值，会发生什么？</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/10/18/Golang-%E4%B8%ADdefer%E4%BF%AE%E6%94%B9%E8%BF%94%E5%9B%9E%E5%80%BC%E9%97%AE%E9%A2%98/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/24/Golang-%E4%B8%AD%E7%9A%84%E9%98%9F%E5%88%97/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Andy Zhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="盐 碱 地">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/09/24/Golang-%E4%B8%AD%E7%9A%84%E9%98%9F%E5%88%97/" class="post-title-link" itemprop="url">Golang 中的队列</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-09-24 22:27:08" itemprop="dateCreated datePublished" datetime="2020-09-24T22:27:08+08:00">2020-09-24</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-06-19 16:35:53" itemprop="dateModified" datetime="2021-06-19T16:35:53+08:00">2021-06-19</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="什么是队列"><a href="#什么是队列" class="headerlink" title="什么是队列"></a><span id="what-is-queue">什么是队列</span></h3><p><strong>队列</strong>，又称为伫列（queue），计算机科学中的一种抽象资料型别，是先进先出（FIFO, First-In-First-Out）的线性表。在具体应用中通常用链表或者数组来实现。队列只允许在后端（称为rear）进行插入操作，在前端（称为front）进行删除操作。</p>
-<p>队列的操作方式和堆栈类似，唯一的区别在于队列只允许新数据在后端进行添加<a href="#refer-anchor-1"><sup>[1]</sup></a>。</p>
-<h3 id="Golang-实现单链队列（数组）"><a href="#Golang-实现单链队列（数组）" class="headerlink" title="Golang 实现单链队列（数组）"></a><span id="single-queue-in-golang">Golang 实现单链队列（数组）</span></h3><p>在 Golang 中使用数组实现一个单链队列，除了需要创建一个数组存储数据外，还要定义最大值（maxSize）、头指针（front）和尾指针（rear），其中头指针和尾指针的初始值为-1。</p>
-<p>当向队列中插入数据时，头指针不变，尾指针+1，最后在数组的尾指针位置赋值。</p>
-<p>当从队列中取出数据时，尾指针不变，头指针+1，最后在数组的头指针位置取值。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/09/24/Golang-%E4%B8%AD%E7%9A%84%E9%98%9F%E5%88%97/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/19/Golang-%E4%B8%AD%E7%9A%84%E7%A8%80%E7%96%8F%E7%9F%A9%E9%98%B5/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Andy Zhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="盐 碱 地">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/09/19/Golang-%E4%B8%AD%E7%9A%84%E7%A8%80%E7%96%8F%E7%9F%A9%E9%98%B5/" class="post-title-link" itemprop="url">Golang 中的稀疏矩阵</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-09-19 10:14:05" itemprop="dateCreated datePublished" datetime="2020-09-19T10:14:05+08:00">2020-09-19</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-06-19 15:48:10" itemprop="dateModified" datetime="2021-06-19T15:48:10+08:00">2021-06-19</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="什么是稀疏矩阵"><a href="#什么是稀疏矩阵" class="headerlink" title="什么是稀疏矩阵"></a><span id="what-is-sparse-matrix">什么是稀疏矩阵</span></h3><p><strong>稀疏矩阵</strong>（英语：sparse matrix），在数值分析中，是其元素大部分为零的矩阵。反之，如果大部分元素都非零，则这个矩阵是稠密的。在科学与工程领域中求解线性模型时经常出现大型的稀疏矩阵。</p>
-<p>在使用计算机存储和操作稀疏矩阵时，经常需要修改标准算法以利用矩阵的稀疏结构。由于其自身的稀疏特性，通过压缩可以大大节省稀疏矩阵的内存代价。更为重要的是，由于过大的尺寸，标准的算法经常无法操作这些稀疏矩阵<a href="#refer-anchor-1"><sup>[1]</sup></a>。</p>
-<h3 id="Golang中的稀疏矩阵"><a href="#Golang中的稀疏矩阵" class="headerlink" title="Golang中的稀疏矩阵"></a><span id="sparse-matrix-in-golang">Golang中的稀疏矩阵</span></h3><p>在 Golang 中我们可以使用一个二维数组模拟一个稀疏矩阵：</p>
-<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> chessMap [<span class="number">8</span>][<span class="number">8</span>]<span class="keyword">int</span></span><br><span class="line">chessMap[<span class="number">1</span>][<span class="number">1</span>] = <span class="number">1</span></span><br><span class="line">chessMap[<span class="number">2</span>][<span class="number">2</span>] = <span class="number">2</span></span><br><span class="line">chessMap[<span class="number">3</span>][<span class="number">3</span>] = <span class="number">3</span></span><br></pre></td></tr></table></figure>
-
-<p>对其打印效果如下：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">0    0    0    0    0    0    0    0</span><br><span class="line">0    1    0    0    0    0    0    0</span><br><span class="line">0    0    2    0    0    0    0    0</span><br><span class="line">0    0    0    3    0    0    0    0</span><br><span class="line">0    0    0    0    0    0    0    0</span><br><span class="line">0    0    0    0    0    0    0    0</span><br><span class="line">0    0    0    0    0    0    0    0</span><br><span class="line">0    0    0    0    0    0    0    0</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/09/19/Golang-%E4%B8%AD%E7%9A%84%E7%A8%80%E7%96%8F%E7%9F%A9%E9%98%B5/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
   </article>
   
   
   
 
   </div>
-
-  
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
-  </nav>
-
 
 
           </div>
@@ -998,6 +341,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Thrift简介"><span class="nav-number">1.</span> <span class="nav-text">Thrift简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#具体使用步骤"><span class="nav-number">2.</span> <span class="nav-text">具体使用步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-安装Thrift"><span class="nav-number">2.1.</span> <span class="nav-text">1. 安装Thrift</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-定义接口文件"><span class="nav-number">2.2.</span> <span class="nav-text">2. 定义接口文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-生成java文件"><span class="nav-number">2.3.</span> <span class="nav-text">3. 生成java文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-新建项目"><span class="nav-number">2.4.</span> <span class="nav-text">4. 新建项目</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-实现定义的接口"><span class="nav-number">2.5.</span> <span class="nav-text">5. 实现定义的接口</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-服务端实现"><span class="nav-number">2.6.</span> <span class="nav-text">6. 服务端实现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-客户端实现"><span class="nav-number">2.7.</span> <span class="nav-text">7. 客户端实现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8-测试"><span class="nav-number">2.8.</span> <span class="nav-text">8. 测试</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
