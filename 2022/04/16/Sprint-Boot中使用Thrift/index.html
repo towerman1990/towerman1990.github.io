@@ -54,7 +54,7 @@
 <meta property="og:description" content="Thrift简介Thrift是一种接口描述语言和二进制通讯协议，它被用来定义和创建跨语言的服务。它被当作一个远程过程调用（RPC）框架来使用，是由Facebook为“大规模跨语言服务开发”而开发的。它通过一个代码生成引擎联合了一个软件栈，来创建不同程度的、无缝的跨平台高效服务，可以使用C#、C++（基于POSIX兼容系统）、Cappuccino、Cocoa、Delphi、Erlang、Go、Has">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-04-16T03:38:55.000Z">
-<meta property="article:modified_time" content="2022-04-16T05:19:53.626Z">
+<meta property="article:modified_time" content="2022-04-16T05:49:49.251Z">
 <meta property="article:author" content="Andy Zhang">
 <meta name="twitter:card" content="summary">
 
@@ -217,7 +217,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2022-04-16 11:38:55 / 修改时间：13:19:53" itemprop="dateCreated datePublished" datetime="2022-04-16T11:38:55+08:00">2022-04-16</time>
+              <time title="创建时间：2022-04-16 11:38:55 / 修改时间：13:49:49" itemprop="dateCreated datePublished" datetime="2022-04-16T11:38:55+08:00">2022-04-16</time>
             </span>
 
           
@@ -232,6 +232,8 @@
 
       
         <h3 id="Thrift简介"><a href="#Thrift简介" class="headerlink" title="Thrift简介"></a><span id="thrift-brief">Thrift简介</span></h3><p>Thrift是一种接口描述语言和二进制通讯协议，它被用来定义和创建跨语言的服务。它被当作一个远程过程调用（RPC）框架来使用，是由<code>Facebook</code>为“大规模跨语言服务开发”而开发的。它通过一个代码生成引擎联合了一个软件栈，来创建不同程度的、无缝的跨平台高效服务，可以使用<code>C#</code>、<code>C++</code>（基于<code>POSIX</code>兼容系统）、<code>Cappuccino</code>、<code>Cocoa</code>、<code>Delphi</code>、<code>Erlang</code>、<code>Go</code>、<code>Haskell</code>、<code>Java</code>、<code>Node.js</code>、<code>OCaml</code>、<code>Perl</code>、<code>PHP</code>、<code>Python</code>、<code>Ruby</code>和<code>Smalltalk</code>。虽然它以前是由<code>Facebook</code>开发的，但它现在是<code>Apache</code>软件基金会的开源项目了。该实现被描述在2007年4月的一篇由<code>Facebook</code>发表的技术论文中，该论文现由<code>Apache</code>掌管。<a href="#refer-anchor-1"><sup>[1]</sup></a></p>
+<a id="more"></a>
+
 <h3 id="具体使用步骤"><a href="#具体使用步骤" class="headerlink" title="具体使用步骤"></a><span id="steps">具体使用步骤</span></h3><h4 id="1-安装Thrift"><a href="#1-安装Thrift" class="headerlink" title="1. 安装Thrift"></a><span id="thrift-install">1. 安装Thrift</span></h4><p>由于我用的是<code>Windows</code>系统，直接去<a href="https://thrift.apache.org/" target="_blank" rel="noopener"><code>Thrift</code>官网</a>下载<code>EXE</code>文件就可以，其他系统的安装可以参见官网的安装说明。</p>
 <h4 id="2-定义接口文件"><a href="#2-定义接口文件" class="headerlink" title="2. 定义接口文件"></a><span id="define-interface-file">2. 定义接口文件</span></h4><p>我定义两个文件，一个是数据结构文件（<code>BookModel.thrift</code>），另一个是需要实现的方法接口文件（<code>BookService.thrift</code>）：</p>
 <figure class="highlight thrift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">namespace</span> java cn.towerman1990.server.model</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">enum</span> <span class="title">Status</span> </span>&#123;</span><br><span class="line">    No = <span class="number">0</span>;</span><br><span class="line">    YES = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Book</span> </span>&#123;</span><br><span class="line">    <span class="number">1</span>: <span class="keyword">required</span> <span class="built_in">i32</span> id;</span><br><span class="line">    <span class="number">2</span>: <span class="keyword">required</span> <span class="built_in">string</span> type;</span><br><span class="line">    <span class="number">3</span>: <span class="keyword">required</span> <span class="built_in">string</span> name;</span><br><span class="line">    <span class="number">4</span>: <span class="keyword">optional</span> <span class="built_in">string</span> description;</span><br><span class="line">    <span class="number">5</span>: <span class="keyword">required</span> Status status;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
