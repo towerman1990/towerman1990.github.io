@@ -3,8 +3,8 @@ title: Centos 7 LNMP环境搭建
 date: 2020-02-13 23:08:08
 tags:
  - Linux
- - Nginx
  - MySQL
+ - Nginx
  - PHP
 ---
 

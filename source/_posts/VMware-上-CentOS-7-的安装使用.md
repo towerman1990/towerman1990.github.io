@@ -2,9 +2,9 @@
 title: VMware 上 CentOS 7 的安装使用
 date: 2020-02-03 11:30:00
 tags:
-  - VMware
-  - Linux
   - CentOS
+  - Linux
+  - VMware
 ---
 
 VMware Workstation是一款功能强大的桌面虚拟计算机软件，现在也已经提供面向个人用户的免费版本。虽然个人版的功能受限，不如商业版功能强大，但是作为个人开发使用还是够用的。这里就基于VMware Workstation，演示一下CentOS 7的安装步骤。
