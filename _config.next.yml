@@ -1,0 +1,19 @@
+scheme: Mist
+darkmode: false
+
+menu:
+  home: / || fa fa-home
+  about: /about/ || fa fa-user
+  tags: /tags/ || fa fa-tags
+  categories: /categories/ || fa fa-th
+  archives: /archives/ || fa fa-archive
+
+avatar:
+  url: /images/avatar.jpg
+  rounded: true
+  rotated: true
+
+baidu_analytics: '0827f66baef0e8fc8bd5d7647e82136b'
+
+custom_file_path:
+  style: source/_data/styles.styl
