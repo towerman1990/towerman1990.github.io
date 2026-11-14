@@ -1,5 +1,5 @@
 ---
-title: Sprint Boot中使用Thrift
+title: Spring Boot 中使用 Thrift
 date: 2022-04-16 11:38:55
 tags:
  - Java
@@ -22,13 +22,13 @@ Thrift是一种接口描述语言和二进制通讯协议，它被用来定义�
 我定义两个文件，一个是数据结构文件（`BookModel.thrift`），另一个是需要实现的方法接口文件（`BookService.thrift`）：
 
 ```thrift
-namespace java cn.towerman1990.server.model
+namespace java cn.towerman1990.learn_thrift.model
 
 enum Status {
-    No = 0;
+    NO = 0;
     YES = 1;
 }
-struct Book {
+struct BookModel {
     1: required i32 id;
     2: required string type;
     3: required string name;
@@ -38,7 +38,7 @@ struct Book {
 ```
 
 ```thrift
-namespace java cn.towerman1990.server.service
+namespace java cn.towerman1990.learn_thrift.service
 
 include "BookModel.thrift"
 
@@ -47,29 +47,31 @@ exception InvalidOperationException {
     2: string description
 }
 
-service Book {
+service BookService {
 
-    BookModel.Book getById(1: i32 id) throws (1: InvalidOperationException e),
+    BookModel.BookModel getById(1: i32 id) throws (1: InvalidOperationException e),
 
-    BookModel.Book create(1:BookModel.Book book) throws (1:InvalidOperationException e),
+    BookModel.BookModel create(1: BookModel.BookModel book) throws (1: InvalidOperationException e),
 
-    BookModel.Book update(1:BookModel.Book book) throws (1:InvalidOperationException e),
+    BookModel.BookModel update(1: BookModel.BookModel book) throws (1: InvalidOperationException e),
 
-    list <BookModel.Book> getList() throws (1:InvalidOperationException e),
+    list<BookModel.BookModel> getList() throws (1: InvalidOperationException e),
 }
 ```
 
-#### <span id="generate-java-file">3. 生成java文件</span>
+#### <span id="generate-java-file">3. 生成 Java 文件</span>
 
 使用下载好的`Thrift`程序，将定义的接口文件转换成`Java`文件：
 
-```bash
-$thrift-path/thrift-0.16.0.exe -r --gen java BookService.thrift
+```powershell
+& "C:\tools\thrift\thrift-0.16.0.exe" -r --gen java BookService.thrift
 ```
+
+在两个 `.thrift` 文件所在目录执行以上命令，并将可执行文件路径替换为实际安装路径。`-r` 会同时生成被引用文件的代码，默认输出到 `gen-java` 目录。这里的 `BookModel.BookModel` 中，前一个名称表示被包含的 IDL 文件，后一个名称表示该文件中定义的结构体。
 
 #### <span id="new-project">4. 新建项目</span>
 
-新建一个`Maven`项目，并在`pom.xml`文件中增加`Thrift`依赖：
+新建一个`Maven`项目，并在`pom.xml`文件中增加`Thrift`依赖。本文沿用 Java 17、Spring Boot 2.6.6 和 Thrift 0.16.0 的示例版本，Thrift 编译器与 Java 运行库使用相同版本：
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -104,7 +106,9 @@ $thrift-path/thrift-0.16.0.exe -r --gen java BookService.thrift
 </project>
 ```
 
-创建项目后需将之前生成的java文件放入到项目的对应路径下。
+创建项目后，将 `gen-java` 下的 `cn` 目录复制到 `src/main/java` 下，保留生成的包目录结构。此时应能找到 `cn.towerman1990.learn_thrift.model.BookModel`、`Status` 和 `cn.towerman1990.learn_thrift.service.BookService` 等类型。
+
+如果 Thrift 0.16.0 生成的代码引用了 `javax.annotation.Generated`，在 Java 17 下还需要补充 `javax.annotation:javax.annotation-api:1.3.2` 依赖，或生成代码时使用 `--gen java:generated_annotations=suppress` 关闭该注解的生成。
 
 #### <span id="implement-interface">5. 实现定义的接口</span>
 
@@ -175,11 +179,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class ThriftServerApplication {
     public static void main(String[] args) {
-        SpringApplication.run(ThriftServerApplication.class, args);
+        var context = SpringApplication.run(ThriftServerApplication.class, args);
 
         try {
             System.out.println("Server start...");
-            TProcessor tprocessor = new BookService.Processor<BookService.Iface>(new BookModelServiceImpl());
+            BookService.Iface handler = context.getBean(BookModelServiceImpl.class);
+            TProcessor tprocessor = new BookService.Processor<BookService.Iface>(handler);
             TServerSocket serverTransport = new TServerSocket(1314);
             TServer.Args tArgs = new TServer.Args(serverTransport);
             tArgs.processor(tprocessor);
@@ -194,6 +199,8 @@ public class ThriftServerApplication {
 ```
 
 #### <span id="client-implement">7. 客户端实现</span>
+
+服务端通过 Spring 容器获取带有 `@Service` 注解的实现类，避免手动 `new` 导致该类中的依赖注入失效。这里的 `TSimpleServer` 用于演示基础调用，`serve()` 会阻塞当前线程；实际项目还需要根据并发需求选择服务模型，并管理启动、停止和资源释放。
 
 创建一个名为`ThriftClientApplication`的类文件，代码如下：
 
@@ -254,9 +261,13 @@ BookModel(id:1, type:小说, name:《红楼梦》, description:《红楼梦》�
 Process finished with exit code 0
 ```
 
-完整演示代码地址：[*仓库*](https://github.com/towerman1990/spring-boot-learn/tree/main/learn-thrift)
+注意：示例将客户端和服务端启动类放在同一个包中，二者都带有 `@SpringBootApplication`。正式拆分项目时，应将它们放在独立模块或互不扫描的包中；普通 Thrift 客户端本身也可以不启动 Spring 容器，直接创建连接并调用。
+
+完整演示代码地址：[*仓库*](https://github.com/towerman1990/spring-boot-learn/tree/main/learn-thrift)。本文中的 IDL 包名和类型名已统一，使用仓库代码时也应核对其生成文件与 IDL 是否一致。
 
 
 <div id="refer-anchor-1"></div>
 
 - [1] [Thrift](https://zh.wikipedia.org/wiki/Thrift)
+- [Apache Thrift IDL 文档](https://thrift.apache.org/docs/idl)
+- [Apache Thrift Java 示例](https://thrift.apache.org/tutorial/java.html)
