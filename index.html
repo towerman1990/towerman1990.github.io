@@ -189,6 +189,74 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2026/11/14/Golang-%E4%B8%AD%E4%BD%BF%E7%94%A8Mockey%E5%92%8CGoConvey%E7%BC%96%E5%86%99%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Andy Zhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="盐 碱 地">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/11/14/Golang-%E4%B8%AD%E4%BD%BF%E7%94%A8Mockey%E5%92%8CGoConvey%E7%BC%96%E5%86%99%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/" class="post-title-link" itemprop="url">Golang 中使用 Mockey 和 GoConvey 编写单元测试</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2026-11-14 12:00:00 / 修改时间：10:22:20" itemprop="dateCreated datePublished" datetime="2026-11-14T12:00:00+08:00">2026-11-14</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>在 Go 项目中，一个业务方法往往会调用数据库、缓存或者其他服务。如果每次测试都依赖真实环境，不但准备数据麻烦，也很难稳定地复现超时、查询失败等情况。</p>
+<p>单元测试可以把这些依赖替换成可控制的实现，让我们专注验证业务逻辑。本文通过一个查询用户资料的例子，介绍如何使用字节跳动的 <a href="https://github.com/bytedance/mockey" target="_blank" rel="noopener">Mockey</a> 和 <a href="https://github.com/smartystreets/goconvey" target="_blank" rel="noopener">GoConvey</a> 编写单元测试。</p>
+<p>两者的职责不同：<strong>Mockey 负责打桩，GoConvey 负责组织测试场景和执行断言</strong>。测试入口和执行命令仍然使用 Go 自带的 <code>testing</code> 和 <code>go test</code>。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2026/11/14/Golang-%E4%B8%AD%E4%BD%BF%E7%94%A8Mockey%E5%92%8CGoConvey%E7%BC%96%E5%86%99%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/04/16/Sprint-Boot%E4%B8%AD%E4%BD%BF%E7%94%A8Thrift/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -212,10 +280,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2022-04-16 11:38:55 / 修改时间：13:49:49" itemprop="dateCreated datePublished" datetime="2022-04-16T11:38:55+08:00">2022-04-16</time>
+              <time title="创建时间：2022-04-16 11:38:55" itemprop="dateCreated datePublished" datetime="2022-04-16T11:38:55+08:00">2022-04-16</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-04-30 08:24:14" itemprop="dateModified" datetime="2022-04-30T08:24:14+08:00">2022-04-30</time>
+              </span>
 
           
 
@@ -278,10 +352,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2022-03-27 11:34:36 / 修改时间：12:30:23" itemprop="dateCreated datePublished" datetime="2022-03-27T11:34:36+08:00">2022-03-27</time>
+              <time title="创建时间：2022-03-27 11:34:36" itemprop="dateCreated datePublished" datetime="2022-03-27T11:34:36+08:00">2022-03-27</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-04-30 08:19:01" itemprop="dateModified" datetime="2022-04-30T08:19:01+08:00">2022-04-30</time>
+              </span>
 
           
 
@@ -352,7 +432,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-03-27 12:14:13" itemprop="dateModified" datetime="2022-03-27T12:14:13+08:00">2022-03-27</time>
+                <time title="修改时间：2022-04-30 08:23:08" itemprop="dateModified" datetime="2022-04-30T08:23:08+08:00">2022-04-30</time>
               </span>
 
           
@@ -429,7 +509,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-06-20 17:26:36" itemprop="dateModified" datetime="2021-06-20T17:26:36+08:00">2021-06-20</time>
+                <time title="修改时间：2022-04-30 08:22:49" itemprop="dateModified" datetime="2022-04-30T08:22:49+08:00">2022-04-30</time>
               </span>
 
           
@@ -502,7 +582,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-06-19 16:35:58" itemprop="dateModified" datetime="2021-06-19T16:35:58+08:00">2021-06-19</time>
+                <time title="修改时间：2022-04-30 08:23:26" itemprop="dateModified" datetime="2022-04-30T08:23:26+08:00">2022-04-30</time>
               </span>
 
           
@@ -575,7 +655,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-03-14 09:56:15" itemprop="dateModified" datetime="2021-03-14T09:56:15+08:00">2021-03-14</time>
+                <time title="修改时间：2022-04-30 08:24:07" itemprop="dateModified" datetime="2022-04-30T08:24:07+08:00">2022-04-30</time>
               </span>
 
           
@@ -650,7 +730,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-03-17 20:46:32" itemprop="dateModified" datetime="2021-03-17T20:46:32+08:00">2021-03-17</time>
+                <time title="修改时间：2022-04-30 08:24:00" itemprop="dateModified" datetime="2022-04-30T08:24:00+08:00">2022-04-30</time>
               </span>
 
           
@@ -798,7 +878,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-06-19 16:35:53" itemprop="dateModified" datetime="2021-06-19T16:35:53+08:00">2021-06-19</time>
+                <time title="修改时间：2022-04-30 08:23:21" itemprop="dateModified" datetime="2022-04-30T08:23:21+08:00">2022-04-30</time>
               </span>
 
           
@@ -820,84 +900,6 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2020/09/24/Golang-%E4%B8%AD%E7%9A%84%E9%98%9F%E5%88%97/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/19/Golang-%E4%B8%AD%E7%9A%84%E7%A8%80%E7%96%8F%E7%9F%A9%E9%98%B5/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Andy Zhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="盐 碱 地">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/09/19/Golang-%E4%B8%AD%E7%9A%84%E7%A8%80%E7%96%8F%E7%9F%A9%E9%98%B5/" class="post-title-link" itemprop="url">Golang 中的稀疏矩阵</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-09-19 10:14:05" itemprop="dateCreated datePublished" datetime="2020-09-19T10:14:05+08:00">2020-09-19</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-06-19 15:48:10" itemprop="dateModified" datetime="2021-06-19T15:48:10+08:00">2021-06-19</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="什么是稀疏矩阵"><a href="#什么是稀疏矩阵" class="headerlink" title="什么是稀疏矩阵"></a><span id="what-is-sparse-matrix">什么是稀疏矩阵</span></h3><p><strong>稀疏矩阵</strong>（英语：sparse matrix），在数值分析中，是其元素大部分为零的矩阵。反之，如果大部分元素都非零，则这个矩阵是稠密的。在科学与工程领域中求解线性模型时经常出现大型的稀疏矩阵。</p>
-<p>在使用计算机存储和操作稀疏矩阵时，经常需要修改标准算法以利用矩阵的稀疏结构。由于其自身的稀疏特性，通过压缩可以大大节省稀疏矩阵的内存代价。更为重要的是，由于过大的尺寸，标准的算法经常无法操作这些稀疏矩阵<a href="#refer-anchor-1"><sup>[1]</sup></a>。</p>
-<h3 id="Golang中的稀疏矩阵"><a href="#Golang中的稀疏矩阵" class="headerlink" title="Golang中的稀疏矩阵"></a><span id="sparse-matrix-in-golang">Golang中的稀疏矩阵</span></h3><p>在 Golang 中我们可以使用一个二维数组模拟一个稀疏矩阵：</p>
-<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> chessMap [<span class="number">8</span>][<span class="number">8</span>]<span class="keyword">int</span></span><br><span class="line">chessMap[<span class="number">1</span>][<span class="number">1</span>] = <span class="number">1</span></span><br><span class="line">chessMap[<span class="number">2</span>][<span class="number">2</span>] = <span class="number">2</span></span><br><span class="line">chessMap[<span class="number">3</span>][<span class="number">3</span>] = <span class="number">3</span></span><br></pre></td></tr></table></figure>
-
-<p>对其打印效果如下：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">0    0    0    0    0    0    0    0</span><br><span class="line">0    1    0    0    0    0    0    0</span><br><span class="line">0    0    2    0    0    0    0    0</span><br><span class="line">0    0    0    3    0    0    0    0</span><br><span class="line">0    0    0    0    0    0    0    0</span><br><span class="line">0    0    0    0    0    0    0    0</span><br><span class="line">0    0    0    0    0    0    0    0</span><br><span class="line">0    0    0    0    0    0    0    0</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/09/19/Golang-%E4%B8%AD%E7%9A%84%E7%A8%80%E7%96%8F%E7%9F%A9%E9%98%B5/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -989,14 +991,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">17</span>
+          <span class="site-state-item-count">18</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-count">12</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -1021,7 +1023,7 @@
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2022</span>
+  <span itemprop="copyrightYear">2026</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
