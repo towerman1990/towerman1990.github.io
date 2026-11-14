@@ -2,9 +2,9 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
-<meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 4.2.1">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 8.1.2">
+
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
@@ -13,217 +13,205 @@
 <link rel="stylesheet" href="/css/main.css">
 
 
-<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-<script id="hexo-configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    hostname: new URL('http://yoursite.com').hostname,
-    root: '/',
-    scheme: 'Mist',
-    version: '7.7.0',
-    exturl: false,
-    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
-    copycode: {"enable":false,"show_result":false,"style":null},
-    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
-    bookmark: {"enable":false,"color":"#222","save":"auto"},
-    fancybox: false,
-    mediumzoom: false,
-    lazyload: false,
-    pangu: false,
-    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
-    algolia: {
-      appID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    },
-    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
-    path: '',
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
-  };
-</script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"blog.towerman1990.cn","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.28.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js" defer></script>
 
-  <meta property="og:type" content="website">
+    <meta property="og:type" content="website">
 <meta property="og:title" content="盐 碱 地">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta property="og:url" content="https://blog.towerman1990.cn/index.html">
 <meta property="og:site_name" content="盐 碱 地">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:author" content="Andy Zhang">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://yoursite.com/">
+
+<link rel="canonical" href="https://blog.towerman1990.cn/">
 
 
-<script id="page-configurations">
-  // https://hexo.io/docs/variables.html
-  CONFIG.page = {
-    sidebar: "",
-    isHome: true,
-    isPost: false
-  };
-</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":true,"isPost":false,"lang":"zh-CN","comments":"","permalink":"","path":"index.html","title":""}</script>
 
-  <title>盐 碱 地</title>
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>盐 碱 地</title>
+  
+
+  <script src="/js/third-party/analytics/baidu-analytics.js" defer></script>
+  <script async src="https://hm.baidu.com/hm.js?0827f66baef0e8fc8bd5d7647e82136b"></script>
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
   
 
 
-  <script>
-    var _hmt = _hmt || [];
-    (function() {
-      var hm = document.createElement("script");
-      hm.src = "https://hm.baidu.com/hm.js?0827f66baef0e8fc8bd5d7647e82136b";
-      var s = document.getElementsByTagName("script")[0];
-      s.parentNode.insertBefore(hm, s);
-    })();
-  </script>
+
+
+
+
+  
+
 
 
 
 
   <noscript>
-  <style>
-  .use-motion .brand,
-  .use-motion .menu-item,
-  .sidebar-inner,
-  .use-motion .post-block,
-  .use-motion .pagination,
-  .use-motion .comments,
-  .use-motion .post-header,
-  .use-motion .post-body,
-  .use-motion .collection-header { opacity: initial; }
-
-  .use-motion .site-title,
-  .use-motion .site-subtitle {
-    opacity: initial;
-    top: initial;
-  }
-
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
-  </style>
-</noscript>
-
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container use-motion">
-    <div class="headband"></div>
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
 
-    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-container">
-  <div class="site-meta">
-
-    <div>
-      <a href="/" class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">盐 碱 地</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
     </div>
   </div>
 
-  <div class="site-nav-toggle">
-    <div class="toggle" aria-label="切换导航栏">
-      <span class="toggle-line toggle-line-first"></span>
-      <span class="toggle-line toggle-line-middle"></span>
-      <span class="toggle-line toggle-line-last"></span>
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">盐 碱 地</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
     </div>
   </div>
 </div>
+
 
 
 <nav class="site-nav">
-  
-  <ul id="menu" class="menu">
-        <li class="menu-item menu-item-home">
-
-    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
-
-  </li>
-        <li class="menu-item menu-item-about">
-
-    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
-
-  </li>
-        <li class="menu-item menu-item-tags">
-
-    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
-
-  </li>
-        <li class="menu-item menu-item-categories">
-
-    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
-
-  </li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
   </ul>
-
 </nav>
-</div>
-    </header>
-
-    
-  <div class="back-to-top">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
 
 
-    <main class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          
 
-          <div class="content">
-            
 
-  <div class="posts-expand">
+</header>
         
   
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Andy Zhang"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Andy Zhang</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">18</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2024/05/12/Golang-%E4%B8%AD%E4%BD%BF%E7%94%A8Mockey%E5%92%8CGoConvey%E7%BC%96%E5%86%99%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/">
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://blog.towerman1990.cn/2024/05/12/Golang-%E4%B8%AD%E4%BD%BF%E7%94%A8Mockey%E5%92%8CGoConvey%E7%BC%96%E5%86%99%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
       <meta itemprop="name" content="Andy Zhang">
-      <meta itemprop="description" content="">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="盐 碱 地">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | 盐 碱 地">
+      <meta itemprop="description" content="">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2024/05/12/Golang-%E4%B8%AD%E4%BD%BF%E7%94%A8Mockey%E5%92%8CGoConvey%E7%BC%96%E5%86%99%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/" class="post-title-link" itemprop="url">Golang 中使用 Mockey 和 GoConvey 编写单元测试</a>
-        </h1>
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/05/12/Golang-%E4%B8%AD%E4%BD%BF%E7%94%A8Mockey%E5%92%8CGoConvey%E7%BC%96%E5%86%99%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/" class="post-title-link" itemprop="url">Golang 中使用 Mockey 和 GoConvey 编写单元测试</a>
+        </h2>
 
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2024-05-12 10:30:28" itemprop="dateCreated datePublished" datetime="2024-05-12T10:30:28+08:00">2024-05-12</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2026-11-14 10:38:33" itemprop="dateModified" datetime="2026-11-14T10:38:33+08:00">2026-11-14</time>
-              </span>
+      <time title="创建时间：2024-05-12 10:30:28" itemprop="dateCreated datePublished" datetime="2024-05-12T10:30:28+08:00">2024-05-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-11-14 10:38:33" itemprop="dateModified" datetime="2026-11-14T10:38:33+08:00">2026-11-14</time>
+    </span>
 
-          
+  
+</div>
 
         </div>
       </header>
@@ -232,10 +220,8 @@
     
     
     <div class="post-body" itemprop="articleBody">
-
-      
           <p>在 Go 项目中，一个业务方法往往会调用数据库、缓存或者其他服务。如果每次测试都依赖真实环境，不但准备数据麻烦，也很难稳定地复现超时、查询失败等情况。</p>
-<p>单元测试可以把这些依赖替换成可控制的实现，让我们专注验证业务逻辑。本文通过一个查询用户资料的例子，介绍如何使用字节跳动的 <a href="https://github.com/bytedance/mockey" target="_blank" rel="noopener">Mockey</a> 和 <a href="https://github.com/smartystreets/goconvey" target="_blank" rel="noopener">GoConvey</a> 编写单元测试。</p>
+<p>单元测试可以把这些依赖替换成可控制的实现，让我们专注验证业务逻辑。本文通过一个查询用户资料的例子，介绍如何使用字节跳动的 <a target="_blank" rel="noopener" href="https://github.com/bytedance/mockey">Mockey</a> 和 <a target="_blank" rel="noopener" href="https://github.com/smartystreets/goconvey">GoConvey</a> 编写单元测试。</p>
 <p>两者的职责不同：<strong>Mockey 负责打桩，GoConvey 负责组织测试场景和执行断言</strong>。测试入口和执行命令仍然使用 Go 自带的 <code>testing</code> 和 <code>go test</code>。</p>
           <!--noindex-->
             <div class="post-button">
@@ -251,53 +237,66 @@
     
     
     
-      <footer class="post-footer">
+
+    <footer class="post-footer">
         <div class="post-eof"></div>
-      </footer>
+      
+    </footer>
   </article>
-  
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/04/16/Sprint-Boot%E4%B8%AD%E4%BD%BF%E7%94%A8Thrift/">
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://blog.towerman1990.cn/2022/04/16/Sprint-Boot%E4%B8%AD%E4%BD%BF%E7%94%A8Thrift/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
       <meta itemprop="name" content="Andy Zhang">
-      <meta itemprop="description" content="">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="盐 碱 地">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | 盐 碱 地">
+      <meta itemprop="description" content="">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/04/16/Sprint-Boot%E4%B8%AD%E4%BD%BF%E7%94%A8Thrift/" class="post-title-link" itemprop="url">Spring Boot 中使用 Thrift</a>
-        </h1>
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/04/16/Sprint-Boot%E4%B8%AD%E4%BD%BF%E7%94%A8Thrift/" class="post-title-link" itemprop="url">Spring Boot 中使用 Thrift</a>
+        </h2>
 
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2022-04-16 11:38:55" itemprop="dateCreated datePublished" datetime="2022-04-16T11:38:55+08:00">2022-04-16</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2026-11-14 10:40:23" itemprop="dateModified" datetime="2026-11-14T10:40:23+08:00">2026-11-14</time>
-              </span>
+      <time title="创建时间：2022-04-16 11:38:55" itemprop="dateCreated datePublished" datetime="2022-04-16T11:38:55+08:00">2022-04-16</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-11-14 10:40:23" itemprop="dateModified" datetime="2026-11-14T10:40:23+08:00">2026-11-14</time>
+    </span>
 
-          
+  
+</div>
 
         </div>
       </header>
@@ -306,8 +305,6 @@
     
     
     <div class="post-body" itemprop="articleBody">
-
-      
           <h3 id="Thrift简介"><a href="#Thrift简介" class="headerlink" title="Thrift简介"></a><span id="thrift-brief">Thrift简介</span></h3><p>Thrift是一种接口描述语言和二进制通讯协议，它被用来定义和创建跨语言的服务。它被当作一个远程过程调用（RPC）框架来使用，是由<code>Facebook</code>为“大规模跨语言服务开发”而开发的。它通过一个代码生成引擎联合了一个软件栈，来创建不同程度的、无缝的跨平台高效服务，可以使用<code>C#</code>、<code>C++</code>（基于<code>POSIX</code>兼容系统）、<code>Cappuccino</code>、<code>Cocoa</code>、<code>Delphi</code>、<code>Erlang</code>、<code>Go</code>、<code>Haskell</code>、<code>Java</code>、<code>Node.js</code>、<code>OCaml</code>、<code>Perl</code>、<code>PHP</code>、<code>Python</code>、<code>Ruby</code>和<code>Smalltalk</code>。虽然它以前是由<code>Facebook</code>开发的，但它现在是<code>Apache</code>软件基金会的开源项目了。该实现被描述在2007年4月的一篇由<code>Facebook</code>发表的技术论文中，该论文现由<code>Apache</code>掌管。<a href="#refer-anchor-1"><sup>[1]</sup></a></p>
           <!--noindex-->
             <div class="post-button">
@@ -323,53 +320,66 @@
     
     
     
-      <footer class="post-footer">
+
+    <footer class="post-footer">
         <div class="post-eof"></div>
-      </footer>
+      
+    </footer>
   </article>
-  
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/03/27/%E7%A4%BE%E5%8C%BA%E7%89%88IDEA%E4%B8%AD%E5%90%AF%E5%8A%A8Tomcat/">
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://blog.towerman1990.cn/2022/03/27/%E7%A4%BE%E5%8C%BA%E7%89%88IDEA%E4%B8%AD%E5%90%AF%E5%8A%A8Tomcat/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
       <meta itemprop="name" content="Andy Zhang">
-      <meta itemprop="description" content="">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="盐 碱 地">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | 盐 碱 地">
+      <meta itemprop="description" content="">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/03/27/%E7%A4%BE%E5%8C%BA%E7%89%88IDEA%E4%B8%AD%E5%90%AF%E5%8A%A8Tomcat/" class="post-title-link" itemprop="url">社区版IDEA中启动Tomcat</a>
-        </h1>
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/03/27/%E7%A4%BE%E5%8C%BA%E7%89%88IDEA%E4%B8%AD%E5%90%AF%E5%8A%A8Tomcat/" class="post-title-link" itemprop="url">社区版IDEA中启动Tomcat</a>
+        </h2>
 
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2022-03-27 11:34:36" itemprop="dateCreated datePublished" datetime="2022-03-27T11:34:36+08:00">2022-03-27</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-04-30 08:19:01" itemprop="dateModified" datetime="2022-04-30T08:19:01+08:00">2022-04-30</time>
-              </span>
+      <time title="创建时间：2022-03-27 11:34:36" itemprop="dateCreated datePublished" datetime="2022-03-27T11:34:36+08:00">2022-03-27</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-04-30 08:19:01" itemprop="dateModified" datetime="2022-04-30T08:19:01+08:00">2022-04-30</time>
+    </span>
 
-          
+  
+</div>
 
         </div>
       </header>
@@ -378,8 +388,6 @@
     
     
     <div class="post-body" itemprop="articleBody">
-
-      
           <p>因为工作需要，最近在学习Java。在学习的过程中，由于什么软件都喜欢用新版（┑(￣Д ￣)┍）踩了不少的坑，分享一下社区版IDEA中启动Tomcat的相关配置与代码Demo。<br>本人使用的软件环境为Java17 + Tomcat10 + IDEA2021.3.3，代码参考了廖雪峰老师的博客<a href="#refer-anchor-1"><sup>[1]</sup></a>。</p>
           <!--noindex-->
             <div class="post-button">
@@ -395,53 +403,66 @@
     
     
     
-      <footer class="post-footer">
+
+    <footer class="post-footer">
         <div class="post-eof"></div>
-      </footer>
+      
+    </footer>
   </article>
-  
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/07/31/Golang-%E4%B8%AD%E7%9A%84%E5%A0%86%E6%A0%88/">
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://blog.towerman1990.cn/2021/07/31/Golang-%E4%B8%AD%E7%9A%84%E5%A0%86%E6%A0%88/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
       <meta itemprop="name" content="Andy Zhang">
-      <meta itemprop="description" content="">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="盐 碱 地">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | 盐 碱 地">
+      <meta itemprop="description" content="">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/07/31/Golang-%E4%B8%AD%E7%9A%84%E5%A0%86%E6%A0%88/" class="post-title-link" itemprop="url">Golang 中的堆栈</a>
-        </h1>
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/07/31/Golang-%E4%B8%AD%E7%9A%84%E5%A0%86%E6%A0%88/" class="post-title-link" itemprop="url">Golang 中的堆栈</a>
+        </h2>
 
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2021-07-31 14:50:02" itemprop="dateCreated datePublished" datetime="2021-07-31T14:50:02+08:00">2021-07-31</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-04-30 08:23:08" itemprop="dateModified" datetime="2022-04-30T08:23:08+08:00">2022-04-30</time>
-              </span>
+      <time title="创建时间：2021-07-31 14:50:02" itemprop="dateCreated datePublished" datetime="2021-07-31T14:50:02+08:00">2021-07-31</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-04-30 08:23:08" itemprop="dateModified" datetime="2022-04-30T08:23:08+08:00">2022-04-30</time>
+    </span>
 
-          
+  
+</div>
 
         </div>
       </header>
@@ -450,8 +471,6 @@
     
     
     <div class="post-body" itemprop="articleBody">
-
-      
           <h3 id="什么是堆栈"><a href="#什么是堆栈" class="headerlink" title="什么是堆栈"></a><span id="what-is-queue">什么是堆栈</span></h3><p><strong>堆栈</strong>（英语：stack）又称为<strong>栈</strong>或<strong>堆叠</strong>，是计算机科学中的一种抽象资料类型，只允许在有序的线性资料集合的一端（称为堆栈顶端，英语：top）进行加入数据（英语：push）和移除数据（英语：pop）的运算。因而按照后进先出（LIFO, Last In First Out）的原理运作<a href="#refer-anchor-1"><sup>[1]</sup></a>。</p>
 <h3 id="操作"><a href="#操作" class="headerlink" title="操作"></a><span id="operate">操作</span></h3><p>堆栈使用两种基本操作：推入（压栈，push）和弹出（弹栈，pop）：</p>
 <ul>
@@ -472,53 +491,66 @@
     
     
     
-      <footer class="post-footer">
+
+    <footer class="post-footer">
         <div class="post-eof"></div>
-      </footer>
+      
+    </footer>
   </article>
-  
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/06/19/Golang-%E4%B8%AD%E7%9A%84%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/">
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://blog.towerman1990.cn/2021/06/19/Golang-%E4%B8%AD%E7%9A%84%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
       <meta itemprop="name" content="Andy Zhang">
-      <meta itemprop="description" content="">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="盐 碱 地">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | 盐 碱 地">
+      <meta itemprop="description" content="">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/06/19/Golang-%E4%B8%AD%E7%9A%84%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/" class="post-title-link" itemprop="url">Golang 中的排序算法</a>
-        </h1>
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/06/19/Golang-%E4%B8%AD%E7%9A%84%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/" class="post-title-link" itemprop="url">Golang 中的排序算法</a>
+        </h2>
 
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2021-06-19 15:10:20" itemprop="dateCreated datePublished" datetime="2021-06-19T15:10:20+08:00">2021-06-19</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-04-30 08:22:49" itemprop="dateModified" datetime="2022-04-30T08:22:49+08:00">2022-04-30</time>
-              </span>
+      <time title="创建时间：2021-06-19 15:10:20" itemprop="dateCreated datePublished" datetime="2021-06-19T15:10:20+08:00">2021-06-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-04-30 08:22:49" itemprop="dateModified" datetime="2022-04-30T08:22:49+08:00">2022-04-30</time>
+    </span>
 
-          
+  
+</div>
 
         </div>
       </header>
@@ -527,8 +559,6 @@
     
     
     <div class="post-body" itemprop="articleBody">
-
-      
           <h3 id="什么是排序"><a href="#什么是排序" class="headerlink" title="什么是排序"></a><span id="what-is-sorting-algorithm">什么是排序</span></h3><p>在计算机科学与数学中，一个<strong>排序算法</strong>（英语：Sorting algorithm）是一种能将一串资料依照特定排序方式进行排列的一种算法<a href="#refer-anchor-1"><sup>[1]</sup></a>。本文中将使用Golang实现几种常见的排序算法。</p>
 <h3 id="Golang-实现冒泡排序"><a href="#Golang-实现冒泡排序" class="headerlink" title="Golang 实现冒泡排序"></a><span id="bubble_sort">Golang 实现冒泡排序</span></h3><p><strong>冒泡排序</strong>（英语：Bubble Sort）又称为泡式排序，是一种简单的排序算法。它重复地走访过要排序的数列，一次比较两个元素，如果他们的顺序错误就把他们交换过来。走访数列的工作是重复地进行直到没有再需要交换，也就是说该数列已经排序完成。这个算法的名字由来是因为越小的元素会经由交换慢慢“浮”到数列的顶端<a href="#refer-anchor-2"><sup>[2]</sup></a>。</p>
           <!--noindex-->
@@ -545,53 +575,66 @@
     
     
     
-      <footer class="post-footer">
+
+    <footer class="post-footer">
         <div class="post-eof"></div>
-      </footer>
+      
+    </footer>
   </article>
-  
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/05/23/Golang-%E4%B8%AD%E7%9A%84%E9%93%BE%E8%A1%A8/">
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://blog.towerman1990.cn/2021/05/23/Golang-%E4%B8%AD%E7%9A%84%E9%93%BE%E8%A1%A8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
       <meta itemprop="name" content="Andy Zhang">
-      <meta itemprop="description" content="">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="盐 碱 地">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | 盐 碱 地">
+      <meta itemprop="description" content="">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/05/23/Golang-%E4%B8%AD%E7%9A%84%E9%93%BE%E8%A1%A8/" class="post-title-link" itemprop="url">Golang 中的链表</a>
-        </h1>
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/05/23/Golang-%E4%B8%AD%E7%9A%84%E9%93%BE%E8%A1%A8/" class="post-title-link" itemprop="url">Golang 中的链表</a>
+        </h2>
 
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2021-05-23 17:47:42" itemprop="dateCreated datePublished" datetime="2021-05-23T17:47:42+08:00">2021-05-23</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-04-30 08:23:26" itemprop="dateModified" datetime="2022-04-30T08:23:26+08:00">2022-04-30</time>
-              </span>
+      <time title="创建时间：2021-05-23 17:47:42" itemprop="dateCreated datePublished" datetime="2021-05-23T17:47:42+08:00">2021-05-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-04-30 08:23:26" itemprop="dateModified" datetime="2022-04-30T08:23:26+08:00">2022-04-30</time>
+    </span>
 
-          
+  
+</div>
 
         </div>
       </header>
@@ -600,8 +643,6 @@
     
     
     <div class="post-body" itemprop="articleBody">
-
-      
           <h3 id="什么是链表"><a href="#什么是链表" class="headerlink" title="什么是链表"></a><span id="what-is-queue">什么是链表</span></h3><p>在计算机科学中，<strong>链表</strong>（Linked list）是一种常见的基础数据结构，是一种线性表，但是并不会按线性的顺序存储数据，而是在每一个节点里存到下一个节点的指针(Pointer)<a href="#refer-anchor-1"><sup>[1]</sup></a>。</p>
 <h3 id="Golang-实现单向链表"><a href="#Golang-实现单向链表" class="headerlink" title="Golang 实现单向链表"></a><span id="single-queue-in-golang">Golang 实现单向链表</span></h3>
           <!--noindex-->
@@ -618,53 +659,66 @@
     
     
     
-      <footer class="post-footer">
+
+    <footer class="post-footer">
         <div class="post-eof"></div>
-      </footer>
+      
+    </footer>
   </article>
-  
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/02/19/PHP-8-%E5%AE%89%E8%A3%85amqp%E6%89%A9%E5%B1%95/">
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://blog.towerman1990.cn/2021/02/19/PHP-8-%E5%AE%89%E8%A3%85amqp%E6%89%A9%E5%B1%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
       <meta itemprop="name" content="Andy Zhang">
-      <meta itemprop="description" content="">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="盐 碱 地">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | 盐 碱 地">
+      <meta itemprop="description" content="">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/02/19/PHP-8-%E5%AE%89%E8%A3%85amqp%E6%89%A9%E5%B1%95/" class="post-title-link" itemprop="url">PHP 8 安装amqp扩展</a>
-        </h1>
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/02/19/PHP-8-%E5%AE%89%E8%A3%85amqp%E6%89%A9%E5%B1%95/" class="post-title-link" itemprop="url">PHP 8 安装amqp扩展</a>
+        </h2>
 
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2021-02-19 13:52:12" itemprop="dateCreated datePublished" datetime="2021-02-19T13:52:12+08:00">2021-02-19</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-04-30 08:24:07" itemprop="dateModified" datetime="2022-04-30T08:24:07+08:00">2022-04-30</time>
-              </span>
+      <time title="创建时间：2021-02-19 13:52:12" itemprop="dateCreated datePublished" datetime="2021-02-19T13:52:12+08:00">2021-02-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-04-30 08:24:07" itemprop="dateModified" datetime="2022-04-30T08:24:07+08:00">2022-04-30</time>
+    </span>
 
-          
+  
+</div>
 
         </div>
       </header>
@@ -673,12 +727,10 @@
     
     
     <div class="post-body" itemprop="articleBody">
-
-      
           <p>最近公司新项目开始使用PHP8，之前使用的扩展也需要升级，更换成支持PHP8的版本。在使用RabbitMQ时需要使用到php-amqp扩展，我安装的时候发现网上的一些安装教程都比较旧了，顶多支持到php7对应的版本。下面记录一下php8相关扩展的安装过程。</p>
 <h3 id="安装rabbitmq-c"><a href="#安装rabbitmq-c" class="headerlink" title="安装rabbitmq-c"></a>安装rabbitmq-c</h3><p>安装PHP-AMQP扩展前首先要安装 rabbitmq-c，rabbitmq-c 是一个支持 RabbitMQ v2.0+ 版本的由C语言开发的 AMQP 客户端库。</p>
 <p>按照官方说法安装rabbitmq-c需要使用 v2.6及以上版本的<code>CMake</code>进行构建，我们先安装一下它：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo dnf install cmake</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> dnf install cmake</span><br></pre></td></tr></table></figure>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2021/02/19/PHP-8-%E5%AE%89%E8%A3%85amqp%E6%89%A9%E5%B1%95/#more" rel="contents">
@@ -693,53 +745,66 @@
     
     
     
-      <footer class="post-footer">
+
+    <footer class="post-footer">
         <div class="post-eof"></div>
-      </footer>
+      
+    </footer>
   </article>
-  
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/12/09/MySQL-%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB%E5%92%8C%E9%94%81/">
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://blog.towerman1990.cn/2020/12/09/MySQL-%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB%E5%92%8C%E9%94%81/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
       <meta itemprop="name" content="Andy Zhang">
-      <meta itemprop="description" content="">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="盐 碱 地">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | 盐 碱 地">
+      <meta itemprop="description" content="">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/12/09/MySQL-%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB%E5%92%8C%E9%94%81/" class="post-title-link" itemprop="url">MySQL 事务隔离级别和锁</a>
-        </h1>
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2020/12/09/MySQL-%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB%E5%92%8C%E9%94%81/" class="post-title-link" itemprop="url">MySQL 事务隔离级别和锁</a>
+        </h2>
 
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-12-09 09:43:39" itemprop="dateCreated datePublished" datetime="2020-12-09T09:43:39+08:00">2020-12-09</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-04-30 08:24:00" itemprop="dateModified" datetime="2022-04-30T08:24:00+08:00">2022-04-30</time>
-              </span>
+      <time title="创建时间：2020-12-09 09:43:39" itemprop="dateCreated datePublished" datetime="2020-12-09T09:43:39+08:00">2020-12-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-04-30 08:24:00" itemprop="dateModified" datetime="2022-04-30T08:24:00+08:00">2022-04-30</time>
+    </span>
 
-          
+  
+</div>
 
         </div>
       </header>
@@ -748,8 +813,6 @@
     
     
     <div class="post-body" itemprop="articleBody">
-
-      
           <h3 id="事务概念"><a href="#事务概念" class="headerlink" title="事务概念"></a>事务概念</h3><p>数据库事务（简称:事务）是数据库管理系统执行过程中的一个逻辑单位，由一个有限的数据库操作序列构成。事务主要用于处理操作量大，复杂度高而的数据。比如在支付过程中，涉及到账户金额的变更、用户商品关系的建立和订单状态修改等操作，此时我们需要保证整个支付过程中所有数据的变更操作全部执行成功，或者完全恢复到支付前的状态，此时，我们就需要使用事务。</p>
 <blockquote>
 <p>注：<br>在 MySQL 中只有使用了 Innodb 数据库引擎的数据库或表才支持事务。<br>事务处理可以用来维护数据库的完整性，保证成批的 SQL 语句要么全部执行，要么全部不执行。<br>事务用来管理 insert,update,delete 语句。</p>
@@ -768,53 +831,66 @@
     
     
     
-      <footer class="post-footer">
+
+    <footer class="post-footer">
         <div class="post-eof"></div>
-      </footer>
+      
+    </footer>
   </article>
-  
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/10/18/Golang-%E4%B8%ADdefer%E4%BF%AE%E6%94%B9%E8%BF%94%E5%9B%9E%E5%80%BC%E9%97%AE%E9%A2%98/">
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://blog.towerman1990.cn/2020/10/18/Golang-%E4%B8%ADdefer%E4%BF%AE%E6%94%B9%E8%BF%94%E5%9B%9E%E5%80%BC%E9%97%AE%E9%A2%98/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
       <meta itemprop="name" content="Andy Zhang">
-      <meta itemprop="description" content="">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="盐 碱 地">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | 盐 碱 地">
+      <meta itemprop="description" content="">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/10/18/Golang-%E4%B8%ADdefer%E4%BF%AE%E6%94%B9%E8%BF%94%E5%9B%9E%E5%80%BC%E9%97%AE%E9%A2%98/" class="post-title-link" itemprop="url">Golang 中defer修改返回值问题</a>
-        </h1>
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2020/10/18/Golang-%E4%B8%ADdefer%E4%BF%AE%E6%94%B9%E8%BF%94%E5%9B%9E%E5%80%BC%E9%97%AE%E9%A2%98/" class="post-title-link" itemprop="url">Golang 中defer修改返回值问题</a>
+        </h2>
 
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-10-18 20:56:14" itemprop="dateCreated datePublished" datetime="2020-10-18T20:56:14+08:00">2020-10-18</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-06-19 15:50:05" itemprop="dateModified" datetime="2021-06-19T15:50:05+08:00">2021-06-19</time>
-              </span>
+      <time title="创建时间：2020-10-18 20:56:14" itemprop="dateCreated datePublished" datetime="2020-10-18T20:56:14+08:00">2020-10-18</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2021-06-19 15:50:05" itemprop="dateModified" datetime="2021-06-19T15:50:05+08:00">2021-06-19</time>
+    </span>
 
-          
+  
+</div>
 
         </div>
       </header>
@@ -823,8 +899,6 @@
     
     
     <div class="post-body" itemprop="articleBody">
-
-      
           <h3 id="什么是defer"><a href="#什么是defer" class="headerlink" title="什么是defer"></a><span id="what-is-defer">什么是defer</span></h3><p>在 Golang 中 <code>defer</code> 是一个关键字，它用来实现 <code>延迟调用函数</code>：当 <code>defer</code> 语句被执行时，跟在 <code>defer</code> 后面的函数会被延迟执行。直到包含该 <code>defer</code> 语句的函数执行完毕时，<code>defer</code> 后的函数才会被执行，不论包含defer语句的函数是通过 <code>return</code> 正常结束，还是由于 <code>panic</code> 导致的异常结束。你可以在一个函数中执行多条defer语句，它们的执行顺序与声明顺序相反<a href="#refer-anchor-1"><sup>[1]</sup></a>。</p>
 <p>既然 <code>defer</code> 之后的函数是在“主函数”（这个主函数是先对于 <code>defer</code> 定义的延迟调用函数而言的）执行完毕后执行，那就可能出现这样一种情况：“主函数”在执行完成之后生成了返回值，延迟调用函数继续执行，假如此时延迟调用函数修改了返回值，会发生什么？</p>
           <!--noindex-->
@@ -841,53 +915,66 @@
     
     
     
-      <footer class="post-footer">
+
+    <footer class="post-footer">
         <div class="post-eof"></div>
-      </footer>
+      
+    </footer>
   </article>
-  
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/24/Golang-%E4%B8%AD%E7%9A%84%E9%98%9F%E5%88%97/">
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://blog.towerman1990.cn/2020/09/24/Golang-%E4%B8%AD%E7%9A%84%E9%98%9F%E5%88%97/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
       <meta itemprop="name" content="Andy Zhang">
-      <meta itemprop="description" content="">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="盐 碱 地">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | 盐 碱 地">
+      <meta itemprop="description" content="">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/09/24/Golang-%E4%B8%AD%E7%9A%84%E9%98%9F%E5%88%97/" class="post-title-link" itemprop="url">Golang 中的队列</a>
-        </h1>
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2020/09/24/Golang-%E4%B8%AD%E7%9A%84%E9%98%9F%E5%88%97/" class="post-title-link" itemprop="url">Golang 中的队列</a>
+        </h2>
 
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-09-24 22:27:08" itemprop="dateCreated datePublished" datetime="2020-09-24T22:27:08+08:00">2020-09-24</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-04-30 08:23:21" itemprop="dateModified" datetime="2022-04-30T08:23:21+08:00">2022-04-30</time>
-              </span>
+      <time title="创建时间：2020-09-24 22:27:08" itemprop="dateCreated datePublished" datetime="2020-09-24T22:27:08+08:00">2020-09-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-04-30 08:23:21" itemprop="dateModified" datetime="2022-04-30T08:23:21+08:00">2022-04-30</time>
+    </span>
 
-          
+  
+</div>
 
         </div>
       </header>
@@ -896,8 +983,6 @@
     
     
     <div class="post-body" itemprop="articleBody">
-
-      
           <h3 id="什么是队列"><a href="#什么是队列" class="headerlink" title="什么是队列"></a><span id="what-is-queue">什么是队列</span></h3><p><strong>队列</strong>，又称为伫列（queue），计算机科学中的一种抽象资料型别，是先进先出（FIFO, First-In-First-Out）的线性表。在具体应用中通常用链表或者数组来实现。队列只允许在后端（称为rear）进行插入操作，在前端（称为front）进行删除操作。</p>
 <p>队列的操作方式和堆栈类似，唯一的区别在于队列只允许新数据在后端进行添加<a href="#refer-anchor-1"><sup>[1]</sup></a>。</p>
 <h3 id="Golang-实现单链队列（数组）"><a href="#Golang-实现单链队列（数组）" class="headerlink" title="Golang 实现单链队列（数组）"></a><span id="single-queue-in-golang">Golang 实现单链队列（数组）</span></h3><p>在 Golang 中使用数组实现一个单链队列，除了需要创建一个数组存储数据外，还要定义最大值（maxSize）、头指针（front）和尾指针（rear），其中头指针和尾指针的初始值为-1。</p>
@@ -917,180 +1002,56 @@
     
     
     
-      <footer class="post-footer">
+
+    <footer class="post-footer">
         <div class="post-eof"></div>
-      </footer>
+      
+    </footer>
   </article>
-  
-  
-  
+</div>
 
-  </div>
 
-  
+
+
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
+</div>
+  </main>
 
+  <footer class="footer">
+    <div class="footer-inner">
 
-          </div>
-          
-
-<script>
-  window.addEventListener('tabs:register', () => {
-    let activeClass = CONFIG.comments.activeClass;
-    if (CONFIG.comments.storage) {
-      activeClass = localStorage.getItem('comments_active') || activeClass;
-    }
-    if (activeClass) {
-      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
-      if (activeTab) {
-        activeTab.click();
-      }
-    }
-  });
-  if (CONFIG.comments.storage) {
-    window.addEventListener('tabs:click', event => {
-      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      let commentClass = event.target.classList[1];
-      localStorage.setItem('comments_active', commentClass);
-    });
-  }
-</script>
-
-        </div>
-          
-  
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Andy Zhang</span>
   </div>
-
-  <aside class="sidebar">
-    <div class="sidebar-inner">
-
-      <ul class="sidebar-nav motion-element">
-        <li class="sidebar-nav-toc">
-          文章目录
-        </li>
-        <li class="sidebar-nav-overview">
-          站点概览
-        </li>
-      </ul>
-
-      <!--noindex-->
-      <div class="post-toc-wrap sidebar-panel">
-      </div>
-      <!--/noindex-->
-
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <img class="site-author-image" itemprop="image" alt="Andy Zhang"
-      src="/images/avatar.jpg">
-  <p class="site-author-name" itemprop="name">Andy Zhang</p>
-  <div class="site-description" itemprop="description"></div>
-</div>
-<div class="site-state-wrap motion-element">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
-          <span class="site-state-item-count">18</span>
-          <span class="site-state-item-name">日志</span>
-        </a>
-      </div>
-      <div class="site-state-item site-state-tags">
-            <a href="/tags/">
-          
-        <span class="site-state-item-count">12</span>
-        <span class="site-state-item-name">标签</span></a>
-      </div>
-  </nav>
-</div>
-
-
-
-      </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/mist/" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
 
     </div>
-  </aside>
-  <div id="sidebar-dimmer"></div>
+  </footer>
 
-
-      </div>
-    </main>
-
-    <footer class="footer">
-      <div class="footer-inner">
-        
-
-<div class="copyright">
   
-  &copy; 
-  <span itemprop="copyrightYear">2026</span>
-  <span class="with-love">
-    <i class="fa fa-user"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">Andy Zhang</span>
-</div>
-  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.1
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
   </div>
-  <span class="post-meta-divider">|</span>
-  <div class="theme-info">主题 – <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> v7.7.0
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
   </div>
 
-        
-
-
-
-
-
-
-
-
-      </div>
-    </footer>
-  </div>
-
-  
-  <script src="/lib/anime.min.js"></script>
-  <script src="/lib/velocity/velocity.min.js"></script>
-  <script src="/lib/velocity/velocity.ui.min.js"></script>
-
-<script src="/js/utils.js"></script>
-
-<script src="/js/motion.js"></script>
-
-
-<script src="/js/schemes/muse.js"></script>
-
-
-<script src="/js/next-boot.js"></script>
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-  
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
 
 </body>
 </html>

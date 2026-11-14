@@ -2,9 +2,9 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
-<meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 4.2.1">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 8.1.2">
+
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
@@ -13,43 +13,16 @@
 <link rel="stylesheet" href="/css/main.css">
 
 
-<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-<script id="hexo-configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    hostname: new URL('http://yoursite.com').hostname,
-    root: '/',
-    scheme: 'Mist',
-    version: '7.7.0',
-    exturl: false,
-    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
-    copycode: {"enable":false,"show_result":false,"style":null},
-    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
-    bookmark: {"enable":false,"color":"#222","save":"auto"},
-    fancybox: false,
-    mediumzoom: false,
-    lazyload: false,
-    pangu: false,
-    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
-    algolia: {
-      appID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    },
-    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
-    path: '',
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
-  };
-</script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"blog.towerman1990.cn","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.28.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js" defer></script>
 
-  <meta name="description" content="Thrift简介Thrift是一种接口描述语言和二进制通讯协议，它被用来定义和创建跨语言的服务。它被当作一个远程过程调用（RPC）框架来使用，是由Facebook为“大规模跨语言服务开发”而开发的。它通过一个代码生成引擎联合了一个软件栈，来创建不同程度的、无缝的跨平台高效服务，可以使用C#、C++（基于POSIX兼容系统）、Cappuccino、Cocoa、Delphi、Erlang、Go、Has">
+    <meta name="description" content="Thrift简介Thrift是一种接口描述语言和二进制通讯协议，它被用来定义和创建跨语言的服务。它被当作一个远程过程调用（RPC）框架来使用，是由Facebook为“大规模跨语言服务开发”而开发的。它通过一个代码生成引擎联合了一个软件栈，来创建不同程度的、无缝的跨平台高效服务，可以使用C#、C++（基于POSIX兼容系统）、Cappuccino、Cocoa、Delphi、Erlang、Go、Has">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Spring Boot 中使用 Thrift">
-<meta property="og:url" content="http://yoursite.com/2022/04/16/Sprint-Boot%E4%B8%AD%E4%BD%BF%E7%94%A8Thrift/index.html">
+<meta property="og:url" content="https://blog.towerman1990.cn/2022/04/16/Sprint-Boot%E4%B8%AD%E4%BD%BF%E7%94%A8Thrift/index.html">
 <meta property="og:site_name" content="盐 碱 地">
 <meta property="og:description" content="Thrift简介Thrift是一种接口描述语言和二进制通讯协议，它被用来定义和创建跨语言的服务。它被当作一个远程过程调用（RPC）框架来使用，是由Facebook为“大规模跨语言服务开发”而开发的。它通过一个代码生成引擎联合了一个软件栈，来创建不同程度的、无缝的跨平台高效服务，可以使用C#、C++（基于POSIX兼容系统）、Cappuccino、Cocoa、Delphi、Erlang、Go、Has">
 <meta property="og:locale" content="zh_CN">
@@ -59,299 +32,93 @@
 <meta property="article:tag" content="Java">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://yoursite.com/2022/04/16/Sprint-Boot%E4%B8%AD%E4%BD%BF%E7%94%A8Thrift/">
+
+<link rel="canonical" href="https://blog.towerman1990.cn/2022/04/16/Sprint-Boot%E4%B8%AD%E4%BD%BF%E7%94%A8Thrift/">
 
 
-<script id="page-configurations">
-  // https://hexo.io/docs/variables.html
-  CONFIG.page = {
-    sidebar: "",
-    isHome: false,
-    isPost: true
-  };
-</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://blog.towerman1990.cn/2022/04/16/Sprint-Boot%E4%B8%AD%E4%BD%BF%E7%94%A8Thrift/","path":"2022/04/16/Sprint-Boot中使用Thrift/","title":"Spring Boot 中使用 Thrift"}</script>
 
-  <title>Spring Boot 中使用 Thrift | 盐 碱 地</title>
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Spring Boot 中使用 Thrift | 盐 碱 地</title>
+  
+
+  <script src="/js/third-party/analytics/baidu-analytics.js" defer></script>
+  <script async src="https://hm.baidu.com/hm.js?0827f66baef0e8fc8bd5d7647e82136b"></script>
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
   
 
 
-  <script>
-    var _hmt = _hmt || [];
-    (function() {
-      var hm = document.createElement("script");
-      hm.src = "https://hm.baidu.com/hm.js?0827f66baef0e8fc8bd5d7647e82136b";
-      var s = document.getElementsByTagName("script")[0];
-      s.parentNode.insertBefore(hm, s);
-    })();
-  </script>
+
+
+
+
+  
+
 
 
 
 
   <noscript>
-  <style>
-  .use-motion .brand,
-  .use-motion .menu-item,
-  .sidebar-inner,
-  .use-motion .post-block,
-  .use-motion .pagination,
-  .use-motion .comments,
-  .use-motion .post-header,
-  .use-motion .post-body,
-  .use-motion .collection-header { opacity: initial; }
-
-  .use-motion .site-title,
-  .use-motion .site-subtitle {
-    opacity: initial;
-    top: initial;
-  }
-
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
-  </style>
-</noscript>
-
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container use-motion">
-    <div class="headband"></div>
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
 
-    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-container">
-  <div class="site-meta">
-
-    <div>
-      <a href="/" class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">盐 碱 地</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
     </div>
   </div>
 
-  <div class="site-nav-toggle">
-    <div class="toggle" aria-label="切换导航栏">
-      <span class="toggle-line toggle-line-first"></span>
-      <span class="toggle-line toggle-line-middle"></span>
-      <span class="toggle-line toggle-line-last"></span>
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">盐 碱 地</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
     </div>
   </div>
 </div>
+
 
 
 <nav class="site-nav">
-  
-  <ul id="menu" class="menu">
-        <li class="menu-item menu-item-home">
-
-    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
-
-  </li>
-        <li class="menu-item menu-item-about">
-
-    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
-
-  </li>
-        <li class="menu-item menu-item-tags">
-
-    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
-
-  </li>
-        <li class="menu-item menu-item-categories">
-
-    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
-
-  </li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
   </ul>
-
 </nav>
-</div>
-    </header>
-
-    
-  <div class="back-to-top">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
 
 
-    <main class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          
 
-          <div class="content">
-            
 
-  <div class="posts-expand">
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/04/16/Sprint-Boot%E4%B8%AD%E4%BD%BF%E7%94%A8Thrift/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Andy Zhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="盐 碱 地">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          Spring Boot 中使用 Thrift
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2022-04-16 11:38:55" itemprop="dateCreated datePublished" datetime="2022-04-16T11:38:55+08:00">2022-04-16</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2026-11-14 10:40:23" itemprop="dateModified" datetime="2026-11-14T10:40:23+08:00">2026-11-14</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-        <h3 id="Thrift简介"><a href="#Thrift简介" class="headerlink" title="Thrift简介"></a><span id="thrift-brief">Thrift简介</span></h3><p>Thrift是一种接口描述语言和二进制通讯协议，它被用来定义和创建跨语言的服务。它被当作一个远程过程调用（RPC）框架来使用，是由<code>Facebook</code>为“大规模跨语言服务开发”而开发的。它通过一个代码生成引擎联合了一个软件栈，来创建不同程度的、无缝的跨平台高效服务，可以使用<code>C#</code>、<code>C++</code>（基于<code>POSIX</code>兼容系统）、<code>Cappuccino</code>、<code>Cocoa</code>、<code>Delphi</code>、<code>Erlang</code>、<code>Go</code>、<code>Haskell</code>、<code>Java</code>、<code>Node.js</code>、<code>OCaml</code>、<code>Perl</code>、<code>PHP</code>、<code>Python</code>、<code>Ruby</code>和<code>Smalltalk</code>。虽然它以前是由<code>Facebook</code>开发的，但它现在是<code>Apache</code>软件基金会的开源项目了。该实现被描述在2007年4月的一篇由<code>Facebook</code>发表的技术论文中，该论文现由<code>Apache</code>掌管。<a href="#refer-anchor-1"><sup>[1]</sup></a></p>
-<a id="more"></a>
-
-<h3 id="具体使用步骤"><a href="#具体使用步骤" class="headerlink" title="具体使用步骤"></a><span id="steps">具体使用步骤</span></h3><h4 id="1-安装Thrift"><a href="#1-安装Thrift" class="headerlink" title="1. 安装Thrift"></a><span id="thrift-install">1. 安装Thrift</span></h4><p>由于我用的是<code>Windows</code>系统，直接去<a href="https://thrift.apache.org/" target="_blank" rel="noopener"><code>Thrift</code>官网</a>下载<code>EXE</code>文件就可以，其他系统的安装可以参见官网的安装说明。</p>
-<h4 id="2-定义接口文件"><a href="#2-定义接口文件" class="headerlink" title="2. 定义接口文件"></a><span id="define-interface-file">2. 定义接口文件</span></h4><p>我定义两个文件，一个是数据结构文件（<code>BookModel.thrift</code>），另一个是需要实现的方法接口文件（<code>BookService.thrift</code>）：</p>
-<figure class="highlight thrift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">namespace</span> java cn.towerman1990.learn_thrift.model</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">enum</span> <span class="title">Status</span> </span>&#123;</span><br><span class="line">    NO = <span class="number">0</span>;</span><br><span class="line">    YES = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">BookModel</span> </span>&#123;</span><br><span class="line">    <span class="number">1</span>: <span class="keyword">required</span> <span class="built_in">i32</span> id;</span><br><span class="line">    <span class="number">2</span>: <span class="keyword">required</span> <span class="built_in">string</span> type;</span><br><span class="line">    <span class="number">3</span>: <span class="keyword">required</span> <span class="built_in">string</span> name;</span><br><span class="line">    <span class="number">4</span>: <span class="keyword">optional</span> <span class="built_in">string</span> description;</span><br><span class="line">    <span class="number">5</span>: <span class="keyword">required</span> Status status;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight thrift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">namespace</span> java cn.towerman1990.learn_thrift<span class="class">.<span class="keyword">service</span></span></span><br><span class="line"><span class="class"></span></span><br><span class="line"><span class="class"><span class="title">include</span> "BookModel.thrift"</span></span><br><span class="line"><span class="class"></span></span><br><span class="line"><span class="class">exception InvalidOperationException </span>&#123;</span><br><span class="line">    <span class="number">1</span>: <span class="built_in">i32</span> code,</span><br><span class="line">    <span class="number">2</span>: <span class="built_in">string</span> description</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">service</span> <span class="title">BookService</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    BookModel.BookModel getById(<span class="number">1</span>: <span class="built_in">i32</span> id) throws (<span class="number">1</span>: InvalidOperationException e),</span><br><span class="line"></span><br><span class="line">    BookModel.BookModel create(<span class="number">1</span>: BookModel.BookModel book) throws (<span class="number">1</span>: InvalidOperationException e),</span><br><span class="line"></span><br><span class="line">    BookModel.BookModel update(<span class="number">1</span>: BookModel.BookModel book) throws (<span class="number">1</span>: InvalidOperationException e),</span><br><span class="line"></span><br><span class="line">    list&lt;BookModel.BookModel&gt; getList() throws (<span class="number">1</span>: InvalidOperationException e),</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="3-生成-Java-文件"><a href="#3-生成-Java-文件" class="headerlink" title="3. 生成 Java 文件"></a><span id="generate-java-file">3. 生成 Java 文件</span></h4><p>使用下载好的<code>Thrift</code>程序，将定义的接口文件转换成<code>Java</code>文件：</p>
-<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&amp; <span class="string">"C:\tools\thrift\thrift-0.16.0.exe"</span> <span class="literal">-r</span> -<span class="literal">-gen</span> java BookService.thrift</span><br></pre></td></tr></table></figure>
-
-<p>在两个 <code>.thrift</code> 文件所在目录执行以上命令，并将可执行文件路径替换为实际安装路径。<code>-r</code> 会同时生成被引用文件的代码，默认输出到 <code>gen-java</code> 目录。这里的 <code>BookModel.BookModel</code> 中，前一个名称表示被包含的 IDL 文件，后一个名称表示该文件中定义的结构体。</p>
-<h4 id="4-新建项目"><a href="#4-新建项目" class="headerlink" title="4. 新建项目"></a><span id="new-project">4. 新建项目</span></h4><p>新建一个<code>Maven</code>项目，并在<code>pom.xml</code>文件中增加<code>Thrift</code>依赖。本文沿用 Java 17、Spring Boot 2.6.6 和 Thrift 0.16.0 的示例版本，Thrift 编译器与 Java 运行库使用相同版本：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">project</span> <span class="attr">xmlns</span>=<span class="string">"http://maven.apache.org/POM/4.0.0"</span></span></span><br><span class="line"><span class="tag">         <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="tag">         <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">modelVersion</span>&gt;</span>4.0.0<span class="tag">&lt;/<span class="name">modelVersion</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>cn.towerman1990.learn_thrift<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>learn-thrift<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0-SNAPSHOT<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">properties</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">maven.compiler.source</span>&gt;</span>17<span class="tag">&lt;/<span class="name">maven.compiler.source</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">maven.compiler.target</span>&gt;</span>17<span class="tag">&lt;/<span class="name">maven.compiler.target</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">spring.version</span>&gt;</span>2.6.6<span class="tag">&lt;/<span class="name">spring.version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">properties</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;spring.version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.thrift<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>libthrift<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>0.16.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">project</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>创建项目后，将 <code>gen-java</code> 下的 <code>cn</code> 目录复制到 <code>src/main/java</code> 下，保留生成的包目录结构。此时应能找到 <code>cn.towerman1990.learn_thrift.model.BookModel</code>、<code>Status</code> 和 <code>cn.towerman1990.learn_thrift.service.BookService</code> 等类型。</p>
-<p>如果 Thrift 0.16.0 生成的代码引用了 <code>javax.annotation.Generated</code>，在 Java 17 下还需要补充 <code>javax.annotation:javax.annotation-api:1.3.2</code> 依赖，或生成代码时使用 <code>--gen java:generated_annotations=suppress</code> 关闭该注解的生成。</p>
-<h4 id="5-实现定义的接口"><a href="#5-实现定义的接口" class="headerlink" title="5. 实现定义的接口"></a><span id="implement-interface">5. 实现定义的接口</span></h4><p>创建一个<code>BookService.Iface</code>的实现类：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.towerman1990.learn_thrift.impl;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> cn.towerman1990.learn_thrift.model.BookModel;</span><br><span class="line"><span class="keyword">import</span> cn.towerman1990.learn_thrift.model.Status;</span><br><span class="line"><span class="keyword">import</span> cn.towerman1990.learn_thrift.service.BookService;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Service;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BookModelServiceImpl</span> <span class="keyword">implements</span> <span class="title">BookService</span>.<span class="title">Iface</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> cn.towerman1990.learn_thrift.model.<span class="function">BookModel <span class="title">getById</span><span class="params">(<span class="keyword">int</span> id)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// todo</span></span><br><span class="line">        <span class="comment">// find data from database, then transfer to BookModel;</span></span><br><span class="line">        <span class="keyword">var</span> bookModel = <span class="keyword">new</span> BookModel();</span><br><span class="line">        bookModel.setId(id);</span><br><span class="line">        bookModel.setType(<span class="string">"小说"</span>);</span><br><span class="line">        bookModel.setName(<span class="string">"《红楼梦》"</span>);</span><br><span class="line">        bookModel.setDescription(<span class="string">"《红楼梦》，中国古典长篇章回小说，是中国四大小说名著。"</span>);</span><br><span class="line">        bookModel.setStatus(Status.YES);</span><br><span class="line">        <span class="keyword">return</span> bookModel;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> cn.towerman1990.learn_thrift.model.<span class="function">BookModel <span class="title">create</span><span class="params">(cn.towerman1990.learn_thrift.model.BookModel bookModel)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> bookModel;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> cn.towerman1990.learn_thrift.model.<span class="function">BookModel <span class="title">update</span><span class="params">(cn.towerman1990.learn_thrift.model.BookModel bookModel)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> bookModel;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> List&lt;cn.towerman1990.learn_thrift.model.BookModel&gt; getList() &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="6-服务端实现"><a href="#6-服务端实现" class="headerlink" title="6. 服务端实现"></a><span id="server-implement">6. 服务端实现</span></h4><p>创建一个名为<code>ThriftServerApplication</code>的类文件，代码如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.towerman1990.learn_thrift;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> cn.towerman1990.learn_thrift.impl.BookModelServiceImpl;</span><br><span class="line"><span class="keyword">import</span> cn.towerman1990.learn_thrift.service.BookService;</span><br><span class="line"><span class="keyword">import</span> org.apache.thrift.TProcessor;</span><br><span class="line"><span class="keyword">import</span> org.apache.thrift.protocol.TBinaryProtocol;</span><br><span class="line"><span class="keyword">import</span> org.apache.thrift.server.TServer;</span><br><span class="line"><span class="keyword">import</span> org.apache.thrift.server.TSimpleServer;</span><br><span class="line"><span class="keyword">import</span> org.apache.thrift.transport.TServerSocket;</span><br><span class="line"><span class="keyword">import</span> org.apache.thrift.transport.TTransportException;</span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.SpringApplication;</span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.autoconfigure.SpringBootApplication;</span><br><span class="line"></span><br><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ThriftServerApplication</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> context = SpringApplication.run(ThriftServerApplication<span class="class">.<span class="keyword">class</span>, <span class="title">args</span>)</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            System.out.println(<span class="string">"Server start..."</span>);</span><br><span class="line">            BookService.Iface handler = context.getBean(BookModelServiceImpl<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">            TProcessor tprocessor = <span class="keyword">new</span> BookService.Processor&lt;BookService.Iface&gt;(handler);</span><br><span class="line">            TServerSocket serverTransport = <span class="keyword">new</span> TServerSocket(<span class="number">1314</span>);</span><br><span class="line">            TServer.Args tArgs = <span class="keyword">new</span> TServer.Args(serverTransport);</span><br><span class="line">            tArgs.processor(tprocessor);</span><br><span class="line">            tArgs.protocolFactory(<span class="keyword">new</span> TBinaryProtocol.Factory());</span><br><span class="line">            TServer server = <span class="keyword">new</span> TSimpleServer(tArgs);</span><br><span class="line">            server.serve();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (TTransportException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="7-客户端实现"><a href="#7-客户端实现" class="headerlink" title="7. 客户端实现"></a><span id="client-implement">7. 客户端实现</span></h4><p>服务端通过 Spring 容器获取带有 <code>@Service</code> 注解的实现类，避免手动 <code>new</code> 导致该类中的依赖注入失效。这里的 <code>TSimpleServer</code> 用于演示基础调用，<code>serve()</code> 会阻塞当前线程；实际项目还需要根据并发需求选择服务模型，并管理启动、停止和资源释放。</p>
-<p>创建一个名为<code>ThriftClientApplication</code>的类文件，代码如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.towerman1990.learn_thrift;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> cn.towerman1990.learn_thrift.model.BookModel;</span><br><span class="line"><span class="keyword">import</span> cn.towerman1990.learn_thrift.model.Status;</span><br><span class="line"><span class="keyword">import</span> cn.towerman1990.learn_thrift.service.BookService;</span><br><span class="line"><span class="keyword">import</span> org.apache.thrift.TException;</span><br><span class="line"><span class="keyword">import</span> org.apache.thrift.protocol.TBinaryProtocol;</span><br><span class="line"><span class="keyword">import</span> org.apache.thrift.protocol.TProtocol;</span><br><span class="line"><span class="keyword">import</span> org.apache.thrift.transport.TSocket;</span><br><span class="line"><span class="keyword">import</span> org.apache.thrift.transport.TTransport;</span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.SpringApplication;</span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.autoconfigure.SpringBootApplication;</span><br><span class="line"></span><br><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ThriftClientApplication</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        SpringApplication.run(ThriftClientApplication<span class="class">.<span class="keyword">class</span>, <span class="title">args</span>)</span>;</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">"Client start..."</span>);</span><br><span class="line">        <span class="keyword">try</span> (TTransport transport = <span class="keyword">new</span> TSocket(<span class="string">"localhost"</span>, <span class="number">1314</span>, <span class="number">30000</span>)) &#123;</span><br><span class="line">            TProtocol protocol = <span class="keyword">new</span> TBinaryProtocol(transport);</span><br><span class="line">            BookService.Client client = <span class="keyword">new</span> BookService.Client(protocol);</span><br><span class="line">            transport.open();</span><br><span class="line">            <span class="keyword">var</span> result = client.getById(<span class="number">1</span>);</span><br><span class="line">            System.out.println(result);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (TException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="8-测试"><a href="#8-测试" class="headerlink" title="8. 测试"></a><span id="test">8. 测试</span></h4><p>先启动<code>ThriftServerApplication</code>类，后启动<code>ThriftClientApplication</code>类，打印结果如下：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">  .   ____          _            __ _ _</span><br><span class="line"> /\\ / ___<span class="string">'_ __ _ _(_)_ __  __ _ \ \ \ \</span></span><br><span class="line"><span class="string">( ( )\___ | '</span>_ | <span class="string">'_| | '</span>_ \/ _` | \ \ \ \</span><br><span class="line"> \\/  ___)| |_)| | | | | || (_| |  ) ) ) )</span><br><span class="line">  <span class="string">'  |____| .__|_| |_|_| |_\__, | / / / /</span></span><br><span class="line"><span class="string"> =========|_|==============|___/=/_/_/_/</span></span><br><span class="line"><span class="string"> :: Spring Boot ::                (v2.6.6)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">2022-04-16 12:53:52 [main] INFO  [org.springframework.boot.StartupInfoLogger        ] &gt;&gt;&gt; Starting ThriftClientApplication using Java 17.0.2 on DESKTOP-T3TFEF9 with PID 9800 (D:\dev\java\spring-boot-learn\learn-thrift\target\classes started by chunyu in D:\dev\java\spring-boot-learn)</span></span><br><span class="line"><span class="string">2022-04-16 12:53:52 [main] INFO  [org.springframework.boot.SpringApplication        ] &gt;&gt;&gt; No active profile set, falling back to 1 default profile: "default"</span></span><br><span class="line"><span class="string">2022-04-16 12:53:52 [main] INFO  [org.springframework.boot.StartupInfoLogger        ] &gt;&gt;&gt; Started ThriftClientApplication in 0.638 seconds (JVM running for 0.878)</span></span><br><span class="line"><span class="string">Client start...</span></span><br><span class="line"><span class="string">BookModel(id:1, type:小说, name:《红楼梦》, description:《红楼梦》，中国古典长篇章回小说，是中国四大小说名著。, status:YES)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Process finished with exit code 0</span></span><br></pre></td></tr></table></figure>
-
-<p>注意：示例将客户端和服务端启动类放在同一个包中，二者都带有 <code>@SpringBootApplication</code>。正式拆分项目时，应将它们放在独立模块或互不扫描的包中；普通 Thrift 客户端本身也可以不启动 Spring 容器，直接创建连接并调用。</p>
-<p>完整演示代码地址：<a href="https://github.com/towerman1990/spring-boot-learn/tree/main/learn-thrift" target="_blank" rel="noopener"><em>仓库</em></a>。本文中的 IDL 包名和类型名已统一，使用仓库代码时也应核对其生成文件与 IDL 是否一致。</p>
-<div id="refer-anchor-1"></div>
-
-<ul>
-<li>[1] <a href="https://zh.wikipedia.org/wiki/Thrift" target="_blank" rel="noopener">Thrift</a></li>
-<li><a href="https://thrift.apache.org/docs/idl" target="_blank" rel="noopener">Apache Thrift IDL 文档</a></li>
-<li><a href="https://thrift.apache.org/tutorial/java.html" target="_blank" rel="noopener">Apache Thrift Java 示例</a></li>
-</ul>
-
-    </div>
-
-    
-    
-    
-
-      <footer class="post-footer">
-          <div class="post-tags">
-              <a href="/tags/Java/" rel="tag"># Java</a>
-          </div>
-
+</header>
         
-
-
-        
-    <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/2022/03/27/%E7%A4%BE%E5%8C%BA%E7%89%88IDEA%E4%B8%AD%E5%90%AF%E5%8A%A8Tomcat/" rel="prev" title="社区版IDEA中启动Tomcat">
-      <i class="fa fa-chevron-left"></i> 社区版IDEA中启动Tomcat
-    </a></div>
-      <div class="post-nav-item">
-    <a href="/2024/05/12/Golang-%E4%B8%AD%E4%BD%BF%E7%94%A8Mockey%E5%92%8CGoConvey%E7%BC%96%E5%86%99%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/" rel="next" title="Golang 中使用 Mockey 和 GoConvey 编写单元测试">
-      Golang 中使用 Mockey 和 GoConvey 编写单元测试 <i class="fa fa-chevron-right"></i>
-    </a></div>
-    </div>
-      </footer>
-    
-  </article>
   
-  
-  
-
-  </div>
-
-
-          </div>
-          
-
-<script>
-  window.addEventListener('tabs:register', () => {
-    let activeClass = CONFIG.comments.activeClass;
-    if (CONFIG.comments.storage) {
-      activeClass = localStorage.getItem('comments_active') || activeClass;
-    }
-    if (activeClass) {
-      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
-      if (activeTab) {
-        activeTab.click();
-      }
-    }
-  });
-  if (CONFIG.comments.storage) {
-    window.addEventListener('tabs:click', event => {
-      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      let commentClass = event.target.classList[1];
-      localStorage.setItem('comments_active', commentClass);
-    });
-  }
-</script>
-
-        </div>
-          
-  
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
-  </div>
-
   <aside class="sidebar">
-    <div class="sidebar-inner">
 
-      <ul class="sidebar-nav motion-element">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
         </li>
@@ -360,118 +127,215 @@
         </li>
       </ul>
 
-      <!--noindex-->
-      <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Thrift简介"><span class="nav-number">1.</span> <span class="nav-text">Thrift简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#具体使用步骤"><span class="nav-number">2.</span> <span class="nav-text">具体使用步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-安装Thrift"><span class="nav-number">2.1.</span> <span class="nav-text">1. 安装Thrift</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-定义接口文件"><span class="nav-number">2.2.</span> <span class="nav-text">2. 定义接口文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-生成-Java-文件"><span class="nav-number">2.3.</span> <span class="nav-text">3. 生成 Java 文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-新建项目"><span class="nav-number">2.4.</span> <span class="nav-text">4. 新建项目</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-实现定义的接口"><span class="nav-number">2.5.</span> <span class="nav-text">5. 实现定义的接口</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-服务端实现"><span class="nav-number">2.6.</span> <span class="nav-text">6. 服务端实现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-客户端实现"><span class="nav-number">2.7.</span> <span class="nav-text">7. 客户端实现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8-测试"><span class="nav-number">2.8.</span> <span class="nav-text">8. 测试</span></a></li></ol></li></ol></div>
-      </div>
-      <!--/noindex-->
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Thrift%E7%AE%80%E4%BB%8B"><span class="nav-number">1.</span> <span class="nav-text">Thrift简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B7%E4%BD%93%E4%BD%BF%E7%94%A8%E6%AD%A5%E9%AA%A4"><span class="nav-number">2.</span> <span class="nav-text">具体使用步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E5%AE%89%E8%A3%85Thrift"><span class="nav-number">2.1.</span> <span class="nav-text">1. 安装Thrift</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E5%AE%9A%E4%B9%89%E6%8E%A5%E5%8F%A3%E6%96%87%E4%BB%B6"><span class="nav-number">2.2.</span> <span class="nav-text">2. 定义接口文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E7%94%9F%E6%88%90-Java-%E6%96%87%E4%BB%B6"><span class="nav-number">2.3.</span> <span class="nav-text">3. 生成 Java 文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-%E6%96%B0%E5%BB%BA%E9%A1%B9%E7%9B%AE"><span class="nav-number">2.4.</span> <span class="nav-text">4. 新建项目</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-%E5%AE%9E%E7%8E%B0%E5%AE%9A%E4%B9%89%E7%9A%84%E6%8E%A5%E5%8F%A3"><span class="nav-number">2.5.</span> <span class="nav-text">5. 实现定义的接口</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-%E6%9C%8D%E5%8A%A1%E7%AB%AF%E5%AE%9E%E7%8E%B0"><span class="nav-number">2.6.</span> <span class="nav-text">6. 服务端实现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%AE%9E%E7%8E%B0"><span class="nav-number">2.7.</span> <span class="nav-text">7. 客户端实现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8-%E6%B5%8B%E8%AF%95"><span class="nav-number">2.8.</span> <span class="nav-text">8. 测试</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
 
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image" alt="Andy Zhang"
       src="/images/avatar.jpg">
   <p class="site-author-name" itemprop="name">Andy Zhang</p>
   <div class="site-description" itemprop="description"></div>
 </div>
-<div class="site-state-wrap motion-element">
+<div class="site-state-wrap animated">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
+        <a href="/archives/">
           <span class="site-state-item-count">18</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
-            <a href="/tags/">
-          
+          <a href="/tags/">
         <span class="site-state-item-count">12</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
 </div>
 
-
-
+        </div>
       </div>
+    </div>
+
+    
+  </aside>
+
 
     </div>
-  </aside>
-  <div id="sidebar-dimmer"></div>
+
+    <div class="main-inner post posts-expand">
 
 
-      </div>
-    </main>
-
-    <footer class="footer">
-      <div class="footer-inner">
-        
-
-<div class="copyright">
   
-  &copy; 
-  <span itemprop="copyrightYear">2026</span>
-  <span class="with-love">
-    <i class="fa fa-user"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">Andy Zhang</span>
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.towerman1990.cn/2022/04/16/Sprint-Boot%E4%B8%AD%E4%BD%BF%E7%94%A8Thrift/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Andy Zhang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="盐 碱 地">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Spring Boot 中使用 Thrift | 盐 碱 地">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Spring Boot 中使用 Thrift
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-04-16 11:38:55" itemprop="dateCreated datePublished" datetime="2022-04-16T11:38:55+08:00">2022-04-16</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-11-14 10:40:23" itemprop="dateModified" datetime="2026-11-14T10:40:23+08:00">2026-11-14</time>
+    </span>
+
+  
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.1
-  </div>
-  <span class="post-meta-divider">|</span>
-  <div class="theme-info">主题 – <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> v7.7.0
-  </div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h3 id="Thrift简介"><a href="#Thrift简介" class="headerlink" title="Thrift简介"></a><span id="thrift-brief">Thrift简介</span></h3><p>Thrift是一种接口描述语言和二进制通讯协议，它被用来定义和创建跨语言的服务。它被当作一个远程过程调用（RPC）框架来使用，是由<code>Facebook</code>为“大规模跨语言服务开发”而开发的。它通过一个代码生成引擎联合了一个软件栈，来创建不同程度的、无缝的跨平台高效服务，可以使用<code>C#</code>、<code>C++</code>（基于<code>POSIX</code>兼容系统）、<code>Cappuccino</code>、<code>Cocoa</code>、<code>Delphi</code>、<code>Erlang</code>、<code>Go</code>、<code>Haskell</code>、<code>Java</code>、<code>Node.js</code>、<code>OCaml</code>、<code>Perl</code>、<code>PHP</code>、<code>Python</code>、<code>Ruby</code>和<code>Smalltalk</code>。虽然它以前是由<code>Facebook</code>开发的，但它现在是<code>Apache</code>软件基金会的开源项目了。该实现被描述在2007年4月的一篇由<code>Facebook</code>发表的技术论文中，该论文现由<code>Apache</code>掌管。<a href="#refer-anchor-1"><sup>[1]</sup></a></p>
+<span id="more"></span>
+
+<h3 id="具体使用步骤"><a href="#具体使用步骤" class="headerlink" title="具体使用步骤"></a><span id="steps">具体使用步骤</span></h3><h4 id="1-安装Thrift"><a href="#1-安装Thrift" class="headerlink" title="1. 安装Thrift"></a><span id="thrift-install">1. 安装Thrift</span></h4><p>由于我用的是<code>Windows</code>系统，直接去<a target="_blank" rel="noopener" href="https://thrift.apache.org/"><code>Thrift</code>官网</a>下载<code>EXE</code>文件就可以，其他系统的安装可以参见官网的安装说明。</p>
+<h4 id="2-定义接口文件"><a href="#2-定义接口文件" class="headerlink" title="2. 定义接口文件"></a><span id="define-interface-file">2. 定义接口文件</span></h4><p>我定义两个文件，一个是数据结构文件（<code>BookModel.thrift</code>），另一个是需要实现的方法接口文件（<code>BookService.thrift</code>）：</p>
+<figure class="highlight thrift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">namespace</span> java cn.towerman1990.learn_thrift.model</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">enum</span> <span class="title">Status</span> </span>&#123;</span><br><span class="line">    NO = <span class="number">0</span>;</span><br><span class="line">    YES = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">BookModel</span> </span>&#123;</span><br><span class="line">    <span class="number">1</span>: <span class="keyword">required</span> <span class="type">i32</span> id;</span><br><span class="line">    <span class="number">2</span>: <span class="keyword">required</span> <span class="type">string</span> type;</span><br><span class="line">    <span class="number">3</span>: <span class="keyword">required</span> <span class="type">string</span> name;</span><br><span class="line">    <span class="number">4</span>: <span class="keyword">optional</span> <span class="type">string</span> description;</span><br><span class="line">    <span class="number">5</span>: <span class="keyword">required</span> Status status;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight thrift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">namespace</span> java cn.towerman1990.learn_thrift.<span class="keyword">service</span></span><br><span class="line"></span><br><span class="line">include <span class="string">&quot;BookModel.thrift&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">exception</span> <span class="title">InvalidOperationException</span> </span>&#123;</span><br><span class="line">    <span class="number">1</span>: <span class="type">i32</span> code,</span><br><span class="line">    <span class="number">2</span>: <span class="type">string</span> description</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">service</span> <span class="title">BookService</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    BookModel.BookModel getById(<span class="number">1</span>: <span class="type">i32</span> id) throws (<span class="number">1</span>: InvalidOperationException e),</span><br><span class="line"></span><br><span class="line">    BookModel.BookModel create(<span class="number">1</span>: BookModel.BookModel book) throws (<span class="number">1</span>: InvalidOperationException e),</span><br><span class="line"></span><br><span class="line">    BookModel.BookModel update(<span class="number">1</span>: BookModel.BookModel book) throws (<span class="number">1</span>: InvalidOperationException e),</span><br><span class="line"></span><br><span class="line">    <span class="type">list</span>&lt;BookModel.BookModel&gt; getList() throws (<span class="number">1</span>: InvalidOperationException e),</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-生成-Java-文件"><a href="#3-生成-Java-文件" class="headerlink" title="3. 生成 Java 文件"></a><span id="generate-java-file">3. 生成 Java 文件</span></h4><p>使用下载好的<code>Thrift</code>程序，将定义的接口文件转换成<code>Java</code>文件：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&amp; <span class="string">&quot;C:\tools\thrift\thrift-0.16.0.exe&quot;</span> <span class="literal">-r</span> <span class="literal">--gen</span> java BookService.thrift</span><br></pre></td></tr></table></figure>
+
+<p>在两个 <code>.thrift</code> 文件所在目录执行以上命令，并将可执行文件路径替换为实际安装路径。<code>-r</code> 会同时生成被引用文件的代码，默认输出到 <code>gen-java</code> 目录。这里的 <code>BookModel.BookModel</code> 中，前一个名称表示被包含的 IDL 文件，后一个名称表示该文件中定义的结构体。</p>
+<h4 id="4-新建项目"><a href="#4-新建项目" class="headerlink" title="4. 新建项目"></a><span id="new-project">4. 新建项目</span></h4><p>新建一个<code>Maven</code>项目，并在<code>pom.xml</code>文件中增加<code>Thrift</code>依赖。本文沿用 Java 17、Spring Boot 2.6.6 和 Thrift 0.16.0 的示例版本，Thrift 编译器与 Java 运行库使用相同版本：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;UTF-8&quot;</span>?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">project</span> <span class="attr">xmlns</span>=<span class="string">&quot;http://maven.apache.org/POM/4.0.0&quot;</span></span></span><br><span class="line"><span class="tag">         <span class="attr">xmlns:xsi</span>=<span class="string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span></span><br><span class="line"><span class="tag">         <span class="attr">xsi:schemaLocation</span>=<span class="string">&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">modelVersion</span>&gt;</span>4.0.0<span class="tag">&lt;/<span class="name">modelVersion</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>cn.towerman1990.learn_thrift<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>learn-thrift<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0-SNAPSHOT<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">properties</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">maven.compiler.source</span>&gt;</span>17<span class="tag">&lt;/<span class="name">maven.compiler.source</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">maven.compiler.target</span>&gt;</span>17<span class="tag">&lt;/<span class="name">maven.compiler.target</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">spring.version</span>&gt;</span>2.6.6<span class="tag">&lt;/<span class="name">spring.version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">properties</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;spring.version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.thrift<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>libthrift<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>0.16.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">project</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>创建项目后，将 <code>gen-java</code> 下的 <code>cn</code> 目录复制到 <code>src/main/java</code> 下，保留生成的包目录结构。此时应能找到 <code>cn.towerman1990.learn_thrift.model.BookModel</code>、<code>Status</code> 和 <code>cn.towerman1990.learn_thrift.service.BookService</code> 等类型。</p>
+<p>如果 Thrift 0.16.0 生成的代码引用了 <code>javax.annotation.Generated</code>，在 Java 17 下还需要补充 <code>javax.annotation:javax.annotation-api:1.3.2</code> 依赖，或生成代码时使用 <code>--gen java:generated_annotations=suppress</code> 关闭该注解的生成。</p>
+<h4 id="5-实现定义的接口"><a href="#5-实现定义的接口" class="headerlink" title="5. 实现定义的接口"></a><span id="implement-interface">5. 实现定义的接口</span></h4><p>创建一个<code>BookService.Iface</code>的实现类：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.towerman1990.learn_thrift.impl;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> cn.towerman1990.learn_thrift.model.BookModel;</span><br><span class="line"><span class="keyword">import</span> cn.towerman1990.learn_thrift.model.Status;</span><br><span class="line"><span class="keyword">import</span> cn.towerman1990.learn_thrift.service.BookService;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Service;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">BookModelServiceImpl</span> <span class="keyword">implements</span> <span class="title class_">BookService</span>.Iface &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> cn.towerman1990.learn_thrift.model.<span class="type">BookModel</span> <span class="title function_">getById</span><span class="params">(<span class="type">int</span> id)</span> &#123;</span><br><span class="line">        <span class="comment">// todo</span></span><br><span class="line">        <span class="comment">// find data from database, then transfer to BookModel;</span></span><br><span class="line">        <span class="type">var</span> <span class="variable">bookModel</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BookModel</span>();</span><br><span class="line">        bookModel.setId(id);</span><br><span class="line">        bookModel.setType(<span class="string">&quot;小说&quot;</span>);</span><br><span class="line">        bookModel.setName(<span class="string">&quot;《红楼梦》&quot;</span>);</span><br><span class="line">        bookModel.setDescription(<span class="string">&quot;《红楼梦》，中国古典长篇章回小说，是中国四大小说名著。&quot;</span>);</span><br><span class="line">        bookModel.setStatus(Status.YES);</span><br><span class="line">        <span class="keyword">return</span> bookModel;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> cn.towerman1990.learn_thrift.model.<span class="type">BookModel</span> <span class="title function_">create</span><span class="params">(cn.towerman1990.learn_thrift.model.BookModel bookModel)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> bookModel;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> cn.towerman1990.learn_thrift.model.<span class="type">BookModel</span> <span class="title function_">update</span><span class="params">(cn.towerman1990.learn_thrift.model.BookModel bookModel)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> bookModel;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> List&lt;cn.towerman1990.learn_thrift.model.BookModel&gt; getList() &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="6-服务端实现"><a href="#6-服务端实现" class="headerlink" title="6. 服务端实现"></a><span id="server-implement">6. 服务端实现</span></h4><p>创建一个名为<code>ThriftServerApplication</code>的类文件，代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.towerman1990.learn_thrift;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> cn.towerman1990.learn_thrift.impl.BookModelServiceImpl;</span><br><span class="line"><span class="keyword">import</span> cn.towerman1990.learn_thrift.service.BookService;</span><br><span class="line"><span class="keyword">import</span> org.apache.thrift.TProcessor;</span><br><span class="line"><span class="keyword">import</span> org.apache.thrift.protocol.TBinaryProtocol;</span><br><span class="line"><span class="keyword">import</span> org.apache.thrift.server.TServer;</span><br><span class="line"><span class="keyword">import</span> org.apache.thrift.server.TSimpleServer;</span><br><span class="line"><span class="keyword">import</span> org.apache.thrift.transport.TServerSocket;</span><br><span class="line"><span class="keyword">import</span> org.apache.thrift.transport.TTransportException;</span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.SpringApplication;</span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.autoconfigure.SpringBootApplication;</span><br><span class="line"></span><br><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ThriftServerApplication</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">var</span> <span class="variable">context</span> <span class="operator">=</span> SpringApplication.run(ThriftServerApplication.class, args);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;Server start...&quot;</span>);</span><br><span class="line">            BookService.<span class="type">Iface</span> <span class="variable">handler</span> <span class="operator">=</span> context.getBean(BookModelServiceImpl.class);</span><br><span class="line">            <span class="type">TProcessor</span> <span class="variable">tprocessor</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BookService</span>.Processor&lt;BookService.Iface&gt;(handler);</span><br><span class="line">            <span class="type">TServerSocket</span> <span class="variable">serverTransport</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">TServerSocket</span>(<span class="number">1314</span>);</span><br><span class="line">            TServer.<span class="type">Args</span> <span class="variable">tArgs</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">TServer</span>.Args(serverTransport);</span><br><span class="line">            tArgs.processor(tprocessor);</span><br><span class="line">            tArgs.protocolFactory(<span class="keyword">new</span> <span class="title class_">TBinaryProtocol</span>.Factory());</span><br><span class="line">            <span class="type">TServer</span> <span class="variable">server</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">TSimpleServer</span>(tArgs);</span><br><span class="line">            server.serve();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (TTransportException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="7-客户端实现"><a href="#7-客户端实现" class="headerlink" title="7. 客户端实现"></a><span id="client-implement">7. 客户端实现</span></h4><p>服务端通过 Spring 容器获取带有 <code>@Service</code> 注解的实现类，避免手动 <code>new</code> 导致该类中的依赖注入失效。这里的 <code>TSimpleServer</code> 用于演示基础调用，<code>serve()</code> 会阻塞当前线程；实际项目还需要根据并发需求选择服务模型，并管理启动、停止和资源释放。</p>
+<p>创建一个名为<code>ThriftClientApplication</code>的类文件，代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.towerman1990.learn_thrift;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> cn.towerman1990.learn_thrift.model.BookModel;</span><br><span class="line"><span class="keyword">import</span> cn.towerman1990.learn_thrift.model.Status;</span><br><span class="line"><span class="keyword">import</span> cn.towerman1990.learn_thrift.service.BookService;</span><br><span class="line"><span class="keyword">import</span> org.apache.thrift.TException;</span><br><span class="line"><span class="keyword">import</span> org.apache.thrift.protocol.TBinaryProtocol;</span><br><span class="line"><span class="keyword">import</span> org.apache.thrift.protocol.TProtocol;</span><br><span class="line"><span class="keyword">import</span> org.apache.thrift.transport.TSocket;</span><br><span class="line"><span class="keyword">import</span> org.apache.thrift.transport.TTransport;</span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.SpringApplication;</span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.autoconfigure.SpringBootApplication;</span><br><span class="line"></span><br><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ThriftClientApplication</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        SpringApplication.run(ThriftClientApplication.class, args);</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">&quot;Client start...&quot;</span>);</span><br><span class="line">        <span class="keyword">try</span> (<span class="type">TTransport</span> <span class="variable">transport</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">TSocket</span>(<span class="string">&quot;localhost&quot;</span>, <span class="number">1314</span>, <span class="number">30000</span>)) &#123;</span><br><span class="line">            <span class="type">TProtocol</span> <span class="variable">protocol</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">TBinaryProtocol</span>(transport);</span><br><span class="line">            BookService.<span class="type">Client</span> <span class="variable">client</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BookService</span>.Client(protocol);</span><br><span class="line">            transport.open();</span><br><span class="line">            <span class="type">var</span> <span class="variable">result</span> <span class="operator">=</span> client.getById(<span class="number">1</span>);</span><br><span class="line">            System.out.println(result);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (TException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="8-测试"><a href="#8-测试" class="headerlink" title="8. 测试"></a><span id="test">8. 测试</span></h4><p>先启动<code>ThriftServerApplication</code>类，后启动<code>ThriftClientApplication</code>类，打印结果如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">  .   ____          _            __ _ _</span><br><span class="line"> /\\ / ___<span class="string">&#x27;_ __ _ _(_)_ __  __ _ \ \ \ \</span></span><br><span class="line"><span class="string">( ( )\___ | &#x27;</span>_ | <span class="string">&#x27;_| | &#x27;</span>_ \/ _` | \ \ \ \</span><br><span class="line"> \\/  ___)| |_)| | | | | || (_| |  ) ) ) )</span><br><span class="line">  <span class="string">&#x27;  |____| .__|_| |_|_| |_\__, | / / / /</span></span><br><span class="line"><span class="string"> =========|_|==============|___/=/_/_/_/</span></span><br><span class="line"><span class="string"> :: Spring Boot ::                (v2.6.6)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">2022-04-16 12:53:52 [main] INFO  [org.springframework.boot.StartupInfoLogger        ] &gt;&gt;&gt; Starting ThriftClientApplication using Java 17.0.2 on DESKTOP-T3TFEF9 with PID 9800 (D:\dev\java\spring-boot-learn\learn-thrift\target\classes started by chunyu in D:\dev\java\spring-boot-learn)</span></span><br><span class="line"><span class="string">2022-04-16 12:53:52 [main] INFO  [org.springframework.boot.SpringApplication        ] &gt;&gt;&gt; No active profile set, falling back to 1 default profile: &quot;default&quot;</span></span><br><span class="line"><span class="string">2022-04-16 12:53:52 [main] INFO  [org.springframework.boot.StartupInfoLogger        ] &gt;&gt;&gt; Started ThriftClientApplication in 0.638 seconds (JVM running for 0.878)</span></span><br><span class="line"><span class="string">Client start...</span></span><br><span class="line"><span class="string">BookModel(id:1, type:小说, name:《红楼梦》, description:《红楼梦》，中国古典长篇章回小说，是中国四大小说名著。, status:YES)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Process finished with exit code 0</span></span><br></pre></td></tr></table></figure>
+
+<p>注意：示例将客户端和服务端启动类放在同一个包中，二者都带有 <code>@SpringBootApplication</code>。正式拆分项目时，应将它们放在独立模块或互不扫描的包中；普通 Thrift 客户端本身也可以不启动 Spring 容器，直接创建连接并调用。</p>
+<p>完整演示代码地址：<a target="_blank" rel="noopener" href="https://github.com/towerman1990/spring-boot-learn/tree/main/learn-thrift"><em>仓库</em></a>。本文中的 IDL 包名和类型名已统一，使用仓库代码时也应核对其生成文件与 IDL 是否一致。</p>
+<div id="refer-anchor-1"></div>
+
+<ul>
+<li>[1] <a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/Thrift">Thrift</a></li>
+<li><a target="_blank" rel="noopener" href="https://thrift.apache.org/docs/idl">Apache Thrift IDL 文档</a></li>
+<li><a target="_blank" rel="noopener" href="https://thrift.apache.org/tutorial/java.html">Apache Thrift Java 示例</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Java/" rel="tag"># Java</a>
+          </div>
 
         
 
-
-
-
-
-
-
-
-      </div>
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/03/27/%E7%A4%BE%E5%8C%BA%E7%89%88IDEA%E4%B8%AD%E5%90%AF%E5%8A%A8Tomcat/" rel="prev" title="社区版IDEA中启动Tomcat">
+                  <i class="fa fa-angle-left"></i> 社区版IDEA中启动Tomcat
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2024/05/12/Golang-%E4%B8%AD%E4%BD%BF%E7%94%A8Mockey%E5%92%8CGoConvey%E7%BC%96%E5%86%99%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/" rel="next" title="Golang 中使用 Mockey 和 GoConvey 编写单元测试">
+                  Golang 中使用 Mockey 和 GoConvey 编写单元测试 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
     </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Andy Zhang</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/mist/" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
   </div>
 
-  
-  <script src="/lib/anime.min.js"></script>
-  <script src="/lib/velocity/velocity.min.js"></script>
-  <script src="/lib/velocity/velocity.ui.min.js"></script>
-
-<script src="/js/utils.js"></script>
-
-<script src="/js/motion.js"></script>
-
-
-<script src="/js/schemes/muse.js"></script>
-
-
-<script src="/js/next-boot.js"></script>
-
-
-
+    </div>
+  </footer>
 
   
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-  
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
 
 </body>
 </html>

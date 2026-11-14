@@ -2,9 +2,9 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
-<meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 4.2.1">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 8.1.2">
+
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
@@ -13,43 +13,16 @@
 <link rel="stylesheet" href="/css/main.css">
 
 
-<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-<script id="hexo-configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    hostname: new URL('http://yoursite.com').hostname,
-    root: '/',
-    scheme: 'Mist',
-    version: '7.7.0',
-    exturl: false,
-    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
-    copycode: {"enable":false,"show_result":false,"style":null},
-    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
-    bookmark: {"enable":false,"color":"#222","save":"auto"},
-    fancybox: false,
-    mediumzoom: false,
-    lazyload: false,
-    pangu: false,
-    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
-    algolia: {
-      appID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    },
-    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
-    path: '',
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
-  };
-</script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"blog.towerman1990.cn","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.28.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js" defer></script>
 
-  <meta name="description" content="在 Go 项目中，一个业务方法往往会调用数据库、缓存或者其他服务。如果每次测试都依赖真实环境，不但准备数据麻烦，也很难稳定地复现超时、查询失败等情况。 单元测试可以把这些依赖替换成可控制的实现，让我们专注验证业务逻辑。本文通过一个查询用户资料的例子，介绍如何使用字节跳动的 Mockey 和 GoConvey 编写单元测试。 两者的职责不同：Mockey 负责打桩，GoConvey 负责组织测试场景">
+    <meta name="description" content="在 Go 项目中，一个业务方法往往会调用数据库、缓存或者其他服务。如果每次测试都依赖真实环境，不但准备数据麻烦，也很难稳定地复现超时、查询失败等情况。 单元测试可以把这些依赖替换成可控制的实现，让我们专注验证业务逻辑。本文通过一个查询用户资料的例子，介绍如何使用字节跳动的 Mockey 和 GoConvey 编写单元测试。 两者的职责不同：Mockey 负责打桩，GoConvey 负责组织测试场景">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Golang 中使用 Mockey 和 GoConvey 编写单元测试">
-<meta property="og:url" content="http://yoursite.com/2024/05/12/Golang-%E4%B8%AD%E4%BD%BF%E7%94%A8Mockey%E5%92%8CGoConvey%E7%BC%96%E5%86%99%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/index.html">
+<meta property="og:url" content="https://blog.towerman1990.cn/2024/05/12/Golang-%E4%B8%AD%E4%BD%BF%E7%94%A8Mockey%E5%92%8CGoConvey%E7%BC%96%E5%86%99%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/index.html">
 <meta property="og:site_name" content="盐 碱 地">
 <meta property="og:description" content="在 Go 项目中，一个业务方法往往会调用数据库、缓存或者其他服务。如果每次测试都依赖真实环境，不但准备数据麻烦，也很难稳定地复现超时、查询失败等情况。 单元测试可以把这些依赖替换成可控制的实现，让我们专注验证业务逻辑。本文通过一个查询用户资料的例子，介绍如何使用字节跳动的 Mockey 和 GoConvey 编写单元测试。 两者的职责不同：Mockey 负责打桩，GoConvey 负责组织测试场景">
 <meta property="og:locale" content="zh_CN">
@@ -60,175 +33,193 @@
 <meta property="article:tag" content="单元测试">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://yoursite.com/2024/05/12/Golang-%E4%B8%AD%E4%BD%BF%E7%94%A8Mockey%E5%92%8CGoConvey%E7%BC%96%E5%86%99%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/">
+
+<link rel="canonical" href="https://blog.towerman1990.cn/2024/05/12/Golang-%E4%B8%AD%E4%BD%BF%E7%94%A8Mockey%E5%92%8CGoConvey%E7%BC%96%E5%86%99%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/">
 
 
-<script id="page-configurations">
-  // https://hexo.io/docs/variables.html
-  CONFIG.page = {
-    sidebar: "",
-    isHome: false,
-    isPost: true
-  };
-</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://blog.towerman1990.cn/2024/05/12/Golang-%E4%B8%AD%E4%BD%BF%E7%94%A8Mockey%E5%92%8CGoConvey%E7%BC%96%E5%86%99%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/","path":"2024/05/12/Golang-中使用Mockey和GoConvey编写单元测试/","title":"Golang 中使用 Mockey 和 GoConvey 编写单元测试"}</script>
 
-  <title>Golang 中使用 Mockey 和 GoConvey 编写单元测试 | 盐 碱 地</title>
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Golang 中使用 Mockey 和 GoConvey 编写单元测试 | 盐 碱 地</title>
+  
+
+  <script src="/js/third-party/analytics/baidu-analytics.js" defer></script>
+  <script async src="https://hm.baidu.com/hm.js?0827f66baef0e8fc8bd5d7647e82136b"></script>
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
   
 
 
-  <script>
-    var _hmt = _hmt || [];
-    (function() {
-      var hm = document.createElement("script");
-      hm.src = "https://hm.baidu.com/hm.js?0827f66baef0e8fc8bd5d7647e82136b";
-      var s = document.getElementsByTagName("script")[0];
-      s.parentNode.insertBefore(hm, s);
-    })();
-  </script>
+
+
+
+
+  
+
 
 
 
 
   <noscript>
-  <style>
-  .use-motion .brand,
-  .use-motion .menu-item,
-  .sidebar-inner,
-  .use-motion .post-block,
-  .use-motion .pagination,
-  .use-motion .comments,
-  .use-motion .post-header,
-  .use-motion .post-body,
-  .use-motion .collection-header { opacity: initial; }
-
-  .use-motion .site-title,
-  .use-motion .site-subtitle {
-    opacity: initial;
-    top: initial;
-  }
-
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
-  </style>
-</noscript>
-
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container use-motion">
-    <div class="headband"></div>
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
 
-    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-container">
-  <div class="site-meta">
-
-    <div>
-      <a href="/" class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">盐 碱 地</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
     </div>
   </div>
 
-  <div class="site-nav-toggle">
-    <div class="toggle" aria-label="切换导航栏">
-      <span class="toggle-line toggle-line-first"></span>
-      <span class="toggle-line toggle-line-middle"></span>
-      <span class="toggle-line toggle-line-last"></span>
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">盐 碱 地</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
     </div>
   </div>
 </div>
+
 
 
 <nav class="site-nav">
-  
-  <ul id="menu" class="menu">
-        <li class="menu-item menu-item-home">
-
-    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
-
-  </li>
-        <li class="menu-item menu-item-about">
-
-    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
-
-  </li>
-        <li class="menu-item menu-item-tags">
-
-    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
-
-  </li>
-        <li class="menu-item menu-item-categories">
-
-    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
-
-  </li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
   </ul>
-
 </nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%E5%BA%94%E8%AF%A5%E6%B5%8B%E8%AF%95%E4%BB%80%E4%B9%88"><span class="nav-number">1.</span> <span class="nav-text">单元测试应该测试什么</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E7%A4%BA%E4%BE%8B%E9%A1%B9%E7%9B%AE"><span class="nav-number">2.</span> <span class="nav-text">创建示例项目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%86%E5%A4%87%E4%B8%9A%E5%8A%A1%E4%BB%A3%E7%A0%81"><span class="nav-number">3.</span> <span class="nav-text">准备业务代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-PatchConvey-%E7%BB%84%E7%BB%87%E6%B5%8B%E8%AF%95"><span class="nav-number">4.</span> <span class="nav-text">使用 PatchConvey 组织测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%90%86%E8%A7%A3%E6%89%93%E6%A1%A9%E5%92%8C%E6%96%AD%E8%A8%80"><span class="nav-number">5.</span> <span class="nav-text">理解打桩和断言</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9B%BA%E5%AE%9A%E8%BF%94%E5%9B%9E%E5%80%BC%E4%B8%8E%E8%87%AA%E5%AE%9A%E4%B9%89%E6%9B%BF%E8%BA%AB"><span class="nav-number">5.1.</span> <span class="nav-text">固定返回值与自定义替身</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E6%89%93%E6%A1%A9"><span class="nav-number">5.2.</span> <span class="nav-text">方法打桩</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E6%96%AD%E8%A8%80"><span class="nav-number">5.3.</span> <span class="nav-text">常用断言</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C%E6%B5%8B%E8%AF%95%E4%B8%8E%E6%9F%A5%E7%9C%8B%E8%A6%86%E7%9B%96%E7%8E%87"><span class="nav-number">6.</span> <span class="nav-text">运行测试与查看覆盖率</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%A8%E9%A1%B9%E7%9B%AE%E4%B8%AD%E4%BD%BF%E7%94%A8%E6%97%B6%E9%9C%80%E8%A6%81%E6%B3%A8%E6%84%8F%E4%BB%80%E4%B9%88"><span class="nav-number">7.</span> <span class="nav-text">在项目中使用时需要注意什么</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%AC%E5%9C%B0%E3%80%81IDE-%E5%92%8C-CI-%E4%BD%BF%E7%94%A8%E7%9B%B8%E5%90%8C%E7%9A%84%E6%B5%8B%E8%AF%95%E5%8F%82%E6%95%B0"><span class="nav-number">7.1.</span> <span class="nav-text">本地、IDE 和 CI 使用相同的测试参数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A1%A5%E4%B8%81%E5%BF%85%E9%A1%BB%E5%8F%8A%E6%97%B6%E6%81%A2%E5%A4%8D"><span class="nav-number">7.2.</span> <span class="nav-text">补丁必须及时恢复</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%81%BF%E5%85%8D%E7%9B%B8%E4%BA%92%E5%B9%B2%E6%89%B0%E7%9A%84%E5%B9%B6%E5%8F%91%E6%B5%8B%E8%AF%95"><span class="nav-number">7.3.</span> <span class="nav-text">避免相互干扰的并发测试</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%8D%E8%A6%81%E5%AF%B9%E6%89%80%E6%9C%89%E4%B8%9C%E8%A5%BF%E9%83%BD%E6%89%93%E6%A1%A9"><span class="nav-number">7.4.</span> <span class="nav-text">不要对所有东西都打桩</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number">8.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Andy Zhang"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Andy Zhang</p>
+  <div class="site-description" itemprop="description"></div>
 </div>
-    </header>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">18</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
 
     
-  <div class="back-to-top">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
+  </aside>
 
 
-    <main class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          
+    </div>
 
-          <div class="content">
-            
+    <div class="main-inner post posts-expand">
 
-  <div class="posts-expand">
-      
+
+  
+
+
+<div class="post-block">
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2024/05/12/Golang-%E4%B8%AD%E4%BD%BF%E7%94%A8Mockey%E5%92%8CGoConvey%E7%BC%96%E5%86%99%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/">
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.towerman1990.cn/2024/05/12/Golang-%E4%B8%AD%E4%BD%BF%E7%94%A8Mockey%E5%92%8CGoConvey%E7%BC%96%E5%86%99%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
       <meta itemprop="name" content="Andy Zhang">
-      <meta itemprop="description" content="">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="盐 碱 地">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Golang 中使用 Mockey 和 GoConvey 编写单元测试 | 盐 碱 地">
+      <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           Golang 中使用 Mockey 和 GoConvey 编写单元测试
         </h1>
 
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2024-05-12 10:30:28" itemprop="dateCreated datePublished" datetime="2024-05-12T10:30:28+08:00">2024-05-12</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2026-11-14 10:38:33" itemprop="dateModified" datetime="2026-11-14T10:38:33+08:00">2026-11-14</time>
-              </span>
+      <time title="创建时间：2024-05-12 10:30:28" itemprop="dateCreated datePublished" datetime="2024-05-12T10:30:28+08:00">2024-05-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-11-14 10:38:33" itemprop="dateModified" datetime="2026-11-14T10:38:33+08:00">2026-11-14</time>
+    </span>
 
-          
+  
+</div>
 
         </div>
       </header>
@@ -236,13 +227,10 @@
     
     
     
-    <div class="post-body" itemprop="articleBody">
-
-      
-        <p>在 Go 项目中，一个业务方法往往会调用数据库、缓存或者其他服务。如果每次测试都依赖真实环境，不但准备数据麻烦，也很难稳定地复现超时、查询失败等情况。</p>
-<p>单元测试可以把这些依赖替换成可控制的实现，让我们专注验证业务逻辑。本文通过一个查询用户资料的例子，介绍如何使用字节跳动的 <a href="https://github.com/bytedance/mockey" target="_blank" rel="noopener">Mockey</a> 和 <a href="https://github.com/smartystreets/goconvey" target="_blank" rel="noopener">GoConvey</a> 编写单元测试。</p>
+    <div class="post-body" itemprop="articleBody"><p>在 Go 项目中，一个业务方法往往会调用数据库、缓存或者其他服务。如果每次测试都依赖真实环境，不但准备数据麻烦，也很难稳定地复现超时、查询失败等情况。</p>
+<p>单元测试可以把这些依赖替换成可控制的实现，让我们专注验证业务逻辑。本文通过一个查询用户资料的例子，介绍如何使用字节跳动的 <a target="_blank" rel="noopener" href="https://github.com/bytedance/mockey">Mockey</a> 和 <a target="_blank" rel="noopener" href="https://github.com/smartystreets/goconvey">GoConvey</a> 编写单元测试。</p>
 <p>两者的职责不同：<strong>Mockey 负责打桩，GoConvey 负责组织测试场景和执行断言</strong>。测试入口和执行命令仍然使用 Go 自带的 <code>testing</code> 和 <code>go test</code>。</p>
-<a id="more"></a>
+<span id="more"></span>
 
 <h3 id="单元测试应该测试什么"><a href="#单元测试应该测试什么" class="headerlink" title="单元测试应该测试什么"></a>单元测试应该测试什么</h3><p>假设我们要测试一个根据用户 ID 获取昵称的方法，通常需要考虑以下情况：</p>
 <table>
@@ -278,28 +266,28 @@
 <h3 id="创建示例项目"><a href="#创建示例项目" class="headerlink" title="创建示例项目"></a>创建示例项目</h3><p>在博客仓库之外创建一个独立的 Go 示例目录，然后执行：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mkdir go-unit-demo</span><br><span class="line">cd go-unit-demo</span><br><span class="line">go mod init example.com/go-unit-demo</span><br><span class="line">go get github.com/bytedance/mockey@v1.4.8</span><br><span class="line">go get github.com/smartystreets/goconvey@v1.8.1</span><br></pre></td></tr></table></figure>
 
-<p>本文完整示例已在 Windows/amd64、Go 1.27.1、Mockey 1.4.8 和 GoConvey 1.8.1 的环境中运行通过，5 个场景共 17 条断言。</p>
+<p>本文完整示例已在 Windows&#x2F;amd64、Go 1.27.1、Mockey 1.4.8 和 GoConvey 1.8.1 的环境中运行通过，5 个场景共 17 条断言。</p>
 <p>上面的命令会解析依赖并记录到 <code>go.mod</code> 和 <code>go.sum</code>。团队项目应提交这两个文件，固定实际验证过的依赖版本，同时统一本地和 CI 的 Go 工具链版本。</p>
 <p>项目结构如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">go-unit-demo&#x2F;</span><br><span class="line">├── go.mod</span><br><span class="line">├── go.sum</span><br><span class="line">└── user&#x2F;</span><br><span class="line">    ├── service.go</span><br><span class="line">    └── service_test.go</span><br></pre></td></tr></table></figure>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">go-unit-demo/</span><br><span class="line">├── go.mod</span><br><span class="line">├── go.sum</span><br><span class="line">└── user/</span><br><span class="line">    ├── service.go</span><br><span class="line">    └── service_test.go</span><br></pre></td></tr></table></figure>
 
-<p>按照 <a href="https://pkg.go.dev/testing" target="_blank" rel="noopener">Go testing 的约定</a>，测试文件以 <code>_test.go</code> 结尾，测试函数采用 <code>func TestXxx(t *testing.T)</code> 的形式。本文测试与被测代码都放在 <code>user</code> 包中，因此可以直接访问未导出的函数。</p>
+<p>按照 <a target="_blank" rel="noopener" href="https://pkg.go.dev/testing">Go testing 的约定</a>，测试文件以 <code>_test.go</code> 结尾，测试函数采用 <code>func TestXxx(t *testing.T)</code> 的形式。本文测试与被测代码都放在 <code>user</code> 包中，因此可以直接访问未导出的函数。</p>
 <h3 id="准备业务代码"><a href="#准备业务代码" class="headerlink" title="准备业务代码"></a>准备业务代码</h3><p>创建 <code>user/service.go</code>：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> user</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">"context"</span></span><br><span class="line">    <span class="string">"errors"</span></span><br><span class="line">    <span class="string">"fmt"</span></span><br><span class="line">    <span class="string">"strings"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> (</span><br><span class="line">    ErrInvalidID = errors.New(<span class="string">"invalid user id"</span>)</span><br><span class="line">    ErrUserNotFound = errors.New(<span class="string">"user not found"</span>)</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> User <span class="keyword">struct</span> &#123;</span><br><span class="line">    ID <span class="keyword">int64</span></span><br><span class="line">    Nickname <span class="keyword">string</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// findUser 表示数据访问边界；真实项目中这里可以查询数据库或调用 RPC。</span></span><br><span class="line"><span class="comment">// 示例故意不提供真实实现，避免把外部环境引入单元测试。</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">findUser</span><span class="params">(ctx context.Context, id <span class="keyword">int64</span>)</span> <span class="params">(*User, error)</span></span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">nil</span>, errors.New(<span class="string">"findUser: data source is not configured"</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">GetDisplayName</span><span class="params">(ctx context.Context, id <span class="keyword">int64</span>)</span> <span class="params">(<span class="keyword">string</span>, error)</span></span> &#123;</span><br><span class="line">    <span class="keyword">if</span> id &lt;= <span class="number">0</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">""</span>, ErrInvalidID</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    u, err := findUser(ctx, id)</span><br><span class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">""</span>, fmt.Errorf(<span class="string">"find user %d: %w"</span>, id, err)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> u == <span class="literal">nil</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">""</span>, ErrUserNotFound</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    name := strings.TrimSpace(u.Nickname)</span><br><span class="line">    <span class="keyword">if</span> name == <span class="string">""</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"游客"</span>, <span class="literal">nil</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> name, <span class="literal">nil</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> user</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">&quot;context&quot;</span></span><br><span class="line">    <span class="string">&quot;errors&quot;</span></span><br><span class="line">    <span class="string">&quot;fmt&quot;</span></span><br><span class="line">    <span class="string">&quot;strings&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> (</span><br><span class="line">    ErrInvalidID = errors.New(<span class="string">&quot;invalid user id&quot;</span>)</span><br><span class="line">    ErrUserNotFound = errors.New(<span class="string">&quot;user not found&quot;</span>)</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> User <span class="keyword">struct</span> &#123;</span><br><span class="line">    ID <span class="type">int64</span></span><br><span class="line">    Nickname <span class="type">string</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// findUser 表示数据访问边界；真实项目中这里可以查询数据库或调用 RPC。</span></span><br><span class="line"><span class="comment">// 示例故意不提供真实实现，避免把外部环境引入单元测试。</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">findUser</span><span class="params">(ctx context.Context, id <span class="type">int64</span>)</span></span> (*User, <span class="type">error</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">nil</span>, errors.New(<span class="string">&quot;findUser: data source is not configured&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">GetDisplayName</span><span class="params">(ctx context.Context, id <span class="type">int64</span>)</span></span> (<span class="type">string</span>, <span class="type">error</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> id &lt;= <span class="number">0</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;&quot;</span>, ErrInvalidID</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    u, err := findUser(ctx, id)</span><br><span class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;&quot;</span>, fmt.Errorf(<span class="string">&quot;find user %d: %w&quot;</span>, id, err)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> u == <span class="literal">nil</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;&quot;</span>, ErrUserNotFound</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    name := strings.TrimSpace(u.Nickname)</span><br><span class="line">    <span class="keyword">if</span> name == <span class="string">&quot;&quot;</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;游客&quot;</span>, <span class="literal">nil</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> name, <span class="literal">nil</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>这里需要验证的是 <code>GetDisplayName</code> 的业务行为。因此只替换 <code>findUser</code>，保留参数判断、错误包装、空结果处理和字符串处理的真实逻辑。</p>
 <p>如果直接把 <code>GetDisplayName</code> 打桩为固定返回值，再验证它返回了这个值，就没有测试到业务实现。</p>
 <h3 id="使用-PatchConvey-组织测试"><a href="#使用-PatchConvey-组织测试" class="headerlink" title="使用 PatchConvey 组织测试"></a>使用 PatchConvey 组织测试</h3><p>创建 <code>user/service_test.go</code>：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> user</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">"context"</span></span><br><span class="line">    <span class="string">"errors"</span></span><br><span class="line">    <span class="string">"testing"</span></span><br><span class="line"></span><br><span class="line">    <span class="string">"github.com/bytedance/mockey"</span></span><br><span class="line">    <span class="string">"github.com/smartystreets/goconvey/convey"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">TestGetDisplayName</span><span class="params">(t *testing.T)</span></span> &#123;</span><br><span class="line">    mockey.PatchConvey(<span class="string">"查询用户展示名称"</span>, t, <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">        ctx := context.Background()</span><br><span class="line"></span><br><span class="line">        mockey.PatchConvey(<span class="string">"ID 非法时不查询数据"</span>, <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">            query := mockey.Mock(findUser).</span><br><span class="line">                Return((*User)(<span class="literal">nil</span>), <span class="literal">nil</span>).Build()</span><br><span class="line"></span><br><span class="line">            <span class="keyword">for</span> _, id := <span class="keyword">range</span> []<span class="keyword">int64</span>&#123;<span class="number">0</span>, <span class="number">-1</span>&#125; &#123;</span><br><span class="line">                name, err := GetDisplayName(ctx, id)</span><br><span class="line">                convey.So(name, convey.ShouldBeEmpty)</span><br><span class="line">                convey.So(errors.Is(err, ErrInvalidID), convey.ShouldBeTrue)</span><br><span class="line">            &#125;</span><br><span class="line">            convey.So(query.Times(), convey.ShouldEqual, <span class="number">0</span>)</span><br><span class="line">        &#125;)</span><br><span class="line"></span><br><span class="line">        mockey.PatchConvey(<span class="string">"查询失败时保留原始错误"</span>, <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">            dbErr := errors.New(<span class="string">"database unavailable"</span>)</span><br><span class="line">            query := mockey.Mock(findUser).</span><br><span class="line">                Return((*User)(<span class="literal">nil</span>), dbErr).Build()</span><br><span class="line"></span><br><span class="line">            name, err := GetDisplayName(ctx, <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">            convey.So(name, convey.ShouldBeEmpty)</span><br><span class="line">            convey.So(errors.Is(err, dbErr), convey.ShouldBeTrue)</span><br><span class="line">            convey.So(query.Times(), convey.ShouldEqual, <span class="number">1</span>)</span><br><span class="line">        &#125;)</span><br><span class="line"></span><br><span class="line">        mockey.PatchConvey(<span class="string">"用户不存在"</span>, <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">            mockey.Mock(findUser).Return((*User)(<span class="literal">nil</span>), <span class="literal">nil</span>).Build()</span><br><span class="line"></span><br><span class="line">            name, err := GetDisplayName(ctx, <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">            convey.So(name, convey.ShouldBeEmpty)</span><br><span class="line">            convey.So(errors.Is(err, ErrUserNotFound), convey.ShouldBeTrue)</span><br><span class="line">        &#125;)</span><br><span class="line"></span><br><span class="line">        mockey.PatchConvey(<span class="string">"空昵称使用默认名称"</span>, <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">            mockey.Mock(findUser).</span><br><span class="line">                Return(&amp;User&#123;ID: <span class="number">1</span>, Nickname: <span class="string">" \t "</span>&#125;, <span class="literal">nil</span>).Build()</span><br><span class="line"></span><br><span class="line">            name, err := GetDisplayName(ctx, <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">            convey.So(err, convey.ShouldBeNil)</span><br><span class="line">            convey.So(name, convey.ShouldEqual, <span class="string">"游客"</span>)</span><br><span class="line">        &#125;)</span><br><span class="line"></span><br><span class="line">        mockey.PatchConvey(<span class="string">"正常查询并传递正确的参数"</span>, <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">            <span class="keyword">type</span> requestKey <span class="keyword">struct</span>&#123;&#125;</span><br><span class="line">            requestCtx := context.WithValue(ctx, requestKey&#123;&#125;, <span class="string">"req-001"</span>)</span><br><span class="line">            <span class="keyword">var</span> gotCtx context.Context</span><br><span class="line">            <span class="keyword">var</span> gotID <span class="keyword">int64</span></span><br><span class="line">            query := mockey.Mock(findUser).To(</span><br><span class="line">                <span class="function"><span class="keyword">func</span><span class="params">(ctx context.Context, id <span class="keyword">int64</span>)</span> <span class="params">(*User, error)</span></span> &#123;</span><br><span class="line">                    gotCtx, gotID = ctx, id</span><br><span class="line">                    <span class="keyword">return</span> &amp;User&#123;ID: id, Nickname: <span class="string">"  Andy  "</span>&#125;, <span class="literal">nil</span></span><br><span class="line">                &#125;,</span><br><span class="line">            ).Build()</span><br><span class="line"></span><br><span class="line">            name, err := GetDisplayName(requestCtx, <span class="number">42</span>)</span><br><span class="line"></span><br><span class="line">            convey.So(err, convey.ShouldBeNil)</span><br><span class="line">            convey.So(name, convey.ShouldEqual, <span class="string">"Andy"</span>)</span><br><span class="line">            convey.So(gotID, convey.ShouldEqual, <span class="number">42</span>)</span><br><span class="line">            convey.So(gotCtx == requestCtx, convey.ShouldBeTrue)</span><br><span class="line">            convey.So(query.Times(), convey.ShouldEqual, <span class="number">1</span>)</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> user</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">&quot;context&quot;</span></span><br><span class="line">    <span class="string">&quot;errors&quot;</span></span><br><span class="line">    <span class="string">&quot;testing&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="string">&quot;github.com/bytedance/mockey&quot;</span></span><br><span class="line">    <span class="string">&quot;github.com/smartystreets/goconvey/convey&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">TestGetDisplayName</span><span class="params">(t *testing.T)</span></span> &#123;</span><br><span class="line">    mockey.PatchConvey(<span class="string">&quot;查询用户展示名称&quot;</span>, t, <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">        ctx := context.Background()</span><br><span class="line"></span><br><span class="line">        mockey.PatchConvey(<span class="string">&quot;ID 非法时不查询数据&quot;</span>, <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">            query := mockey.Mock(findUser).</span><br><span class="line">                Return((*User)(<span class="literal">nil</span>), <span class="literal">nil</span>).Build()</span><br><span class="line"></span><br><span class="line">            <span class="keyword">for</span> _, id := <span class="keyword">range</span> []<span class="type">int64</span>&#123;<span class="number">0</span>, <span class="number">-1</span>&#125; &#123;</span><br><span class="line">                name, err := GetDisplayName(ctx, id)</span><br><span class="line">                convey.So(name, convey.ShouldBeEmpty)</span><br><span class="line">                convey.So(errors.Is(err, ErrInvalidID), convey.ShouldBeTrue)</span><br><span class="line">            &#125;</span><br><span class="line">            convey.So(query.Times(), convey.ShouldEqual, <span class="number">0</span>)</span><br><span class="line">        &#125;)</span><br><span class="line"></span><br><span class="line">        mockey.PatchConvey(<span class="string">&quot;查询失败时保留原始错误&quot;</span>, <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">            dbErr := errors.New(<span class="string">&quot;database unavailable&quot;</span>)</span><br><span class="line">            query := mockey.Mock(findUser).</span><br><span class="line">                Return((*User)(<span class="literal">nil</span>), dbErr).Build()</span><br><span class="line"></span><br><span class="line">            name, err := GetDisplayName(ctx, <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">            convey.So(name, convey.ShouldBeEmpty)</span><br><span class="line">            convey.So(errors.Is(err, dbErr), convey.ShouldBeTrue)</span><br><span class="line">            convey.So(query.Times(), convey.ShouldEqual, <span class="number">1</span>)</span><br><span class="line">        &#125;)</span><br><span class="line"></span><br><span class="line">        mockey.PatchConvey(<span class="string">&quot;用户不存在&quot;</span>, <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">            mockey.Mock(findUser).Return((*User)(<span class="literal">nil</span>), <span class="literal">nil</span>).Build()</span><br><span class="line"></span><br><span class="line">            name, err := GetDisplayName(ctx, <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">            convey.So(name, convey.ShouldBeEmpty)</span><br><span class="line">            convey.So(errors.Is(err, ErrUserNotFound), convey.ShouldBeTrue)</span><br><span class="line">        &#125;)</span><br><span class="line"></span><br><span class="line">        mockey.PatchConvey(<span class="string">&quot;空昵称使用默认名称&quot;</span>, <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">            mockey.Mock(findUser).</span><br><span class="line">                Return(&amp;User&#123;ID: <span class="number">1</span>, Nickname: <span class="string">&quot; \t &quot;</span>&#125;, <span class="literal">nil</span>).Build()</span><br><span class="line"></span><br><span class="line">            name, err := GetDisplayName(ctx, <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">            convey.So(err, convey.ShouldBeNil)</span><br><span class="line">            convey.So(name, convey.ShouldEqual, <span class="string">&quot;游客&quot;</span>)</span><br><span class="line">        &#125;)</span><br><span class="line"></span><br><span class="line">        mockey.PatchConvey(<span class="string">&quot;正常查询并传递正确的参数&quot;</span>, <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">            <span class="keyword">type</span> requestKey <span class="keyword">struct</span>&#123;&#125;</span><br><span class="line">            requestCtx := context.WithValue(ctx, requestKey&#123;&#125;, <span class="string">&quot;req-001&quot;</span>)</span><br><span class="line">            <span class="keyword">var</span> gotCtx context.Context</span><br><span class="line">            <span class="keyword">var</span> gotID <span class="type">int64</span></span><br><span class="line">            query := mockey.Mock(findUser).To(</span><br><span class="line">                <span class="function"><span class="keyword">func</span><span class="params">(ctx context.Context, id <span class="type">int64</span>)</span></span> (*User, <span class="type">error</span>) &#123;</span><br><span class="line">                    gotCtx, gotID = ctx, id</span><br><span class="line">                    <span class="keyword">return</span> &amp;User&#123;ID: id, Nickname: <span class="string">&quot;  Andy  &quot;</span>&#125;, <span class="literal">nil</span></span><br><span class="line">                &#125;,</span><br><span class="line">            ).Build()</span><br><span class="line"></span><br><span class="line">            name, err := GetDisplayName(requestCtx, <span class="number">42</span>)</span><br><span class="line"></span><br><span class="line">            convey.So(err, convey.ShouldBeNil)</span><br><span class="line">            convey.So(name, convey.ShouldEqual, <span class="string">&quot;Andy&quot;</span>)</span><br><span class="line">            convey.So(gotID, convey.ShouldEqual, <span class="number">42</span>)</span><br><span class="line">            convey.So(gotCtx == requestCtx, convey.ShouldBeTrue)</span><br><span class="line">            convey.So(query.Times(), convey.ShouldEqual, <span class="number">1</span>)</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>最外层的 <code>PatchConvey</code> 接收 <code>t</code>，内层场景不需要重复传入。它连接 GoConvey 的场景组织能力，并管理当前作用域内的 Mockey 补丁；退出作用域时会自动释放补丁。相关规则可以参见 <a href="https://github.com/bytedance/mockey#readme" target="_blank" rel="noopener">Mockey 官方说明</a>。</p>
+<p>最外层的 <code>PatchConvey</code> 接收 <code>t</code>，内层场景不需要重复传入。它连接 GoConvey 的场景组织能力，并管理当前作用域内的 Mockey 补丁；退出作用域时会自动释放补丁。相关规则可以参见 <a target="_blank" rel="noopener" href="https://github.com/bytedance/mockey#readme">Mockey 官方说明</a>。</p>
 <p>每个分支都创建自己的桩，避免前一个场景的返回值影响下一个场景。GoConvey 的嵌套场景会沿不同执行路径重新运行外层准备逻辑，因此不要把它理解为“一次执行的普通嵌套代码块”，也不要在外层累计跨场景共享的计数。</p>
 <p>上面的例子没有使用点导入，保留 <code>mockey.</code> 和 <code>convey.</code> 前缀，阅读时更容易区分各个 API 的来源。</p>
 <h3 id="理解打桩和断言"><a href="#理解打桩和断言" class="headerlink" title="理解打桩和断言"></a>理解打桩和断言</h3><h4 id="固定返回值与自定义替身"><a href="#固定返回值与自定义替身" class="headerlink" title="固定返回值与自定义替身"></a>固定返回值与自定义替身</h4><p><code>Mock(findUser).Return(...).Build()</code> 用于固定返回值，<code>Build()</code> 才会让补丁生效。返回值需要与目标函数的数量、顺序和类型匹配，示例使用 <code>(*User)(nil)</code> 明确表达空用户指针。</p>
-<p>需要检查输入参数或者根据输入构造结果时，可以使用 <code>To</code> 提供一个替身函数。本文的替身保留了原函数的完整签名，并在调用结束后断言收集到的参数。<a href="https://github.com/bytedance/mockey/blob/main/mock.go" target="_blank" rel="noopener">Mockey 的实现与 API</a>还提供了调用计数等能力。</p>
+<p>需要检查输入参数或者根据输入构造结果时，可以使用 <code>To</code> 提供一个替身函数。本文的替身保留了原函数的完整签名，并在调用结束后断言收集到的参数。<a target="_blank" rel="noopener" href="https://github.com/bytedance/mockey/blob/main/mock.go">Mockey 的实现与 API</a>还提供了调用计数等能力。</p>
 <h4 id="方法打桩"><a href="#方法打桩" class="headerlink" title="方法打桩"></a>方法打桩</h4><p>如果数据访问逻辑是结构体的指针接收器方法，例如 <code>func (r *Repository) Find(...)</code>，通常使用方法表达式 <code>mockey.Mock((*Repository).Find)</code> 定位目标。使用 <code>To</code> 时，可以显式把 <code>*Repository</code> 接收器放在替身函数的第一个参数位置。</p>
 <p>这种补丁会影响目标方法的其他实例调用，不能把它当成只替换某个对象的私有状态。为避免混淆，先确认调用发生在值接收器还是指针接收器方法上。</p>
-<h4 id="常用断言"><a href="#常用断言" class="headerlink" title="常用断言"></a>常用断言</h4><p>GoConvey 的断言采用 <code>So(实际值, 断言规则, 期望值)</code> 的形式，部分规则不需要期望值。常见规则可参见<a href="https://github.com/smartystreets/goconvey/wiki/Assertions" target="_blank" rel="noopener">官方断言文档</a>：</p>
+<h4 id="常用断言"><a href="#常用断言" class="headerlink" title="常用断言"></a>常用断言</h4><p>GoConvey 的断言采用 <code>So(实际值, 断言规则, 期望值)</code> 的形式，部分规则不需要期望值。常见规则可参见<a target="_blank" rel="noopener" href="https://github.com/smartystreets/goconvey/wiki/Assertions">官方断言文档</a>：</p>
 <table>
 <thead>
 <tr>
@@ -329,16 +317,16 @@
 </tr>
 </tbody></table>
 <p>对于使用 <code>%w</code> 包装的错误，推荐先调用 <code>errors.Is</code>，再断言结果为真。仅比较错误字符串容易受到上下文文案变化的影响，也不能充分表达错误链的语义。</p>
-<h3 id="运行测试与查看覆盖率"><a href="#运行测试与查看覆盖率" class="headerlink" title="运行测试与查看覆盖率"></a>运行测试与查看覆盖率</h3><p>Mockey 会修改运行时的函数指令。按照其<a href="https://github.com/bytedance/mockey/blob/main/README_cn.md" target="_blank" rel="noopener">官方文档</a>，运行测试时需要关闭编译优化和内联：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">go test -gcflags="all=-N -l" -count=1 -v ./...</span><br></pre></td></tr></table></figure>
+<h3 id="运行测试与查看覆盖率"><a href="#运行测试与查看覆盖率" class="headerlink" title="运行测试与查看覆盖率"></a>运行测试与查看覆盖率</h3><p>Mockey 会修改运行时的函数指令。按照其<a target="_blank" rel="noopener" href="https://github.com/bytedance/mockey/blob/main/README_cn.md">官方文档</a>，运行测试时需要关闭编译优化和内联：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">go test -gcflags=&quot;all=-N -l&quot; -count=1 -v ./...</span><br></pre></td></tr></table></figure>
 
 <p>其中 <code>-N</code> 关闭编译优化，<code>-l</code> 关闭内联；<code>all=</code> 将参数应用到参与构建的所有包。<code>-count=1</code> 用于禁用测试结果缓存，调试打桩问题时可以确保测试重新执行。</p>
 <p>只运行本文的测试入口：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">go test -gcflags="all=-N -l" -count=1 -v -run '^TestGetDisplayName$' ./user</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">go test -gcflags=&quot;all=-N -l&quot; -count=1 -v -run &#x27;^TestGetDisplayName$&#x27; ./user</span><br></pre></td></tr></table></figure>
 
 <p><code>-run</code> 在这里匹配的是 Go 的测试函数名，内层的场景描述不是 <code>t.Run</code> 创建的子测试名，不能直接照搬子测试路径进行筛选。</p>
 <p>生成覆盖率报告：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">go test -gcflags="all=-N -l" -count=1 -coverprofile=coverage.out ./...</span><br><span class="line">go tool cover -func=coverage.out</span><br><span class="line">go tool cover -html=coverage.out -o coverage.html</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">go test -gcflags=&quot;all=-N -l&quot; -count=1 -coverprofile=coverage.out ./...</span><br><span class="line">go tool cover -func=coverage.out</span><br><span class="line">go tool cover -html=coverage.out -o coverage.html</span><br></pre></td></tr></table></figure>
 
 <p>覆盖率可以帮助发现没有执行到的代码，但执行过某一行不代表断言充分。本文虽然打桩了 <code>findUser</code>，却没有验证真实查询实现，因此不能用业务方法的覆盖率证明数据库访问正确。</p>
 <h3 id="在项目中使用时需要注意什么"><a href="#在项目中使用时需要注意什么" class="headerlink" title="在项目中使用时需要注意什么"></a>在项目中使用时需要注意什么</h3><h4 id="本地、IDE-和-CI-使用相同的测试参数"><a href="#本地、IDE-和-CI-使用相同的测试参数" class="headerlink" title="本地、IDE 和 CI 使用相同的测试参数"></a>本地、IDE 和 CI 使用相同的测试参数</h4><p>命令行通过而 IDE 运行失败时，首先检查 IDE 的 Go 测试运行配置是否也传入了 <code>-gcflags=&quot;all=-N -l&quot;</code>。CI 也应该使用同样的参数，不要只在本地关闭优化。</p>
@@ -352,13 +340,13 @@
 <h4 id="不要对所有东西都打桩"><a href="#不要对所有东西都打桩" class="headerlink" title="不要对所有东西都打桩"></a>不要对所有东西都打桩</h4><p>稳定的纯函数通常不需要替换；业务核心逻辑应真实执行。对于新代码，可以通过小接口和构造函数注入依赖，再用简单的 fake 实现测试。对于已有代码中的包级函数、具体类型方法或较难重构的依赖，Mockey 能减少测试准备工作。</p>
 <p>打桩测试验证的是“在这些依赖行为下，业务逻辑是否符合预期”。真实数据库、缓存和 RPC 的连通性与行为，仍应由对应的集成测试覆盖。</p>
 <h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><ul>
-<li><a href="https://pkg.go.dev/testing" target="_blank" rel="noopener">Go testing 标准库文档</a></li>
-<li><a href="https://github.com/bytedance/mockey/blob/main/README_cn.md" target="_blank" rel="noopener">Mockey 项目及中文说明</a></li>
-<li><a href="https://github.com/bytedance/mockey/blob/main/mock.go" target="_blank" rel="noopener">Mockey 函数打桩实现</a></li>
-<li><a href="https://github.com/smartystreets/goconvey" target="_blank" rel="noopener">GoConvey 项目</a></li>
-<li><a href="https://github.com/smartystreets/goconvey/wiki/Composition" target="_blank" rel="noopener">GoConvey 测试组织方式</a></li>
-<li><a href="https://github.com/smartystreets/goconvey/wiki/Execution-order" target="_blank" rel="noopener">GoConvey 执行顺序</a></li>
-<li><a href="https://github.com/smartystreets/goconvey/wiki/Assertions" target="_blank" rel="noopener">GoConvey 断言规则</a></li>
+<li><a target="_blank" rel="noopener" href="https://pkg.go.dev/testing">Go testing 标准库文档</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/bytedance/mockey/blob/main/README_cn.md">Mockey 项目及中文说明</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/bytedance/mockey/blob/main/mock.go">Mockey 函数打桩实现</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/smartystreets/goconvey">GoConvey 项目</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/smartystreets/goconvey/wiki/Composition">GoConvey 测试组织方式</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/smartystreets/goconvey/wiki/Execution-order">GoConvey 执行顺序</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/smartystreets/goconvey/wiki/Assertions">GoConvey 断言规则</a></li>
 </ul>
 
     </div>
@@ -367,7 +355,7 @@
     
     
 
-      <footer class="post-footer">
+    <footer class="post-footer">
           <div class="post-tags">
               <a href="/tags/Golang/" rel="tag"># Golang</a>
               <a href="/tags/%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/" rel="tag"># 单元测试</a>
@@ -375,183 +363,59 @@
 
         
 
-
-        
-    <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/2022/04/16/Sprint-Boot%E4%B8%AD%E4%BD%BF%E7%94%A8Thrift/" rel="prev" title="Spring Boot 中使用 Thrift">
-      <i class="fa fa-chevron-left"></i> Spring Boot 中使用 Thrift
-    </a></div>
-      <div class="post-nav-item"></div>
-    </div>
-      </footer>
-    
-  </article>
-  
-  
-  
-
-  </div>
-
-
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/04/16/Sprint-Boot%E4%B8%AD%E4%BD%BF%E7%94%A8Thrift/" rel="prev" title="Spring Boot 中使用 Thrift">
+                  <i class="fa fa-angle-left"></i> Spring Boot 中使用 Thrift
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
           </div>
-          
+    </footer>
+  </article>
+</div>
 
-<script>
-  window.addEventListener('tabs:register', () => {
-    let activeClass = CONFIG.comments.activeClass;
-    if (CONFIG.comments.storage) {
-      activeClass = localStorage.getItem('comments_active') || activeClass;
-    }
-    if (activeClass) {
-      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
-      if (activeTab) {
-        activeTab.click();
-      }
-    }
-  });
-  if (CONFIG.comments.storage) {
-    window.addEventListener('tabs:click', event => {
-      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      let commentClass = event.target.classList[1];
-      localStorage.setItem('comments_active', commentClass);
-    });
-  }
-</script>
 
-        </div>
-          
-  
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Andy Zhang</span>
   </div>
-
-  <aside class="sidebar">
-    <div class="sidebar-inner">
-
-      <ul class="sidebar-nav motion-element">
-        <li class="sidebar-nav-toc">
-          文章目录
-        </li>
-        <li class="sidebar-nav-overview">
-          站点概览
-        </li>
-      </ul>
-
-      <!--noindex-->
-      <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#单元测试应该测试什么"><span class="nav-number">1.</span> <span class="nav-text">单元测试应该测试什么</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建示例项目"><span class="nav-number">2.</span> <span class="nav-text">创建示例项目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#准备业务代码"><span class="nav-number">3.</span> <span class="nav-text">准备业务代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用-PatchConvey-组织测试"><span class="nav-number">4.</span> <span class="nav-text">使用 PatchConvey 组织测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#理解打桩和断言"><span class="nav-number">5.</span> <span class="nav-text">理解打桩和断言</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#固定返回值与自定义替身"><span class="nav-number">5.1.</span> <span class="nav-text">固定返回值与自定义替身</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#方法打桩"><span class="nav-number">5.2.</span> <span class="nav-text">方法打桩</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#常用断言"><span class="nav-number">5.3.</span> <span class="nav-text">常用断言</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#运行测试与查看覆盖率"><span class="nav-number">6.</span> <span class="nav-text">运行测试与查看覆盖率</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在项目中使用时需要注意什么"><span class="nav-number">7.</span> <span class="nav-text">在项目中使用时需要注意什么</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#本地、IDE-和-CI-使用相同的测试参数"><span class="nav-number">7.1.</span> <span class="nav-text">本地、IDE 和 CI 使用相同的测试参数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#补丁必须及时恢复"><span class="nav-number">7.2.</span> <span class="nav-text">补丁必须及时恢复</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#避免相互干扰的并发测试"><span class="nav-number">7.3.</span> <span class="nav-text">避免相互干扰的并发测试</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#不要对所有东西都打桩"><span class="nav-number">7.4.</span> <span class="nav-text">不要对所有东西都打桩</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考资料"><span class="nav-number">8.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
-      </div>
-      <!--/noindex-->
-
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <img class="site-author-image" itemprop="image" alt="Andy Zhang"
-      src="/images/avatar.jpg">
-  <p class="site-author-name" itemprop="name">Andy Zhang</p>
-  <div class="site-description" itemprop="description"></div>
-</div>
-<div class="site-state-wrap motion-element">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
-          <span class="site-state-item-count">18</span>
-          <span class="site-state-item-name">日志</span>
-        </a>
-      </div>
-      <div class="site-state-item site-state-tags">
-            <a href="/tags/">
-          
-        <span class="site-state-item-count">12</span>
-        <span class="site-state-item-name">标签</span></a>
-      </div>
-  </nav>
-</div>
-
-
-
-      </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/mist/" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
 
     </div>
-  </aside>
-  <div id="sidebar-dimmer"></div>
+  </footer>
 
-
-      </div>
-    </main>
-
-    <footer class="footer">
-      <div class="footer-inner">
-        
-
-<div class="copyright">
   
-  &copy; 
-  <span itemprop="copyrightYear">2026</span>
-  <span class="with-love">
-    <i class="fa fa-user"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">Andy Zhang</span>
-</div>
-  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.1
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
   </div>
-  <span class="post-meta-divider">|</span>
-  <div class="theme-info">主题 – <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> v7.7.0
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
   </div>
 
-        
-
-
-
-
-
-
-
-
-      </div>
-    </footer>
-  </div>
-
-  
-  <script src="/lib/anime.min.js"></script>
-  <script src="/lib/velocity/velocity.min.js"></script>
-  <script src="/lib/velocity/velocity.ui.min.js"></script>
-
-<script src="/js/utils.js"></script>
-
-<script src="/js/motion.js"></script>
-
-
-<script src="/js/schemes/muse.js"></script>
-
-
-<script src="/js/next-boot.js"></script>
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-  
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
 
 </body>
 </html>
