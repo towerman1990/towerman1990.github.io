@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 8.1.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"blog.towerman1990.cn","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.28.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="最近写了个新项目，叫 ResearchPilot。 名字起得有点大，做的事情倒比较具体：给它一个技术问题，让它去读资料、整理要点，最后交一份带来源的报告。写技术方案、了解一个开源项目，或者想弄清楚某份官方文档里几个容易混淆的概念时，都可以试试。 现在用 AI 查东西已经很方便了。不过，一份回答写得流畅，不代表里面的结论都有出处。尤其是准备把它用到代码或方案里时，我还是想知道：这句话是文档说的，还是">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ResearchPilot：给自己写了个技术研究工作台">
+<meta property="og:url" content="https://blog.towerman1990.cn/2026/11/19/ResearchPilot-%E9%A1%B9%E7%9B%AE%E4%BB%8B%E7%BB%8D%E4%B8%8E%E4%BD%BF%E7%94%A8/index.html">
+<meta property="og:site_name" content="盐 碱 地">
+<meta property="og:description" content="最近写了个新项目，叫 ResearchPilot。 名字起得有点大，做的事情倒比较具体：给它一个技术问题，让它去读资料、整理要点，最后交一份带来源的报告。写技术方案、了解一个开源项目，或者想弄清楚某份官方文档里几个容易混淆的概念时，都可以试试。 现在用 AI 查东西已经很方便了。不过，一份回答写得流畅，不代表里面的结论都有出处。尤其是准备把它用到代码或方案里时，我还是想知道：这句话是文档说的，还是">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-11-19T02:00:00.000Z">
+<meta property="article:modified_time" content="2026-11-19T01:55:17.275Z">
+<meta property="article:author" content="Andy Zhang">
+<meta property="article:tag" content="AI">
+<meta property="article:tag" content="Golang">
+<meta property="article:tag" content="项目实践">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://blog.towerman1990.cn/2026/11/19/ResearchPilot-%E9%A1%B9%E7%9B%AE%E4%BB%8B%E7%BB%8D%E4%B8%8E%E4%BD%BF%E7%94%A8/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://blog.towerman1990.cn/2026/11/19/ResearchPilot-%E9%A1%B9%E7%9B%AE%E4%BB%8B%E7%BB%8D%E4%B8%8E%E4%BD%BF%E7%94%A8/","path":"2026/11/19/ResearchPilot-项目介绍与使用/","title":"ResearchPilot：给自己写了个技术研究工作台"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>ResearchPilot：给自己写了个技术研究工作台 | 盐 碱 地</title>
+  
+
+  <script src="/js/third-party/analytics/baidu-analytics.js" defer></script>
+  <script async src="https://hm.baidu.com/hm.js?0827f66baef0e8fc8bd5d7647e82136b"></script>
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">盐 碱 地</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%88%E8%AF%B4%E5%AE%83%E8%83%BD%E5%B9%B2%E4%BB%80%E4%B9%88"><span class="nav-number">1.</span> <span class="nav-text">先说它能干什么</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%88%E5%9C%A8%E7%BA%BF%E4%B8%8A%E8%AF%95%E8%AF%95"><span class="nav-number">2.</span> <span class="nav-text">先在线上试试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%83%B3%E8%87%AA%E5%B7%B1%E9%83%A8%E7%BD%B2%E7%9A%84%E8%AF%9D%EF%BC%8C%E5%9C%A8%E6%9C%AC%E5%9C%B0%E8%B7%91%E8%B5%B7%E6%9D%A5"><span class="nav-number">3.</span> <span class="nav-text">想自己部署的话，在本地跑起来</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%85%8D%E5%A5%BD%E6%A8%A1%E5%9E%8B%EF%BC%8C%E5%86%8D%E5%81%9A%E7%9C%9F%E5%AE%9E%E7%A0%94%E7%A9%B6"><span class="nav-number">3.1.</span> <span class="nav-text">配好模型，再做真实研究</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E4%B8%AA%E9%97%AE%E9%A2%98%E5%88%AB%E9%97%AE%E5%A4%AA%E5%A4%A7"><span class="nav-number">3.2.</span> <span class="nav-text">第一个问题别问太大</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8A%A5%E5%91%8A%E5%87%BA%E6%9D%A5%E4%BA%86%EF%BC%8C%E8%BF%98%E6%98%AF%E8%A6%81%E7%9C%8B%E4%B8%80%E7%9C%BC%E6%9D%A5%E6%BA%90"><span class="nav-number">3.3.</span> <span class="nav-text">报告出来了，还是要看一眼来源</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%8E%E5%8F%B0%E4%B8%BA%E4%BB%80%E4%B9%88%E6%8B%86%E6%88%90%E8%BF%99%E6%A0%B7"><span class="nav-number">4.</span> <span class="nav-text">后台为什么拆成这样</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B5%8B%E4%B8%8B%E6%9D%A5%EF%BC%8C%E6%9C%89%E4%BA%9B%E5%A4%B1%E8%B4%A5%E6%8C%BA%E5%80%BC%E5%BE%97%E7%95%99%E4%B8%8B%E6%9D%A5"><span class="nav-number">5.</span> <span class="nav-text">测下来，有些失败挺值得留下来</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B7%91%E4%B8%8D%E8%B5%B7%E6%9D%A5%E6%97%B6%EF%BC%8C%E5%8F%AF%E4%BB%A5%E5%85%88%E7%9C%8B%E8%BF%99%E9%87%8C"><span class="nav-number">6.</span> <span class="nav-text">跑不起来时，可以先看这里</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Andy Zhang"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Andy Zhang</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">19</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.towerman1990.cn/2026/11/19/ResearchPilot-%E9%A1%B9%E7%9B%AE%E4%BB%8B%E7%BB%8D%E4%B8%8E%E4%BD%BF%E7%94%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Andy Zhang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="盐 碱 地">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="ResearchPilot：给自己写了个技术研究工作台 | 盐 碱 地">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          ResearchPilot：给自己写了个技术研究工作台
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2026-11-19 10:00:00 / 修改时间：09:55:17" itemprop="dateCreated datePublished" datetime="2026-11-19T10:00:00+08:00">2026-11-19</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>最近写了个新项目，叫 <strong>ResearchPilot</strong>。</p>
+<p>名字起得有点大，做的事情倒比较具体：给它一个技术问题，让它去读资料、整理要点，最后交一份带来源的报告。写技术方案、了解一个开源项目，或者想弄清楚某份官方文档里几个容易混淆的概念时，都可以试试。</p>
+<p>现在用 AI 查东西已经很方便了。不过，一份回答写得流畅，不代表里面的结论都有出处。尤其是准备把它用到代码或方案里时，我还是想知道：这句话是文档说的，还是模型推出来的？资料没读到，它会不会也给我写上一大段？</p>
+<p>ResearchPilot 就是围绕这些问题做的一次尝试。现在也放了一个线上版本，不想折腾本地环境的话，可以先打开 <a target="_blank" rel="noopener" href="https://researchpilot.towerman1990.cn/">ResearchPilot 线上试用</a> 看看。</p>
+<p>代码在这里：<a target="_blank" rel="noopener" href="https://github.com/towerman1990/researchpilot">towerman1990&#x2F;researchpilot</a>。下面聊聊它怎么用，以及写这个项目时处理的几个问题。</p>
+<span id="more"></span>
+
+<h3 id="先说它能干什么"><a href="#先说它能干什么" class="headerlink" title="先说它能干什么"></a>先说它能干什么</h3><p>打开工作台，注册、登录，填一个研究目标，剩下的过程就交给后台。它会规划步骤，用只读工具读取公网页面或公开 GitHub 信息，保存用到的材料，再整理报告。页面上可以看进度，也能回头查看历史任务、报告和来源。</p>
+<p>问题最好具体一点。比如“看一下这个仓库怎么启动”“从官方文档里整理 HTTP 客户端的超时设置”，都比“帮我研究一下 Go”更容易得到有用的结果。</p>
+<p>研究不一定每次都能完成。网页打不开、材料不够、模型没按要求返回，都可能让任务失败或者停在「部分完成」。这也是我希望保留在页面上的信息：没查到，就把没查到的部分交代清楚。</p>
+<h3 id="先在线上试试"><a href="#先在线上试试" class="headerlink" title="先在线上试试"></a>先在线上试试</h3><p>直接访问 <a target="_blank" rel="noopener" href="https://researchpilot.towerman1990.cn/">researchpilot.towerman1990.cn</a>，注册并登录后就可以进入工作台。试用额度和模型配置以页面提示为准；后面介绍的研究目标写法、进度查看和报告核对，在线上也一样适用。</p>
+<p>如果想在自己的电脑上运行，或者看看代码怎么实现，再按下面的步骤部署。</p>
+<h3 id="想自己部署的话，在本地跑起来"><a href="#想自己部署的话，在本地跑起来" class="headerlink" title="想自己部署的话，在本地跑起来"></a>想自己部署的话，在本地跑起来</h3><p>我把本地环境放进了 Docker Compose。Windows、macOS 和 Linux 都有对应的启动说明，主要区别在 Docker 的安装方式和初始化脚本。先装好 Git，再准备各自的环境：</p>
+<ul>
+<li>Windows：安装 PowerShell 7 和 Docker Desktop，启动 Docker，并切到 Linux 容器。</li>
+<li>macOS：按 Intel 或 Apple Silicon 芯片选择 Docker Desktop，安装并启动；还需要 OpenSSL，用来生成本地密钥。</li>
+<li>Linux：安装并启动 Docker Engine，再装 Compose v2 插件，同时准备 OpenSSL。</li>
+</ul>
+<p>可以先在终端执行 <code>docker version</code>、<code>docker compose version</code> 和 <code>docker info</code>，确认 Docker 客户端、服务和 Compose 都正常。</p>
+<p><strong>Windows 下这样启动：</strong></p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/towerman1990/researchpilot.git</span><br><span class="line"><span class="built_in">cd</span> researchpilot</span><br><span class="line">pwsh <span class="operator">-File</span> ./scripts/init<span class="literal">-local</span>.ps1</span><br><span class="line">docker compose up <span class="literal">--build</span> <span class="literal">-d</span></span><br><span class="line">docker compose <span class="built_in">ps</span> <span class="literal">-a</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>macOS 和 Linux 下则用这组命令，不用另外安装 PowerShell：</strong></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/towerman1990/researchpilot.git</span><br><span class="line"><span class="built_in">cd</span> researchpilot</span><br><span class="line">sh scripts/init-local.sh</span><br><span class="line">docker compose up --build -d</span><br><span class="line">docker compose ps -a</span><br><span class="line">curl -fsS http://localhost:8080/healthz</span><br></pre></td></tr></table></figure>
+
+<p>健康检查正常时会返回 <code>{&quot;ok&quot;:true}</code>。如果 Linux 上只有 <code>sudo docker</code> 能用，就给 Docker 命令加 <code>sudo</code>；初始化脚本仍然用项目文件所有者的身份执行，别把两件事混在一起。</p>
+<p>Apple Silicon 和 Linux ARM64 可以先尝试本机架构构建，不过目前还没有完成这两类设备的实机验收，生产镜像发布也暂时只有 <code>linux/amd64</code>。如果卡在构建阶段，记得把芯片架构和报错一起留下，方便定位。</p>
+<p>第一次要下载镜像和编译依赖，可能需要等一会儿。Go 和前端都在镜像里构建，宿主机不用另外装对应的工具链。</p>
+<p>这里有个容易让人疑惑的地方：<code>migrate</code> 是负责数据库迁移的一次性服务，正常退出、退出码为 0 就可以，不用等它一直显示 Running。迁移完成后，API 和 Worker 才会启动。</p>
+<p>然后访问 <a target="_blank" rel="noopener" href="http://localhost:8080/">http://localhost:8080</a>，注册账号并登录。先按这个默认地址访问；如果要换地址或端口，也要一起调整 <code>PUBLIC_ORIGIN</code>。</p>
+<h4 id="配好模型，再做真实研究"><a href="#配好模型，再做真实研究" class="headerlink" title="配好模型，再做真实研究"></a>配好模型，再做真实研究</h4><p>进入「模型设置」，填写 Base URL、模型名称和 API Key。</p>
+<p>Base URL 填供应商提供的兼容接口基础地址，例如 <code>https://api.deepseek.com</code>；有些供应商需要带 <code>/v1</code>，按它的说明来。程序会自己拼接 <code>/chat/completions</code>，不用把整条请求地址填进去。模型名称则填写自己账号实际可用的标识。</p>
+<p>保存后，点一下「检查连接与能力」，确认配置能用，再提交任务。不同供应商对兼容接口的实现有差别，连接成功以后，仍然需要用实际任务试一下。</p>
+<p>如果没有配置个人模型，环境也没启用平台试用，任务会走演示流程。它能帮你确认页面、进度和报告这条链路跑通了，但返回的不是一次真实研究。代码里也加了可选的试用额度，只有运行环境配置并启用后才会显示；本地尝试不依赖这部分。</p>
+<h4 id="第一个问题别问太大"><a href="#第一个问题别问太大" class="headerlink" title="第一个问题别问太大"></a>第一个问题别问太大</h4><p>可以先把下面这段填进「研究目标」：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">请阅读下面的 Go 官方资料，整理 net/http 客户端的超时与连接复用注意事项。</span><br><span class="line">区分整体请求超时、连接池空闲连接管理，以及调用方需要关闭响应体的原因。</span><br><span class="line">每项结论附上对应来源；材料没有说明的部分请明确标注，不要补写。</span><br><span class="line">https://pkg.go.dev/net/http</span><br></pre></td></tr></table></figure>
+
+<p>这段输入把问题、资料和输出要求都写出来了。这样报告出来以后，也容易判断它有没有答到点上。当然，实际效果还取决于页面能不能读到，以及使用的模型。</p>
+<p>目前支持公网页面、公开 GitHub 信息和可选的 Brave 搜索。没有配置搜索服务时，直接给公开 URL 会更合适。</p>
+<p>想启用 Brave 搜索，可以在仓库根目录的本地 <code>.env</code> 里填写 <code>BRAVE_SEARCH_API_KEY</code>，再重新创建 API 和 Worker：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker compose up <span class="literal">-d</span> <span class="literal">--force-recreate</span> api worker</span><br></pre></td></tr></table></figure>
+
+<p>读 GitHub 时也可能碰到未认证 API 配额用完的问题。需要提高配额，可以在同一个本地配置里填写最小权限的 <code>GITHUB_READ_TOKEN</code>，然后执行上面的命令。真实密钥别提交到仓库。</p>
+<h4 id="报告出来了，还是要看一眼来源"><a href="#报告出来了，还是要看一眼来源" class="headerlink" title="报告出来了，还是要看一眼来源"></a>报告出来了，还是要看一眼来源</h4><p>任务提交后，页面会显示等待派发、执行中、等待重试等状态，也可以取消任务。报告生成后，建议挑重要结论打开引用看一眼：原文是否真的支持它的说法？有没有漏掉适用条件？哪些是资料里的事实，哪些是推断？</p>
+<p>系统会检查引用是否来自当前任务已保存的材料。不过，有来源和读对了来源，仍然是两回事。这一步目前还得靠人复查。</p>
+<h3 id="后台为什么拆成这样"><a href="#后台为什么拆成这样" class="headerlink" title="后台为什么拆成这样"></a>后台为什么拆成这样</h3><p>后端用了 Go，HTTP 层先用标准库 <code>net/http</code>；前端是 React 19 和 Vite 7。任务、事件、检查点、报告和来源放在 MySQL 8.4，Redis 7.4 加 Asynq 负责异步派发，浏览器通过 SSE 看进度。</p>
+<p>Agent 部分目前是单 Agent、自研运行时。研究过程可以简单理解成：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">提交目标 → 规划步骤 → 读取资料 → 保存证据</span><br><span class="line">                              ↓</span><br><span class="line">                   检查有没有回答目标问题</span><br><span class="line">                              ↓</span><br><span class="line">                       整理报告和引用</span><br></pre></td></tr></table></figure>
+
+<p>真正需要多处理一些的，是这条流程中间出问题怎么办。</p>
+<p>比如，数据库已经创建了任务，往队列发消息却失败了，任务就可能一直等着。所以这里用了 Outbox：在同一个 MySQL 事务里写入任务和待派发记录，再由后台把它转交给 Redis。任务状态以 MySQL 为准，队列主要负责把工作送到 Worker 手里。</p>
+<p>再比如，同一条消息可能被重复投递，一个执行器超时以后也未必立刻停止。Worker 因此需要租约和执行代次来约束写入，并保存检查点供恢复使用。做过异步任务的同学，对这些问题应该都不陌生。</p>
+<p>前端用 SSE 接收持久化后的任务事件，断线后可以按游标回放。这里展示的是任务进度；研究主链路主要使用模型的完整 JSON 响应，所以页面有进度更新，不代表模型正在逐字输出答案。</p>
+<h3 id="测下来，有些失败挺值得留下来"><a href="#测下来，有些失败挺值得留下来" class="headerlink" title="测下来，有些失败挺值得留下来"></a>测下来，有些失败挺值得留下来</h3><p>项目里做过一轮固定十题的真实模型评估。八题生成了完整报告，两题因为没拿到足够的 MySQL 官方材料，没有通过。</p>
+<p>这个数字只能说明那一轮的结果，不能当成通用成功率。相比报一个分数，更值得记录的是：早期有报告遗漏了问题要求里的关键内容，任务状态却已经显示完成。后来加了基于归档证据的目标覆盖检查，缺口补不齐时，就返回「部分完成」。相关过程写在<a target="_blank" rel="noopener" href="https://github.com/towerman1990/researchpilot/blob/main/docs/11-M2-EVALUATION.md">评估记录</a>里。</p>
+<p>这类问题比“接口调通了没有”更难判断。模型返回了东西，程序也没报错，还得继续问一句：它交出来的结果，真的够用吗？</p>
+<h3 id="跑不起来时，可以先看这里"><a href="#跑不起来时，可以先看这里" class="headerlink" title="跑不起来时，可以先看这里"></a>跑不起来时，可以先看这里</h3><p>先检查服务和日志，通常比反复点提交更有效：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker compose <span class="built_in">ps</span> <span class="literal">-a</span></span><br><span class="line">docker compose logs <span class="literal">--tail</span>=<span class="number">100</span> migrate api worker</span><br></pre></td></tr></table></figure>
+
+<p>页面打不开，先看看 Docker、8080 端口和 API。任务一直等待，就看 Worker、Redis 和迁移状态。模型认证失败，回头核对 Base URL、模型名称和密钥；来源读取失败，再确认页面是否公开可访问，或 GitHub 配额是否耗尽。</p>
+<p>如果提示域名解析被拒绝，也可能和代理的 Fake-IP 有关。可以检查服务端 DNS，但不要为了跑通就关掉私网、保留地址的校验。</p>
+<p>仓库还有一个演示烟测脚本：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pwsh <span class="operator">-File</span> ./scripts/smoke.ps1</span><br></pre></td></tr></table></figure>
+
+<p>这个脚本需要 PowerShell 7。macOS 和 Linux 用户想跑它，可以另外安装 PowerShell；只启动和使用工作台则不需要。它会创建测试账号和任务，检查幂等、租户隔离、SSE 回放和演示报告。适合验证基本流程，真实模型的效果还要另外看。</p>
+<p>macOS 或 Linux 上如果报密钥读取失败，先检查 Docker 的目录共享、文件权限和 SELinux 等系统策略。应用容器使用 UID 65532，需要能读取挂载进去的密钥；<code>init-local.sh</code> 会保留已有密钥，迁移旧环境时也不会替你修改旧文件的权限，别为了排错直接重新生成覆盖。</p>
+<p>另外，初始化时生成的 <code>.cache/model-master.key</code> 要保管好。模型配置加密后存在数据库里，备份 MySQL 时也需要保留对应的主密钥，否则恢复了数据也解不开配置。</p>
+<p>日常停止服务用下面这条就行：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker compose down</span><br></pre></td></tr></table></figure>
+
+<p>别顺手加 <code>-v</code>，那会删除 Compose 管理的数据卷。升级之前也记得先备份。</p>
+<p>Web 版本现在已经提供线上试用，桌面端仍在推进。欢迎直接在线上体验，也可以把项目拉下来自己运行。如果碰到“看起来答了，其实没答到”的例子，也欢迎提 Issue。</p>
+<p>项目和文档放在这里：</p>
+<ul>
+<li><p><a target="_blank" rel="noopener" href="https://researchpilot.towerman1990.cn/">ResearchPilot 线上试用</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/towerman1990/researchpilot">ResearchPilot 源码与启动说明</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/towerman1990/researchpilot/blob/main/docs/09-M2-IMPLEMENTATION.md">实现记录</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/towerman1990/researchpilot/blob/main/docs/11-M2-EVALUATION.md">真实模型评估记录</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/towerman1990/researchpilot/blob/main/docs/14-MACOS-LINUX.md">macOS &#x2F; Linux 使用指南</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/towerman1990/researchpilot/blob/main/docs/12-M3-RELEASE.md">Web 发布与部署说明</a></p>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Golang/" rel="tag"># Golang</a>
+              <a href="/tags/AI/" rel="tag"># AI</a>
+              <a href="/tags/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E8%B7%B5/" rel="tag"># 项目实践</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/05/12/Golang-%E4%B8%AD%E4%BD%BF%E7%94%A8Mockey%E5%92%8CGoConvey%E7%BC%96%E5%86%99%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/" rel="prev" title="Golang 中使用 Mockey 和 GoConvey 编写单元测试">
+                  <i class="fa fa-angle-left"></i> Golang 中使用 Mockey 和 GoConvey 编写单元测试
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Andy Zhang</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/mist/" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>
