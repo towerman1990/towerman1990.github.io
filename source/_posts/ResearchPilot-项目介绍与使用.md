@@ -1,7 +1,7 @@
 ---
 title: ResearchPilot：技术研究工作台的使用与实现
 date: 2026-11-19 10:00:00
-updated: 2026-11-20 00:00:00
+updated: 2026-11-21 10:00:00
 tags:
  - Golang
  - AI
@@ -16,29 +16,33 @@ tags:
 
 这是我开发 ResearchPilot 的出发点。线上版本已开放试用。[ResearchPilot 线上试用](https://researchpilot.towerman1990.cn)
 
-下文介绍工作台的使用方法，以及任务派发、执行恢复和证据引用的实现。[源代码与启动说明](https://github.com/towerman1990/researchpilot)
+下文介绍线上试用、Windows 客户端和自托管方式，也记录了证据采集与最新一轮评估的结果。[源代码与启动说明](https://github.com/towerman1990/researchpilot)
 
 <!-- more -->
 
 ### 工作台如何开展研究
 
-注册并登录后，可以提交研究目标。后台会规划步骤，通过只读工具读取公网页面或公开 GitHub 信息，归档材料并生成报告。工作台提供任务进度、历史报告和引用来源。
+注册并登录后，输入一个具体的研究目标。工作台会规划步骤，读取公开网页或 GitHub 资料，归档证据，再生成带引用的报告。分析开源实现时，可以引用固定提交的源码，方便日后核对依据。
 
-研究目标越具体，越容易判断报告是否回答了问题。例如，可以要求说明某个仓库的启动步骤，或根据官方文档整理 HTTP 客户端的超时设置。
+如果要限定研究范围，可以先审阅和编辑计划再开始取证。也可以上传 TXT 或 Markdown，补充背景或约束。报告生成后，可逐条查看归档摘录，下载 Markdown 或另存为 PDF，也可基于这份报告继续追问。
 
-网页无法访问、材料不足或模型响应不符合要求时，任务可能失败或显示「部分完成」。我保留了这些状态，便于读者区分已有结果与尚未解决的问题。
+多任务工作区集中展示进行中、待审批和已结束的研究。配置个人模型后，可以安排按日或按周运行的研究，并在站内订阅结果。研究评估和用量面板可查看近期任务结果、报告反馈和模型用量。
+
+我保留了「部分完成」状态。当证据只覆盖问题的一部分时，报告会保留有依据的内容和待确认事项。也可以在提交任务时启用发布前的引用复核。
 
 ### 线上试用与模型配置
 
-访问线上工作台，注册并登录即可提交研究。使用平台模型时，每个账号有 10 次试用额度。额度按成功创建的任务扣减，同一任务的重试只计一次。额度用完后，可以在「模型设置」配置个人 API Key，再继续提交研究。[打开线上工作台](https://researchpilot.towerman1990.cn)
+使用平台模型时，每个账号有累计 10 次试用额度，每天不会重置。任务创建成功时扣减一次，重试和恢复不会重复扣减，失败或取消也不返还。用完后，可在「模型设置」填写个人模型的 Base URL、模型名称和 API Key，继续提交研究。[打开线上工作台](https://researchpilot.towerman1990.cn)
+
+明确写出技术名称、版本和要比较的问题，通常比只写几个关键词更容易获得切题的报告。如果手边已有官方资料，也可以附上链接限定取证范围。
 
 ### Windows 桌面客户端
 
-{% asset_img researchpilot-icon.png 新版 ResearchPilot 罗盘图标 %}
+{% asset_img researchpilot-icon.png ResearchPilot 罗盘图标 %}
 
-Windows x64 客户端采用 MyGo 和 WebView2，默认连接线上工作台。使用同一账号分别登录网页版和桌面端，即可在两端查看研究历史与报告。新版罗盘图标已应用于登录页、工作台和浏览器标签页，重新打开桌面客户端即可加载新版页面。
+Windows x64 客户端使用 MyGo 和 WebView2，默认连接线上工作台。网页版与桌面端使用同一个账号，任务历史和报告可在两端查看。
 
-Windows 安装包已完成本地试装，公开下载仍待发布。网页版已开放试用。[桌面端源码](https://github.com/towerman1990/researchpilot/tree/main/apps/desktop)
+`v0.1.2` 已作为未签名的预发行版公开提供。发布页附有安装包和 SHA-256 校验文件。[下载 Windows 安装包](https://github.com/towerman1990/researchpilot/releases/tag/v0.1.2)
 
 ### 使用 Docker Compose 本地部署
 
@@ -104,7 +108,7 @@ https://pkg.go.dev/net/http
 
 示例明确了研究问题、资料范围和输出要求，便于评估报告是否涵盖目标。报告质量仍取决于来源的可访问性和所使用的模型。
 
-目前支持公网页面、公开 GitHub 信息和可选的 Brave 搜索。未配置搜索服务时，可以在研究目标中直接附上公开 URL。
+工作台可以读取公网页面与 GitHub 资料。Brave Search API 是可选的网页搜索服务，用于发现候选网页；进入报告的引用来自实际读取的资料。即使没有配置搜索服务，也可以直接描述问题或附上公开 URL。
 
 要启用 Brave 搜索，在仓库根目录的本地 `.env` 中填写 `BRAVE_SEARCH_API_KEY`，再重新创建 API 和 Worker。
 
@@ -124,7 +128,7 @@ docker compose up -d --force-recreate api worker
 
 后端使用 Go 和 Hertz，前端使用 React、Vite 和 Ant Design。任务、事件、检查点、报告和来源保存在 MySQL 中，仓储层使用 GORM Gen。Redis 和 Asynq 负责异步派发，页面通过 SSE 接收任务进度。
 
-Worker 使用 Eino 编排单 Agent 的研究流程，应用负责管理任务状态、重试和恢复。
+Worker 使用 Eino 编排研究流程。独立的取证步骤可以并行执行。覆盖检查发现缺口后，工作台会尝试补充资料，再决定是否生成完整报告。
 
 ```text
 提交目标 → 规划步骤 → 读取资料 → 保存证据
@@ -144,11 +148,9 @@ Worker 使用 Eino 编排单 Agent 的研究流程，应用负责管理任务状
 
 ### 真实模型评估
 
-项目用固定的 10 个问题进行了一轮真实模型评估。8 题生成完整报告，另外 2 题因缺少足够的 MySQL 官方材料而未通过。
+早期固定十题评估中，有两道 MySQL 题因原网页无法读取而取证失败。后来，抓取工具在原站返回 403 时会尝试同版本的 Oracle 官方手册，并将实际读取的页面写入引用。开源实现题也可从目录和清单继续查到固定提交里的具体文件。
 
-结果仅反映该轮题目和运行条件。早期评估发现，有些报告遗漏了关键要求，任务状态却已显示完成。为此，系统增加了基于归档证据的目标覆盖检查。证据缺口无法补齐时，任务显示「部分完成」。[真实模型评估记录](https://github.com/towerman1990/researchpilot/blob/main/docs/11-M2-EVALUATION.md)
-
-因此，评估除了覆盖接口调用和任务状态，也要检查报告能否依据已取得的材料回答研究目标。
+最近一轮在隔离环境复跑了十道固定技术题。题面没有提供 URL，也没有启用 Brave，工作台通过模型规划定位资料并读取原文。十题都生成了完整报告，通过归档引用完整性检查。这个数字只反映该轮固定题集的自动结果；引用是否足以支持关键结论，仍值得查阅报告摘录。真实 Brave 调用仍待验收。[评估方法与记录](https://github.com/towerman1990/researchpilot/blob/main/docs/11-M2-EVALUATION.md)
 
 ### 常见问题与排查
 
@@ -187,6 +189,7 @@ docker compose down
 
 ### 项目链接
 
+- [Windows x64 预发行版](https://github.com/towerman1990/researchpilot/releases/tag/v0.1.2)
 - [ResearchPilot 线上试用](https://researchpilot.towerman1990.cn)
 - [ResearchPilot 源码与启动说明](https://github.com/towerman1990/researchpilot)
 - [实现记录](https://github.com/towerman1990/researchpilot/blob/main/docs/09-M2-IMPLEMENTATION.md)
