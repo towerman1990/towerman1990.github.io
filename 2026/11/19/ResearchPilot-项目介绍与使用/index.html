@@ -28,7 +28,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://blog.towerman1990.cn/2026/11/19/ResearchPilot-%E9%A1%B9%E7%9B%AE%E4%BB%8B%E7%BB%8D%E4%B8%8E%E4%BD%BF%E7%94%A8/researchpilot-icon.png">
 <meta property="article:published_time" content="2026-11-19T02:00:00.000Z">
-<meta property="article:modified_time" content="2026-11-19T16:00:00.000Z">
+<meta property="article:modified_time" content="2026-11-21T02:00:00.000Z">
 <meta property="article:author" content="Andy Zhang">
 <meta property="article:tag" content="AI">
 <meta property="article:tag" content="Golang">
@@ -218,7 +218,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-11-20 00:00:00" itemprop="dateModified" datetime="2026-11-20T00:00:00+08:00">2026-11-20</time>
+      <time title="修改时间：2026-11-21 10:00:00" itemprop="dateModified" datetime="2026-11-21T10:00:00+08:00">2026-11-21</time>
     </span>
 
   
@@ -234,17 +234,19 @@
 <p>输入一个技术问题后，工作台会查阅公开资料、整理要点，并生成带来源的报告。它适合用来了解开源项目、准备技术方案，或梳理官方文档中的具体问题。</p>
 <p>在把 AI 生成的结论用到代码或技术方案之前，我希望能查到支撑结论的原始资料，并区分文档中明确写出的事实与模型的推断。资料不足时，报告也应说明哪些问题仍待确认。</p>
 <p>这是我开发 ResearchPilot 的出发点。线上版本已开放试用。<a target="_blank" rel="noopener" href="https://researchpilot.towerman1990.cn/">ResearchPilot 线上试用</a></p>
-<p>下文介绍工作台的使用方法，以及任务派发、执行恢复和证据引用的实现。<a target="_blank" rel="noopener" href="https://github.com/towerman1990/researchpilot">源代码与启动说明</a></p>
+<p>下文介绍线上试用、Windows 客户端和自托管方式，也记录了证据采集与最新一轮评估的结果。<a target="_blank" rel="noopener" href="https://github.com/towerman1990/researchpilot">源代码与启动说明</a></p>
 <span id="more"></span>
 
-<h3 id="工作台如何开展研究"><a href="#工作台如何开展研究" class="headerlink" title="工作台如何开展研究"></a>工作台如何开展研究</h3><p>注册并登录后，可以提交研究目标。后台会规划步骤，通过只读工具读取公网页面或公开 GitHub 信息，归档材料并生成报告。工作台提供任务进度、历史报告和引用来源。</p>
-<p>研究目标越具体，越容易判断报告是否回答了问题。例如，可以要求说明某个仓库的启动步骤，或根据官方文档整理 HTTP 客户端的超时设置。</p>
-<p>网页无法访问、材料不足或模型响应不符合要求时，任务可能失败或显示「部分完成」。我保留了这些状态，便于读者区分已有结果与尚未解决的问题。</p>
-<h3 id="线上试用与模型配置"><a href="#线上试用与模型配置" class="headerlink" title="线上试用与模型配置"></a>线上试用与模型配置</h3><p>访问线上工作台，注册并登录即可提交研究。使用平台模型时，每个账号有 10 次试用额度。额度按成功创建的任务扣减，同一任务的重试只计一次。额度用完后，可以在「模型设置」配置个人 API Key，再继续提交研究。<a target="_blank" rel="noopener" href="https://researchpilot.towerman1990.cn/">打开线上工作台</a></p>
-<h3 id="Windows-桌面客户端"><a href="#Windows-桌面客户端" class="headerlink" title="Windows 桌面客户端"></a>Windows 桌面客户端</h3><img src="/2026/11/19/ResearchPilot-%E9%A1%B9%E7%9B%AE%E4%BB%8B%E7%BB%8D%E4%B8%8E%E4%BD%BF%E7%94%A8/researchpilot-icon.png" class="" title="新版 ResearchPilot 罗盘图标">
+<h3 id="工作台如何开展研究"><a href="#工作台如何开展研究" class="headerlink" title="工作台如何开展研究"></a>工作台如何开展研究</h3><p>注册并登录后，输入一个具体的研究目标。工作台会规划步骤，读取公开网页或 GitHub 资料，归档证据，再生成带引用的报告。分析开源实现时，可以引用固定提交的源码，方便日后核对依据。</p>
+<p>如果要限定研究范围，可以先审阅和编辑计划再开始取证。也可以上传 TXT 或 Markdown，补充背景或约束。报告生成后，可逐条查看归档摘录，下载 Markdown 或另存为 PDF，也可基于这份报告继续追问。</p>
+<p>多任务工作区集中展示进行中、待审批和已结束的研究。配置个人模型后，可以安排按日或按周运行的研究，并在站内订阅结果。研究评估和用量面板可查看近期任务结果、报告反馈和模型用量。</p>
+<p>我保留了「部分完成」状态。当证据只覆盖问题的一部分时，报告会保留有依据的内容和待确认事项。也可以在提交任务时启用发布前的引用复核。</p>
+<h3 id="线上试用与模型配置"><a href="#线上试用与模型配置" class="headerlink" title="线上试用与模型配置"></a>线上试用与模型配置</h3><p>使用平台模型时，每个账号有累计 10 次试用额度，每天不会重置。任务创建成功时扣减一次，重试和恢复不会重复扣减，失败或取消也不返还。用完后，可在「模型设置」填写个人模型的 Base URL、模型名称和 API Key，继续提交研究。<a target="_blank" rel="noopener" href="https://researchpilot.towerman1990.cn/">打开线上工作台</a></p>
+<p>明确写出技术名称、版本和要比较的问题，通常比只写几个关键词更容易获得切题的报告。如果手边已有官方资料，也可以附上链接限定取证范围。</p>
+<h3 id="Windows-桌面客户端"><a href="#Windows-桌面客户端" class="headerlink" title="Windows 桌面客户端"></a>Windows 桌面客户端</h3><img src="/2026/11/19/ResearchPilot-%E9%A1%B9%E7%9B%AE%E4%BB%8B%E7%BB%8D%E4%B8%8E%E4%BD%BF%E7%94%A8/researchpilot-icon.png" class="" title="ResearchPilot 罗盘图标">
 
-<p>Windows x64 客户端采用 MyGo 和 WebView2，默认连接线上工作台。使用同一账号分别登录网页版和桌面端，即可在两端查看研究历史与报告。新版罗盘图标已应用于登录页、工作台和浏览器标签页，重新打开桌面客户端即可加载新版页面。</p>
-<p>Windows 安装包已完成本地试装，公开下载仍待发布。网页版已开放试用。<a target="_blank" rel="noopener" href="https://github.com/towerman1990/researchpilot/tree/main/apps/desktop">桌面端源码</a></p>
+<p>Windows x64 客户端使用 MyGo 和 WebView2，默认连接线上工作台。网页版与桌面端使用同一个账号，任务历史和报告可在两端查看。</p>
+<p><code>v0.1.2</code> 已作为未签名的预发行版公开提供。发布页附有安装包和 SHA-256 校验文件。<a target="_blank" rel="noopener" href="https://github.com/towerman1990/researchpilot/releases/tag/v0.1.2">下载 Windows 安装包</a></p>
 <h3 id="使用-Docker-Compose-本地部署"><a href="#使用-Docker-Compose-本地部署" class="headerlink" title="使用 Docker Compose 本地部署"></a>使用 Docker Compose 本地部署</h3><p>项目通过 Docker Compose 启动本地环境。请先安装 Git，再按操作系统准备 Docker 和初始化工具。</p>
 <ul>
 <li>Windows 使用 PowerShell 7 和 Docker Desktop。启动 Docker 后切换到 Linux 容器。</li>
@@ -271,7 +273,7 @@
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">请阅读下面的 Go 官方资料，整理 net/http 客户端的超时与连接复用注意事项。</span><br><span class="line">区分整体请求超时、连接池空闲连接管理，以及调用方需要关闭响应体的原因。</span><br><span class="line">每项结论附上对应来源；材料没有说明的部分请明确标注，不要补写。</span><br><span class="line">https://pkg.go.dev/net/http</span><br></pre></td></tr></table></figure>
 
 <p>示例明确了研究问题、资料范围和输出要求，便于评估报告是否涵盖目标。报告质量仍取决于来源的可访问性和所使用的模型。</p>
-<p>目前支持公网页面、公开 GitHub 信息和可选的 Brave 搜索。未配置搜索服务时，可以在研究目标中直接附上公开 URL。</p>
+<p>工作台可以读取公网页面与 GitHub 资料。Brave Search API 是可选的网页搜索服务，用于发现候选网页；进入报告的引用来自实际读取的资料。即使没有配置搜索服务，也可以直接描述问题或附上公开 URL。</p>
 <p>要启用 Brave 搜索，在仓库根目录的本地 <code>.env</code> 中填写 <code>BRAVE_SEARCH_API_KEY</code>，再重新创建 API 和 Worker。</p>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker compose up <span class="literal">-d</span> <span class="literal">--force-recreate</span> api worker</span><br></pre></td></tr></table></figure>
 
@@ -279,16 +281,15 @@
 <h4 id="核对报告引用"><a href="#核对报告引用" class="headerlink" title="核对报告引用"></a>核对报告引用</h4><p>页面会显示等待派发、执行中、等待重试等状态，并提供取消操作。报告生成后，可以打开重要结论的引用，核对原文是否支持结论、适用条件是否完整，以及哪些内容属于推断。</p>
 <p>系统会检查引用是否来自当前任务已归档的材料。引用是否足以支撑具体结论，仍需结合原文判断。</p>
 <h3 id="后台架构与任务执行"><a href="#后台架构与任务执行" class="headerlink" title="后台架构与任务执行"></a>后台架构与任务执行</h3><p>后端使用 Go 和 Hertz，前端使用 React、Vite 和 Ant Design。任务、事件、检查点、报告和来源保存在 MySQL 中，仓储层使用 GORM Gen。Redis 和 Asynq 负责异步派发，页面通过 SSE 接收任务进度。</p>
-<p>Worker 使用 Eino 编排单 Agent 的研究流程，应用负责管理任务状态、重试和恢复。</p>
+<p>Worker 使用 Eino 编排研究流程。独立的取证步骤可以并行执行。覆盖检查发现缺口后，工作台会尝试补充资料，再决定是否生成完整报告。</p>
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">提交目标 → 规划步骤 → 读取资料 → 保存证据</span><br><span class="line">                              ↓</span><br><span class="line">                         检查研究目标覆盖情况</span><br><span class="line">                              ↓</span><br><span class="line">                       整理报告和引用</span><br></pre></td></tr></table></figure>
 
 <p>任务执行设计主要处理派发失败、重复投递和中途恢复。</p>
 <p>如果任务已经写入数据库，但队列消息发送失败，任务可能一直等待派发。为此，系统使用 Outbox，在同一个 MySQL 事务中写入任务和待派发记录，再由后台转交给 Redis。任务状态以 MySQL 为准，队列负责将工作交给 Worker。</p>
 <p>消息可能重复投递，旧执行器也可能在超时后继续运行。Worker 通过租约和执行代次约束写入，并保存检查点供恢复使用。</p>
 <p>前端通过 SSE 接收已持久化的任务事件，断线后可按游标回放。事件流展示任务进度，研究主链路主要处理模型返回的完整 JSON 响应。</p>
-<h3 id="真实模型评估"><a href="#真实模型评估" class="headerlink" title="真实模型评估"></a>真实模型评估</h3><p>项目用固定的 10 个问题进行了一轮真实模型评估。8 题生成完整报告，另外 2 题因缺少足够的 MySQL 官方材料而未通过。</p>
-<p>结果仅反映该轮题目和运行条件。早期评估发现，有些报告遗漏了关键要求，任务状态却已显示完成。为此，系统增加了基于归档证据的目标覆盖检查。证据缺口无法补齐时，任务显示「部分完成」。<a target="_blank" rel="noopener" href="https://github.com/towerman1990/researchpilot/blob/main/docs/11-M2-EVALUATION.md">真实模型评估记录</a></p>
-<p>因此，评估除了覆盖接口调用和任务状态，也要检查报告能否依据已取得的材料回答研究目标。</p>
+<h3 id="真实模型评估"><a href="#真实模型评估" class="headerlink" title="真实模型评估"></a>真实模型评估</h3><p>早期固定十题评估中，有两道 MySQL 题因原网页无法读取而取证失败。后来，抓取工具在原站返回 403 时会尝试同版本的 Oracle 官方手册，并将实际读取的页面写入引用。开源实现题也可从目录和清单继续查到固定提交里的具体文件。</p>
+<p>最近一轮在隔离环境复跑了十道固定技术题。题面没有提供 URL，也没有启用 Brave，工作台通过模型规划定位资料并读取原文。十题都生成了完整报告，通过归档引用完整性检查。这个数字只反映该轮固定题集的自动结果；引用是否足以支持关键结论，仍值得查阅报告摘录。真实 Brave 调用仍待验收。<a target="_blank" rel="noopener" href="https://github.com/towerman1990/researchpilot/blob/main/docs/11-M2-EVALUATION.md">评估方法与记录</a></p>
 <h3 id="常见问题与排查"><a href="#常见问题与排查" class="headerlink" title="常见问题与排查"></a>常见问题与排查</h3><p>遇到启动或执行问题时，可以先查看服务状态和日志。</p>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker compose <span class="built_in">ps</span> <span class="literal">-a</span></span><br><span class="line">docker compose logs <span class="literal">--tail</span>=<span class="number">100</span> migrate api worker</span><br></pre></td></tr></table></figure>
 
@@ -306,6 +307,7 @@
 <p>保留现有数据时，请省略会删除 Compose 数据卷的 <code>-v</code> 参数。升级前请先备份。</p>
 <p>如果报告遗漏了研究要求，欢迎提交 Issue，并附上研究目标、公开来源和报告缺失的内容，便于复现。</p>
 <h3 id="项目链接"><a href="#项目链接" class="headerlink" title="项目链接"></a>项目链接</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/towerman1990/researchpilot/releases/tag/v0.1.2">Windows x64 预发行版</a></li>
 <li><a target="_blank" rel="noopener" href="https://researchpilot.towerman1990.cn/">ResearchPilot 线上试用</a></li>
 <li><a target="_blank" rel="noopener" href="https://github.com/towerman1990/researchpilot">ResearchPilot 源码与启动说明</a></li>
 <li><a target="_blank" rel="noopener" href="https://github.com/towerman1990/researchpilot/blob/main/docs/09-M2-IMPLEMENTATION.md">实现记录</a></li>
