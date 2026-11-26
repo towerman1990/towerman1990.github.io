@@ -1,11 +1,13 @@
 ---
 title: ResearchPilot：技术研究工作台的使用与实现
 date: 2026-11-19 10:00:00
-updated: 2026-11-21 10:00:00
+updated: 2026-11-26 09:27:32
 tags:
  - Golang
  - AI
  - 项目实践
+ - RAG
+ - MCP
 ---
 
 **ResearchPilot** 是我开发的技术研究工作台。
@@ -16,13 +18,13 @@ tags:
 
 这是我开发 ResearchPilot 的出发点。线上版本已开放试用。[ResearchPilot 线上试用](https://researchpilot.towerman1990.cn)
 
-下文介绍线上试用、Windows 客户端和自托管方式，也记录了证据采集与最新一轮评估的结果。[源代码与启动说明](https://github.com/towerman1990/researchpilot)
+这篇文章先用一个 .NET 问题演示完整流程，再拆解 RAG、MCP、联网取证和断点续跑各自负责的工作。文末附有 Windows 客户端和自托管方式。[源代码与启动说明](https://github.com/towerman1990/researchpilot)
 
 <!-- more -->
 
 ### 工作台如何开展研究
 
-注册并登录后，输入一个具体的研究目标。工作台会规划步骤，读取公开网页或 GitHub 资料，归档证据，再生成带引用的报告。分析开源实现时，可以引用固定提交的源码，方便日后核对依据。
+打开工作台就能输入研究目标。比如勾选「先查公开知识库」，问「HttpClient 如何在复用连接池的同时应对 DNS 记录变化？」任务会先找相关文档片段，再检查证据是否足以覆盖问题。完成后可在运行记录里查看检索方式和命中条数，并在中文报告中点开引用核对来源。分析开源实现时，还可以引用固定提交的源码。
 
 如果要限定研究范围，可以先审阅和编辑计划再开始取证。也可以上传 TXT 或 Markdown，补充背景或约束。报告生成后，可逐条查看归档摘录，下载 Markdown 或另存为 PDF，也可基于这份报告继续追问。
 
@@ -30,9 +32,21 @@ tags:
 
 我保留了「部分完成」状态。当证据只覆盖问题的一部分时，报告会保留有依据的内容和待确认事项。也可以在提交任务时启用发布前的引用复核。
 
+### 用 RAG 把检索证据写进报告
+
+我把 .NET、ASP.NET Core 和 Go 的公开文档整理成可复用的资料摘要。研究任务命中的片段会归档到该任务，引用保留资料库版本和官方链接。Worker 将相关片段放进模型上下文，要求每条结论引用已有的来源 ID。遇到证据缺口时，流程会继续取证，或发布保留可用摘录的部分成果。
+
+线上公开知识库目前走关键词检索。英文按词匹配，中文使用相邻双字，API 名和技术术语能直接命中。自托管时配置嵌入服务后，Worker 可以用余弦相似度做向量检索，再通过 RRF 合并两路排名。使用真实多语言模型跑过本地评估；当前线上未启用向量检索与 Milvus。 [知识库实现与评估](https://github.com/towerman1990/researchpilot/blob/main/docs/15-KNOWLEDGE-MCP.md)
+
+### 用 MCP 和联网搜索补齐资料缺口
+
+知识库覆盖不足时，Worker 可以抓取公开网页、读取 GitHub 仓库与固定提交的源码，或调用 Microsoft Learn MCP 查官方文档。MCP 客户端用 `tools/list` 发现工具，只调用白名单里的只读搜索，并把预设主题映射成公开查询词。线上已验证 Microsoft Learn 返回的资料能进入报告引用。项目也提供可在本地运行的 MCP 服务，外部客户端可通过 `stdio` 调用 `search_knowledge` 和 `get_evidence`，访问同一套公开资料。
+
+Brave Search API 是可选的通用网页搜索入口。搜索结果先用来定位候选网页，系统再读取并归档实际页面作为引用依据。没有配置 Brave 时，工作台仍可根据模型规划、已知官方入口和用户提供的链接联网取证。真实 Brave API 的对照验收仍待完成。 [工具与研究流程](https://github.com/towerman1990/researchpilot/blob/main/docs/03-AGENT-RUNTIME.md)
+
 ### 线上试用与模型配置
 
-使用平台模型时，每个账号有累计 10 次试用额度，每天不会重置。任务创建成功时扣减一次，重试和恢复不会重复扣减，失败或取消也不返还。用完后，可在「模型设置」填写个人模型的 Base URL、模型名称和 API Key，继续提交研究。[打开线上工作台](https://researchpilot.towerman1990.cn)
+未登录访客每天可提交 3 次研究，按北京时间零点重置。第 4 次提交会弹出登录或注册窗口，当前草稿会保留。登录后，平台模型为每个账号提供累计 10 次试用额度，额度每天不会重置。任务创建成功时扣减一次，重试和恢复不会重复扣减，失败或取消也不返还。用完后，可在「模型设置」填写个人模型的 Base URL、模型名称和 API Key，继续提交研究。[打开线上工作台](https://researchpilot.towerman1990.cn)
 
 明确写出技术名称、版本和要比较的问题，通常比只写几个关键词更容易获得切题的报告。如果手边已有官方资料，也可以附上链接限定取证范围。
 
@@ -128,29 +142,32 @@ docker compose up -d --force-recreate api worker
 
 后端使用 Go 和 Hertz，前端使用 React、Vite 和 Ant Design。任务、事件、检查点、报告和来源保存在 MySQL 中，仓储层使用 GORM Gen。Redis 和 Asynq 负责异步派发，页面通过 SSE 接收任务进度。
 
-Worker 使用 Eino 编排研究流程。独立的取证步骤可以并行执行。覆盖检查发现缺口后，工作台会尝试补充资料，再决定是否生成完整报告。
+Worker 使用 Eino 编排研究流程。独立的取证步骤可以并行执行；覆盖检查发现缺口后，Worker 会重新规划取证，再根据证据决定发布完整报告或部分成果。
 
 ```text
-提交目标 → 规划步骤 → 读取资料 → 保存证据
-                              ↓
-                         检查研究目标覆盖情况
-                              ↓
-                       整理报告和引用
+提交目标 → 上传资料或可选知识库检索 → 检查证据覆盖
+证据不足 → 规划并联网取证 → 归档证据 → 再检查
+证据充足 → 整理报告和引用
+仍有缺口 → 保留可用摘录，标注待核实事项
 ```
 
 任务执行设计主要处理派发失败、重复投递和中途恢复。
 
 如果任务已经写入数据库，但队列消息发送失败，任务可能一直等待派发。为此，系统使用 Outbox，在同一个 MySQL 事务中写入任务和待派发记录，再由后台转交给 Redis。任务状态以 MySQL 为准，队列负责将工作交给 Worker。
 
-消息可能重复投递，旧执行器也可能在超时后继续运行。Worker 通过租约和执行代次约束写入，并保存检查点供恢复使用。
+#### Worker 断点续跑与浏览器断线回放
 
-前端通过 SSE 接收已持久化的任务事件，断线后可按游标回放。事件流展示任务进度，研究主链路主要处理模型返回的完整 JSON 响应。
+Worker 中途退出后，任务可以在有效期内重新派发。已提交的研究计划、取证结果等按步骤保存为 MySQL 检查点，新 Worker 会复用这些结果，从尚未完成的步骤继续。证据与对应检查点在同一事务中写入。遇到重复投递或旧 Worker 超时后仍在运行时，租约和执行代次用来约束任务写入。
+
+浏览器断网是另一条恢复链路。后端将任务事件持久化，浏览器通过 SSE 接收进度，重连时可用 `Last-Event-ID` 回放遗漏事件。页面刷新也能重新读取任务快照和已完成的报告。模型阶段处理结构化 JSON，事件流里显示的是已记录的任务进度。
 
 ### 真实模型评估
 
 早期固定十题评估中，有两道 MySQL 题因原网页无法读取而取证失败。后来，抓取工具在原站返回 403 时会尝试同版本的 Oracle 官方手册，并将实际读取的页面写入引用。开源实现题也可从目录和清单继续查到固定提交里的具体文件。
 
-最近一轮在隔离环境复跑了十道固定技术题。题面没有提供 URL，也没有启用 Brave，工作台通过模型规划定位资料并读取原文。十题都生成了完整报告，通过归档引用完整性检查。这个数字只反映该轮固定题集的自动结果；引用是否足以支持关键结论，仍值得查阅报告摘录。真实 Brave 调用仍待验收。[评估方法与记录](https://github.com/towerman1990/researchpilot/blob/main/docs/11-M2-EVALUATION.md)
+我在隔离环境中复跑了十道固定技术题。题面没有提供 URL，也没有启用 Brave，工作台通过模型规划定位资料并读取原文。十题都生成了完整报告，通过归档引用完整性检查。这个数字只反映该轮固定题集的自动结果；引用是否足以支持关键结论，仍值得查阅报告摘录。[评估方法与记录](https://github.com/towerman1990/researchpilot/blob/main/docs/11-M2-EVALUATION.md)
+
+检索评估单独使用 11 道固定题和 5 个资料片段。在真实多语言嵌入模型的本地实验里，关键词、纯向量、混合检索的 Recall@5 分别为 100%、94.4%、100%；两道无答案题都没有返回候选。这组结果适合做回归检查，当前样本里混合检索与关键词持平。 [检索题集与复现方式](https://github.com/towerman1990/researchpilot/blob/main/docs/15-KNOWLEDGE-MCP.md)
 
 ### 常见问题与排查
 
@@ -193,6 +210,7 @@ docker compose down
 - [ResearchPilot 线上试用](https://researchpilot.towerman1990.cn)
 - [ResearchPilot 源码与启动说明](https://github.com/towerman1990/researchpilot)
 - [实现记录](https://github.com/towerman1990/researchpilot/blob/main/docs/09-M2-IMPLEMENTATION.md)
+- [RAG、MCP 与检索实验](https://github.com/towerman1990/researchpilot/blob/main/docs/15-KNOWLEDGE-MCP.md)
 - [真实模型评估记录](https://github.com/towerman1990/researchpilot/blob/main/docs/11-M2-EVALUATION.md)
 - [macOS / Linux 使用指南](https://github.com/towerman1990/researchpilot/blob/main/docs/14-MACOS-LINUX.md)
 - [Web 发布与部署说明](https://github.com/towerman1990/researchpilot/blob/main/docs/12-M3-RELEASE.md)
