@@ -145,7 +145,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-count">16</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -207,7 +207,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-11-21 10:00:00" itemprop="dateModified" datetime="2026-11-21T10:00:00+08:00">2026-11-21</time>
+      <time title="修改时间：2026-11-28 00:00:00" itemprop="dateModified" datetime="2026-11-28T00:00:00+08:00">2026-11-28</time>
     </span>
 
   
@@ -224,7 +224,17 @@
 <p>输入一个技术问题后，工作台会查阅公开资料、整理要点，并生成带来源的报告。它适合用来了解开源项目、准备技术方案，或梳理官方文档中的具体问题。</p>
 <p>在把 AI 生成的结论用到代码或技术方案之前，我希望能查到支撑结论的原始资料，并区分文档中明确写出的事实与模型的推断。资料不足时，报告也应说明哪些问题仍待确认。</p>
 <p>这是我开发 ResearchPilot 的出发点。线上版本已开放试用。<a target="_blank" rel="noopener" href="https://researchpilot.towerman1990.cn/">ResearchPilot 线上试用</a></p>
-<p>下文介绍线上试用、Windows 客户端和自托管方式，也记录了证据采集与最新一轮评估的结果。<a target="_blank" rel="noopener" href="https://github.com/towerman1990/researchpilot">源代码与启动说明</a></p>
+<h3 id="项目技术要点"><a href="#项目技术要点" class="headerlink" title="项目技术要点"></a>项目技术要点</h3><ul>
+<li><strong>Go + Hertz，React + Vite + Ant Design</strong>。Go 后端提供任务、认证和 SSE 接口，前端用于配置研究、追踪进度和核查报告证据。</li>
+<li><strong>Eino 工作流与多 Agent 分工</strong>。Eino 编排规划、取证、证据覆盖检查和报告生成。开启分工后，证据分析员把带来源 ID 的笔记交给撰稿员，引用审核员逐条核对结论。</li>
+<li><strong>RAG 与检索评估</strong>。公开资料和私有文档都可以进入证据链。线上使用关键词检索，本地可对照向量检索与 RRF 混合排序，也提供可选 Milvus 后端。</li>
+<li><strong>MCP 与联网取证</strong>。通过 Microsoft Learn MCP、公开网页和 GitHub 获取资料，可选接入 Brave Search。引用指向归档的原始资料或固定提交的源码。</li>
+<li><strong>MySQL、Redis + Asynq、断点续跑</strong>。事务 Outbox 保障任务记录和派发意图一起入库，Worker 使用租约和检查点恢复执行，SSE 在浏览器重连后补发进度事件。</li>
+<li><strong>会话与多轮研究</strong>。会话承载连续问题，每轮保留独立任务、进度、报告和引用。上下文携带首轮及近期报告摘录，服务端通过事务锁分配轮次，支持确认后删除会话。</li>
+<li><strong>长期研究记忆</strong>。把用户主动保存的技术环境和关注点按任务快照传给报告模型，供不同会话中的新研究参考。后续修改只影响新任务。</li>
+<li><strong>研究使用统计</strong>。展示每日和累计使用人数、次数，登录按账号、访客按 IP 去重；成功创建研究时计次，幂等重放不会重复计数。</li>
+</ul>
+<p>下面用一个 .NET 问题演示研究流程，再介绍各部分实现。文末附有 Windows 客户端和自托管方式。<a target="_blank" rel="noopener" href="https://github.com/towerman1990/researchpilot">源代码与启动说明</a></p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2026/11/19/ResearchPilot-%E9%A1%B9%E7%9B%AE%E4%BB%8B%E7%BB%8D%E4%B8%8E%E4%BD%BF%E7%94%A8/#more" rel="contents">

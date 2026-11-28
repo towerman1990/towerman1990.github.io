@@ -26,9 +26,11 @@
 <meta property="og:site_name" content="盐 碱 地">
 <meta property="og:description" content="ResearchPilot 是我开发的技术研究工作台。 输入一个技术问题后，工作台会查阅公开资料、整理要点，并生成带来源的报告。它适合用来了解开源项目、准备技术方案，或梳理官方文档中的具体问题。 在把 AI 生成的结论用到代码或技术方案之前，我希望能查到支撑结论的原始资料，并区分文档中明确写出的事实与模型的推断。资料不足时，报告也应说明哪些问题仍待确认。 这是我开发 ResearchPilot 的">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://blog.towerman1990.cn/2026/11/19/ResearchPilot-%E9%A1%B9%E7%9B%AE%E4%BB%8B%E7%BB%8D%E4%B8%8E%E4%BD%BF%E7%94%A8/researchpilot-architecture.svg">
+<meta property="og:image" content="https://blog.towerman1990.cn/2026/11/19/ResearchPilot-%E9%A1%B9%E7%9B%AE%E4%BB%8B%E7%BB%8D%E4%B8%8E%E4%BD%BF%E7%94%A8/researchpilot-research-flow.svg">
 <meta property="og:image" content="https://blog.towerman1990.cn/2026/11/19/ResearchPilot-%E9%A1%B9%E7%9B%AE%E4%BB%8B%E7%BB%8D%E4%B8%8E%E4%BD%BF%E7%94%A8/researchpilot-icon.png">
 <meta property="article:published_time" content="2026-11-19T02:00:00.000Z">
-<meta property="article:modified_time" content="2026-11-26T11:22:43.000Z">
+<meta property="article:modified_time" content="2026-11-27T16:00:00.000Z">
 <meta property="article:author" content="Andy Zhang">
 <meta property="article:tag" content="AI">
 <meta property="article:tag" content="Golang">
@@ -36,7 +38,7 @@
 <meta property="article:tag" content="RAG">
 <meta property="article:tag" content="项目实践">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://blog.towerman1990.cn/2026/11/19/ResearchPilot-%E9%A1%B9%E7%9B%AE%E4%BB%8B%E7%BB%8D%E4%B8%8E%E4%BD%BF%E7%94%A8/researchpilot-icon.png">
+<meta name="twitter:image" content="https://blog.towerman1990.cn/2026/11/19/ResearchPilot-%E9%A1%B9%E7%9B%AE%E4%BB%8B%E7%BB%8D%E4%B8%8E%E4%BD%BF%E7%94%A8/researchpilot-architecture.svg">
 
 
 <link rel="canonical" href="https://blog.towerman1990.cn/2026/11/19/ResearchPilot-%E9%A1%B9%E7%9B%AE%E4%BB%8B%E7%BB%8D%E4%B8%8E%E4%BD%BF%E7%94%A8/">
@@ -136,7 +138,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE%E6%8A%80%E6%9C%AF%E8%A6%81%E7%82%B9"><span class="nav-number">1.</span> <span class="nav-text">项目技术要点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#M1-%E5%88%B0-M5-%E5%BC%80%E5%8F%91%E9%98%B6%E6%AE%B5"><span class="nav-number">2.</span> <span class="nav-text">M1 到 M5 开发阶段</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B7%A5%E4%BD%9C%E5%8F%B0%E5%A6%82%E4%BD%95%E5%BC%80%E5%B1%95%E7%A0%94%E7%A9%B6"><span class="nav-number">3.</span> <span class="nav-text">工作台如何开展研究</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%A8-RAG-%E6%8A%8A%E6%A3%80%E7%B4%A2%E8%AF%81%E6%8D%AE%E5%86%99%E8%BF%9B%E6%8A%A5%E5%91%8A"><span class="nav-number">4.</span> <span class="nav-text">用 RAG 把检索证据写进报告</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%A8-MCP-%E5%92%8C%E8%81%94%E7%BD%91%E6%90%9C%E7%B4%A2%E8%A1%A5%E9%BD%90%E8%B5%84%E6%96%99%E7%BC%BA%E5%8F%A3"><span class="nav-number">5.</span> <span class="nav-text">用 MCP 和联网搜索补齐资料缺口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%AD%E7%82%B9%E7%BB%AD%E8%B7%91%E4%B8%8E%E8%BF%9B%E5%BA%A6%E5%9B%9E%E6%94%BE"><span class="nav-number">6.</span> <span class="nav-text">断点续跑与进度回放</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#M5-%E7%A0%94%E7%A9%B6%E5%B7%A5%E4%BD%9C%E5%8F%B0%E5%A2%9E%E5%BC%BA"><span class="nav-number">7.</span> <span class="nav-text">M5 研究工作台增强</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E4%B8%8A%E8%AF%95%E7%94%A8%E4%B8%8E%E6%A8%A1%E5%9E%8B%E9%85%8D%E7%BD%AE"><span class="nav-number">8.</span> <span class="nav-text">线上试用与模型配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Windows-%E6%A1%8C%E9%9D%A2%E5%AE%A2%E6%88%B7%E7%AB%AF"><span class="nav-number">9.</span> <span class="nav-text">Windows 桌面客户端</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-Docker-Compose-%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2"><span class="nav-number">10.</span> <span class="nav-text">使用 Docker Compose 本地部署</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E7%A0%94%E7%A9%B6%E6%A8%A1%E5%9E%8B"><span class="nav-number">10.1.</span> <span class="nav-text">配置研究模型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8F%90%E4%BA%A4%E7%AC%AC%E4%B8%80%E4%B8%AA%E7%A0%94%E7%A9%B6%E4%BB%BB%E5%8A%A1"><span class="nav-number">10.2.</span> <span class="nav-text">提交第一个研究任务</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A0%B8%E5%AF%B9%E6%8A%A5%E5%91%8A%E5%BC%95%E7%94%A8"><span class="nav-number">10.3.</span> <span class="nav-text">核对报告引用</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%8E%E5%8F%B0%E6%9E%B6%E6%9E%84%E4%B8%8E%E4%BB%BB%E5%8A%A1%E6%89%A7%E8%A1%8C"><span class="nav-number">11.</span> <span class="nav-text">后台架构与任务执行</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Worker-%E6%96%AD%E7%82%B9%E7%BB%AD%E8%B7%91%E4%B8%8E%E6%B5%8F%E8%A7%88%E5%99%A8%E6%96%AD%E7%BA%BF%E5%9B%9E%E6%94%BE"><span class="nav-number">11.1.</span> <span class="nav-text">Worker 断点续跑与浏览器断线回放</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9C%9F%E5%AE%9E%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0"><span class="nav-number">12.</span> <span class="nav-text">真实模型评估</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E4%B8%8E%E6%8E%92%E6%9F%A5"><span class="nav-number">13.</span> <span class="nav-text">常见问题与排查</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE%E9%93%BE%E6%8E%A5"><span class="nav-number">14.</span> <span class="nav-text">项目链接</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE%E6%8A%80%E6%9C%AF%E8%A6%81%E7%82%B9"><span class="nav-number">1.</span> <span class="nav-text">项目技术要点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#M1-%E5%88%B0-M5-%E5%BC%80%E5%8F%91%E9%98%B6%E6%AE%B5"><span class="nav-number">2.</span> <span class="nav-text">M1 到 M5 开发阶段</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE%E6%9E%B6%E6%9E%84%E5%9B%BE"><span class="nav-number">3.</span> <span class="nav-text">项目架构图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B7%A5%E4%BD%9C%E5%8F%B0%E5%A6%82%E4%BD%95%E5%BC%80%E5%B1%95%E7%A0%94%E7%A9%B6"><span class="nav-number">4.</span> <span class="nav-text">工作台如何开展研究</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%91%E8%B5%B7%E7%A0%94%E7%A9%B6%E7%9A%84%E6%B5%81%E7%A8%8B%E5%9B%BE"><span class="nav-number">5.</span> <span class="nav-text">发起研究的流程图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E4%B8%AA%E4%BC%9A%E8%AF%9D%E6%89%BF%E8%BD%BD%E5%A4%9A%E8%BD%AE%E7%A0%94%E7%A9%B6"><span class="nav-number">6.</span> <span class="nav-text">一个会话承载多轮研究</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%A8-RAG-%E6%8A%8A%E6%A3%80%E7%B4%A2%E8%AF%81%E6%8D%AE%E5%86%99%E8%BF%9B%E6%8A%A5%E5%91%8A"><span class="nav-number">7.</span> <span class="nav-text">用 RAG 把检索证据写进报告</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%A8-MCP-%E5%92%8C%E8%81%94%E7%BD%91%E6%90%9C%E7%B4%A2%E8%A1%A5%E9%BD%90%E8%B5%84%E6%96%99%E7%BC%BA%E5%8F%A3"><span class="nav-number">8.</span> <span class="nav-text">用 MCP 和联网搜索补齐资料缺口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%AD%E7%82%B9%E7%BB%AD%E8%B7%91%E4%B8%8E%E8%BF%9B%E5%BA%A6%E5%9B%9E%E6%94%BE"><span class="nav-number">9.</span> <span class="nav-text">断点续跑与进度回放</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#M5-%E7%A0%94%E7%A9%B6%E5%B7%A5%E4%BD%9C%E5%8F%B0%E5%A2%9E%E5%BC%BA"><span class="nav-number">10.</span> <span class="nav-text">M5 研究工作台增强</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E4%B8%8A%E8%AF%95%E7%94%A8%E4%B8%8E%E6%A8%A1%E5%9E%8B%E9%85%8D%E7%BD%AE"><span class="nav-number">11.</span> <span class="nav-text">线上试用与模型配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A0%94%E7%A9%B6%E4%BD%BF%E7%94%A8%E4%BA%BA%E6%95%B0%E4%B8%8E%E6%AC%A1%E6%95%B0"><span class="nav-number">12.</span> <span class="nav-text">研究使用人数与次数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Windows-%E6%A1%8C%E9%9D%A2%E5%AE%A2%E6%88%B7%E7%AB%AF"><span class="nav-number">13.</span> <span class="nav-text">Windows 桌面客户端</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-Docker-Compose-%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2"><span class="nav-number">14.</span> <span class="nav-text">使用 Docker Compose 本地部署</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E7%A0%94%E7%A9%B6%E6%A8%A1%E5%9E%8B"><span class="nav-number">14.1.</span> <span class="nav-text">配置研究模型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8F%90%E4%BA%A4%E7%AC%AC%E4%B8%80%E4%B8%AA%E7%A0%94%E7%A9%B6%E4%BB%BB%E5%8A%A1"><span class="nav-number">14.2.</span> <span class="nav-text">提交第一个研究任务</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A0%B8%E5%AF%B9%E6%8A%A5%E5%91%8A%E5%BC%95%E7%94%A8"><span class="nav-number">14.3.</span> <span class="nav-text">核对报告引用</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%8E%E5%8F%B0%E6%9E%B6%E6%9E%84%E4%B8%8E%E4%BB%BB%E5%8A%A1%E6%89%A7%E8%A1%8C"><span class="nav-number">15.</span> <span class="nav-text">后台架构与任务执行</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Worker-%E6%96%AD%E7%82%B9%E7%BB%AD%E8%B7%91%E4%B8%8E%E6%B5%8F%E8%A7%88%E5%99%A8%E6%96%AD%E7%BA%BF%E5%9B%9E%E6%94%BE"><span class="nav-number">15.1.</span> <span class="nav-text">Worker 断点续跑与浏览器断线回放</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9C%9F%E5%AE%9E%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0"><span class="nav-number">16.</span> <span class="nav-text">真实模型评估</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E4%B8%8E%E6%8E%92%E6%9F%A5"><span class="nav-number">17.</span> <span class="nav-text">常见问题与排查</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE%E9%93%BE%E6%8E%A5"><span class="nav-number">18.</span> <span class="nav-text">项目链接</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -220,7 +222,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-11-26 19:22:43" itemprop="dateModified" datetime="2026-11-26T19:22:43+08:00">2026-11-26</time>
+      <time title="修改时间：2026-11-28 00:00:00" itemprop="dateModified" datetime="2026-11-28T00:00:00+08:00">2026-11-28</time>
     </span>
 
   
@@ -242,7 +244,9 @@
 <li><strong>RAG 与检索评估</strong>。公开资料和私有文档都可以进入证据链。线上使用关键词检索，本地可对照向量检索与 RRF 混合排序，也提供可选 Milvus 后端。</li>
 <li><strong>MCP 与联网取证</strong>。通过 Microsoft Learn MCP、公开网页和 GitHub 获取资料，可选接入 Brave Search。引用指向归档的原始资料或固定提交的源码。</li>
 <li><strong>MySQL、Redis + Asynq、断点续跑</strong>。事务 Outbox 保障任务记录和派发意图一起入库，Worker 使用租约和检查点恢复执行，SSE 在浏览器重连后补发进度事件。</li>
-<li><strong>长期研究记忆</strong>。把用户主动保存的技术环境和关注点按任务快照传给报告模型。后续修改只影响新任务。</li>
+<li><strong>会话与多轮研究</strong>。会话承载连续问题，每轮保留独立任务、进度、报告和引用。上下文携带首轮及近期报告摘录，服务端通过事务锁分配轮次，支持确认后删除会话。</li>
+<li><strong>长期研究记忆</strong>。把用户主动保存的技术环境和关注点按任务快照传给报告模型，供不同会话中的新研究参考。后续修改只影响新任务。</li>
+<li><strong>研究使用统计</strong>。展示每日和累计使用人数、次数，登录按账号、访客按 IP 去重；成功创建研究时计次，幂等重放不会重复计数。</li>
 </ul>
 <p>下面用一个 .NET 问题演示研究流程，再介绍各部分实现。文末附有 Windows 客户端和自托管方式。<a target="_blank" rel="noopener" href="https://github.com/towerman1990/researchpilot">源代码与启动说明</a></p>
 <span id="more"></span>
@@ -276,10 +280,28 @@
 </tr>
 </tbody></table>
 <p><a target="_blank" rel="noopener" href="https://github.com/towerman1990/researchpilot/blob/main/docs/07-ROADMAP.md">工程路线图</a> · <a target="_blank" rel="noopener" href="https://github.com/towerman1990/researchpilot/blob/main/docs/16-M5-RELEASE.md">M5 发布记录</a></p>
+<p>此后继续完善了会话与多轮研究、删除会话、研究使用统计和任务创建请求 Log ID。下面按使用场景介绍这些功能，不另立新的开发阶段。</p>
+<h3 id="项目架构图"><a href="#项目架构图" class="headerlink" title="项目架构图"></a>项目架构图</h3><p>下面是当前项目的研究主链路。API 负责认证、研究额度、会话和任务；MySQL 保存业务状态与证据，Redis 和 Asynq 负责异步派发。Worker 通过 Eino 编排研究，按需调用模型、知识库和联网工具，执行进度写入事件表后经 SSE 提供给页面。</p>
+<img src="/2026/11/19/ResearchPilot-%E9%A1%B9%E7%9B%AE%E4%BB%8B%E7%BB%8D%E4%B8%8E%E4%BD%BF%E7%94%A8/researchpilot-architecture.svg" class="" title="ResearchPilot 项目架构图">
+
+<a href="/2026/11/19/ResearchPilot-%E9%A1%B9%E7%9B%AE%E4%BB%8B%E7%BB%8D%E4%B8%8E%E4%BD%BF%E7%94%A8/researchpilot-architecture.svg" title="查看架构图原图">查看架构图原图</a>
+
+<p>API 创建任务时会把待派发记录一起写入事务，由 Outbox 派发器转交队列。Worker 把步骤结果与检查点持久化，重启后可以复用已完成的部分。图中的向量检索和 Milvus 是可选能力，当前生产环境使用关键词检索。独立 stdio MCP 服务还可向外部客户端提供公开资料的只读检索。</p>
 <h3 id="工作台如何开展研究"><a href="#工作台如何开展研究" class="headerlink" title="工作台如何开展研究"></a>工作台如何开展研究</h3><p>打开工作台就能输入研究目标。比如勾选「先查公开知识库」，问「HttpClient 如何在复用连接池的同时应对 DNS 记录变化？」任务会先找相关文档片段，再检查证据是否足以覆盖问题。完成后可在运行记录里查看检索方式和命中条数，并在中文报告中点开引用核对来源。分析开源实现时，还可以引用固定提交的源码。</p>
-<p>如果要限定研究范围，可以先审阅和编辑计划再开始取证。也可以上传 TXT 或 Markdown，补充背景或约束。报告生成后，可逐条查看归档摘录，下载 Markdown 或另存为 PDF，也可基于这份报告继续追问。</p>
+<p>如果要限定研究范围，可以先审阅和编辑计划再开始取证。也可以上传 TXT 或 Markdown，补充背景或约束。报告生成后，可逐条查看归档摘录，下载 Markdown 或另存为 PDF，也可在同一会话底部继续提问。侧边栏按会话组织历史，换一个主题时再点击「新建会话」。</p>
 <p>多任务工作区集中展示进行中、待审批和已结束的研究。配置个人模型后，可以安排按日或按周运行的研究，并在站内订阅结果。研究评估和用量面板可查看近期任务结果、报告反馈和模型用量。</p>
 <p>我保留了「部分完成」状态。当证据只覆盖问题的一部分时，报告会保留有依据的内容和待确认事项。也可以在提交任务时启用发布前的引用复核。</p>
+<h3 id="发起研究的流程图"><a href="#发起研究的流程图" class="headerlink" title="发起研究的流程图"></a>发起研究的流程图</h3><p>从用户输入到报告发布，流程包括额度校验、事务创建任务、后台派发、上下文准备、证据采集和引用复核。审批计划、知识库检索、多 Agent 分工与引用复核按研究选项启用；证据不足时，在重规划次数和预算允许的范围内补充取证。</p>
+<img src="/2026/11/19/ResearchPilot-%E9%A1%B9%E7%9B%AE%E4%BB%8B%E7%BB%8D%E4%B8%8E%E4%BD%BF%E7%94%A8/researchpilot-research-flow.svg" class="" title="发起研究到生成报告的流程图">
+
+<a href="/2026/11/19/ResearchPilot-%E9%A1%B9%E7%9B%AE%E4%BB%8B%E7%BB%8D%E4%B8%8E%E4%BD%BF%E7%94%A8/researchpilot-research-flow.svg" title="查看研究流程图原图">查看研究流程图原图</a>
+
+<p>证据仍有缺口时，已有材料可以支撑的部分结论会被单独归纳并复核，报告同时说明限制；无法形成结论时保留归档摘录。没有可用资料或遇到不可恢复错误时，任务会结束为失败。运行中可以取消，任务恢复时会复用已提交的检查点。同一会话的下一轮问题沿用这条执行链，每轮保持独立的任务、证据和预算。</p>
+<h3 id="一个会话承载多轮研究"><a href="#一个会话承载多轮研究" class="headerlink" title="一个会话承载多轮研究"></a>一个会话承载多轮研究</h3><p>以前每次提交问题都会形成一条独立研究记录。现在增加了会话层，把围绕同一主题的多轮任务放在一起。例如先问「比较两种 Go 服务部署方案」，拿到报告后，再问「如果服务器只有 2 GiB 内存，该怎样调整？」页面会依次展示两轮问题与报告，可以加载更早的轮次。刷新页面也能恢复当前研究，旧的独立任务和追问链已迁移到对应会话。</p>
+<p>会话负责串联主题，每一轮仍有自己的任务 ID、进度、检查点、证据和报告。当前轮结束后才能发送下一个问题；某轮失败或取消后，也能留在原会话换个角度继续。每轮按一次新研究使用试用额度和 Token 预算，任务重试和恢复不会再扣一次额度。</p>
+<p>上下文只选取首个问题及近期问题、报告摘录，控制随轮次增长的输入长度。旧报告作为理解追问的背景，新结论仍须引用当前轮实际归档的证据。这和「长期研究记忆」分工不同：会话延续当前主题，长期记忆保存用户主动填写的技术环境和约束，供不同会话参考。</p>
+<p>创建新轮次时，服务端在 MySQL 事务内锁定会话、判断上一轮状态，再分配轮次。同一个请求的重放依靠幂等键返回原任务，避免网络重试生成重复轮次。浏览器仍通过原有 SSE 任务事件查看进度，每轮的报告可以单独导出。</p>
+<p>会话旁有删除按钮，确认后会从历史列表移除；删除当前会话会回到新建页面，并取消尚未完成的研究。删除与追加问题共用事务锁，避免同时操作后留下新的运行中轮次。当前采用软删除，数据库保留报告，同身份的原有任务、报告直链接口仍可访问；目前没有恢复或彻底清除入口。长期记忆、已消耗额度和累计使用统计不会随删除回退。</p>
 <h3 id="用-RAG-把检索证据写进报告"><a href="#用-RAG-把检索证据写进报告" class="headerlink" title="用 RAG 把检索证据写进报告"></a>用 RAG 把检索证据写进报告</h3><p>我把 .NET、ASP.NET Core 和 Go 的公开文档整理成可复用的资料摘要。研究任务命中的片段会归档到该任务，引用保留资料库版本和官方链接。Worker 将相关片段放进模型上下文，要求每条结论引用已有的来源 ID。遇到证据缺口时，流程会继续取证，或发布保留可用摘录的部分成果。</p>
 <p>线上公开知识库目前走关键词检索。英文按词匹配，中文使用相邻双字，API 名和技术术语能直接命中。自托管时配置嵌入服务后，Worker 可以用余弦相似度做向量检索，再通过 RRF 合并两路排名。使用真实多语言模型跑过本地评估；当前线上未启用向量检索与 Milvus。 <a target="_blank" rel="noopener" href="https://github.com/towerman1990/researchpilot/blob/main/docs/15-KNOWLEDGE-MCP.md">知识库实现与评估</a></p>
 <p>登录后还可以建私有知识库并上传 Markdown 或 TXT，由 Worker 在后台切分和索引。报告保留命中的文档版本及摘录，更新文档后仍能回查旧报告的依据。「研究评估」支持对照关键词、纯向量和混合检索的召回率、延迟及无答案误命中，并可导入自己的评估 JSON。</p>
@@ -291,6 +313,8 @@
 <p><strong>多 Agent 分工</strong>。在新建研究时勾选该选项。规划和采集之后，证据分析员对归档资料整理交接笔记，撰稿员结合原始摘录形成报告，引用审核员核对每条结论。依据不足的结论会被过滤，各角色共享该任务的模型配置和 Token 预算。线上验证任务走完了分析、撰写和引用复核，最终报告包含 3 条归档引用。<a target="_blank" rel="noopener" href="https://github.com/towerman1990/researchpilot/blob/main/docs/16-M5-RELEASE.md">M5 发布记录</a></p>
 <h3 id="线上试用与模型配置"><a href="#线上试用与模型配置" class="headerlink" title="线上试用与模型配置"></a>线上试用与模型配置</h3><p>未登录访客每天可提交 5 次研究，按北京时间零点重置。第 6 次提交会弹出登录或注册窗口，当前草稿会保留。登录后，平台模型为每个账号提供累计 10 次试用额度，额度每天不会重置。任务创建成功时扣减一次，重试和恢复不会重复扣减，失败或取消也不返还。用完后，可在「模型设置」填写个人模型的 Base URL、模型名称和 API Key，继续提交研究。<a target="_blank" rel="noopener" href="https://researchpilot.towerman1990.cn/">打开线上工作台</a></p>
 <p>明确写出技术名称、版本和要比较的问题，通常比只写几个关键词更容易获得切题的报告。如果手边已有官方资料，也可以附上链接限定取证范围。</p>
+<h3 id="研究使用人数与次数"><a href="#研究使用人数与次数" class="headerlink" title="研究使用人数与次数"></a>研究使用人数与次数</h3><p>工作台底部用小字显示「今日人数、今日次数、累计人数、累计次数」。计数发生在成功提交研究任务时，追问也算一次；刷新页面、重复发送同一个幂等请求，以及任务重试或恢复都不会额外计次。</p>
+<p>人数按登录账号或访客 IP 去重，每日数据按北京时间划分，累计数据从统计功能启用时开始记录，可见页面约每分钟刷新。这里统计的是研究服务使用情况，共用出口 IP 的访客会合并计为一人。</p>
 <h3 id="Windows-桌面客户端"><a href="#Windows-桌面客户端" class="headerlink" title="Windows 桌面客户端"></a>Windows 桌面客户端</h3><img src="/2026/11/19/ResearchPilot-%E9%A1%B9%E7%9B%AE%E4%BB%8B%E7%BB%8D%E4%B8%8E%E4%BD%BF%E7%94%A8/researchpilot-icon.png" class="" title="ResearchPilot 罗盘图标">
 
 <p>Windows x64 客户端使用 MyGo 和 WebView2，默认连接线上工作台。网页版与桌面端使用同一个账号，任务历史和报告可在两端查看。</p>
@@ -328,7 +352,7 @@
 <p>未认证的 GitHub API 请求可能达到配额上限。需要提高配额时，可在同一个本地配置中填写最小权限的 <code>GITHUB_READ_TOKEN</code>，然后重新创建 API 和 Worker。密钥应保存在本地配置中。</p>
 <h4 id="核对报告引用"><a href="#核对报告引用" class="headerlink" title="核对报告引用"></a>核对报告引用</h4><p>页面会显示等待派发、执行中、等待重试等状态，并提供取消操作。报告生成后，可以打开重要结论的引用，核对原文是否支持结论、适用条件是否完整，以及哪些内容属于推断。</p>
 <p>系统会检查引用是否来自当前任务已归档的材料。引用是否足以支撑具体结论，仍需结合原文判断。</p>
-<h3 id="后台架构与任务执行"><a href="#后台架构与任务执行" class="headerlink" title="后台架构与任务执行"></a>后台架构与任务执行</h3><p>后端使用 Go 和 Hertz，前端使用 React、Vite 和 Ant Design。任务、事件、检查点、报告和来源保存在 MySQL 中，仓储层使用 GORM Gen。Redis 和 Asynq 负责异步派发，页面通过 SSE 接收任务进度。</p>
+<h3 id="后台架构与任务执行"><a href="#后台架构与任务执行" class="headerlink" title="后台架构与任务执行"></a>后台架构与任务执行</h3><p>后端使用 Go 和 Hertz，前端使用 React、Vite 和 Ant Design。会话、各轮任务、事件、检查点、报告和来源保存在 MySQL 中，仓储层使用 GORM Gen。会话和轮次由租户标识与外键关联，读取及删除都按当前账号或访客身份隔离。Redis 和 Asynq 负责异步派发，页面通过 SSE 接收任务进度。</p>
 <p>Worker 使用 Eino 编排研究流程。独立的取证步骤可以并行执行；覆盖检查发现缺口后，Worker 会重新规划取证，再根据证据决定发布完整报告或部分成果。</p>
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">提交目标 → 上传资料或可选知识库检索 → 检查证据覆盖</span><br><span class="line">证据不足 → 规划并联网取证 → 归档证据 → 再检查</span><br><span class="line">证据充足 → 整理报告和引用</span><br><span class="line">仍有缺口 → 保留可用摘录，标注待核实事项</span><br></pre></td></tr></table></figure>
 
@@ -336,6 +360,7 @@
 <p>如果任务已经写入数据库，但队列消息发送失败，任务可能一直等待派发。为此，系统使用 Outbox，在同一个 MySQL 事务中写入任务和待派发记录，再由后台转交给 Redis。任务状态以 MySQL 为准，队列负责将工作交给 Worker。</p>
 <h4 id="Worker-断点续跑与浏览器断线回放"><a href="#Worker-断点续跑与浏览器断线回放" class="headerlink" title="Worker 断点续跑与浏览器断线回放"></a>Worker 断点续跑与浏览器断线回放</h4><p>Worker 中途退出后，任务可以在有效期内重新派发。已提交的研究计划、取证结果等按步骤保存为 MySQL 检查点，新 Worker 会复用这些结果，从尚未完成的步骤继续。证据与对应检查点在同一事务中写入。遇到重复投递或旧 Worker 超时后仍在运行时，租约和执行代次用来约束任务写入。</p>
 <p>浏览器断网是另一条恢复链路。后端将任务事件持久化，浏览器通过 SSE 接收进度，重连时可用 <code>Last-Event-ID</code> 回放遗漏事件。页面刷新也能重新读取任务快照和已完成的报告。模型阶段处理结构化 JSON，事件流里显示的是已记录的任务进度。</p>
+<p>排查某一轮研究时，可在任务详情复制「创建请求 Log ID」，关联该轮的 API 创建请求、Worker 和执行步骤；会话中的多轮研究仍保留各自的排查入口。</p>
 <h3 id="真实模型评估"><a href="#真实模型评估" class="headerlink" title="真实模型评估"></a>真实模型评估</h3><p>早期固定十题评估中，有两道 MySQL 题因原网页无法读取而取证失败。后来，抓取工具在原站返回 403 时会尝试同版本的 Oracle 官方手册，并将实际读取的页面写入引用。开源实现题也可从目录和清单继续查到固定提交里的具体文件。</p>
 <p>我在隔离环境中复跑了十道固定技术题。题面没有提供 URL，也没有启用 Brave，工作台通过模型规划定位资料并读取原文。十题都生成了完整报告，通过归档引用完整性检查。这个数字只反映该轮固定题集的自动结果；引用是否足以支持关键结论，仍值得查阅报告摘录。<a target="_blank" rel="noopener" href="https://github.com/towerman1990/researchpilot/blob/main/docs/11-M2-EVALUATION.md">评估方法与记录</a></p>
 <p>检索评估单独使用 11 道固定题和 5 个资料片段。在真实多语言嵌入模型的本地实验里，关键词、纯向量、混合检索的 Recall@5 分别为 100%、94.4%、100%；两道无答案题都没有返回候选。这组结果适合做回归检查，当前样本里混合检索与关键词持平。 <a target="_blank" rel="noopener" href="https://github.com/towerman1990/researchpilot/blob/main/docs/15-KNOWLEDGE-MCP.md">检索题集与复现方式</a></p>
